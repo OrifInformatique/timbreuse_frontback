@@ -1,0 +1,8 @@
+### Java Spring ###
+application.properties
+
+### VS Code ###
+.vscode/
+
+### Cursor ###
+.cursor/
