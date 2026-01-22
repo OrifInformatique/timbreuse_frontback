@@ -14,6 +14,10 @@ import ChangePassword from './features/auth/ui/change-password';
 import ResetPassword from './features/auth/ui/reset-password';
 import ApiAuthCall from './features/auth';
 import UserDashboard from './features/userDashboard';
+import AdminDashboard from './features/adminDashboard';
+import AdminDashboardDaily from './features/adminDashboard/indexDaily';
+import AdminDashboardStudentPresentPage from './features/adminDashboard/studentPresencePage';
+import AdminDashboardStudentErrorPage from './features/adminDashboard/studentErrorPage'
 
 // Utils
 import Redirect from './common/utils/Redirect'
@@ -81,6 +85,26 @@ root.render(
                 <Route
                     path="/user-dashboard"
                     element={<UserDashboard />}
+                />
+
+                <Route
+                    path="/admin-dashboard"
+                    element={<AdminDashboard />}
+                />
+
+                <Route
+                    path="/admin-dashboard-daily"
+                    element={<AdminDashboardDaily />}
+                />
+
+                <Route
+                    path="/admin-dashboard-student/:id"
+                    element={<AdminDashboardStudentPresentPage />}
+                />
+
+                <Route
+                    path="/admin-dashboard-student-error/:id"
+                    element={<AdminDashboardStudentErrorPage />}
                 />
             </Route>
         </Routes>
