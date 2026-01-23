@@ -23,35 +23,37 @@ const AdminDashboard = ({ logsData }) => {
 
 
   return (<>
-      <h1 className="font-bold text-3xl mr-10">{nom} {prenom}</h1>
+    <div className="flex flex-col">
+      <h1 className="font-bold text-3xl">{nom} {prenom}</h1>
       <p className="font-bold text-2xl">Liste des bénéficiaires</p>
-
-      <div className="flex justify-center my-8">
-        <table className="py-3 w-2/3 border">
-          <tbody className="divide-y-1 divide-gray-500">
-            {listStudent.map((student) => (
-              <tr
-                key={student.id}
-                className={"bg-gray-200"}
-              >
-                <td className="p-2">
-                  {student.errorFound === 0 ? "✅" : "⚠️"}
-                </td>
-                <td className="p-2 font-bold text-center">
-                  {student.name} {student.surname}
-                </td>
-                <td className={student.workTime.startsWith("+") ? "p-2 text-green-500" : "p-2 text-red-500"}>
-                  {student.workTime}
-                </td>
+    </div>
+    <div className="flex justify-center my-8 text-2xl">
+      <table className="py-3 border min-w-2/5 max-w-1/2">
+        <tbody className="divide-y-1 divide-gray-500">
+          {listStudent.map((student) => (
+            <tr
+              key={student.id}
+              className={"bg-gray-200"}
+            >
+              <td className="p-2">
+                {student.errorFound === 0 ? "✅" : "⚠️"}
+              </td>
+              <td className="p-2 font-bold text-center">
+                {student.name} {student.surname}
+              </td>
+              <td className={student.workTime.startsWith("+") ? "p-2 text-green-500" : "p-2 text-red-500"}>
+                {student.workTime}
+              </td>
+              <td>
                 <Link to={`/admin-dashboard-student-error/${student.id}`}>
                   ✏️
                 </Link>
-              </tr>
-            ))}
-
-          </tbody>
-        </table>
-      </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
 
 
   </>);

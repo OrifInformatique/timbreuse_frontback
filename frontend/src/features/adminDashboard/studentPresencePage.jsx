@@ -32,8 +32,8 @@ const AdminDashboardStudentPresentPage = ({ logsData }) => {
         <p className="font-bold text-3xl mr-10">Présence : {student.name} {student.surname}</p>
     </div>    
 
-    <div className="flex justify-between my-20 py-20">
-        <div className="flex flex-row w-1/4 h-30 justify-center p-3 border border-black-400">
+    <div className="flex justify-center my-20 py-20">
+        <div className="flex flex-row max-w-1/4 min-w-1/8 h-30 mx-5 justify-center p-3 border border-black-400">
             <div className={
                 student.presence === 0 ? "flex text-green-500 text-2xl font-bold items-center" : 
                     student.presence === 1 && student.reason === "" ? "flex text-red-500 text-2xl font-bold items-center" :
@@ -44,7 +44,7 @@ const AdminDashboardStudentPresentPage = ({ logsData }) => {
                         student.presence === 1 && student.reason !== "" ? "👍 Excusé" : ""}
             </div>
         </div>
-        <div className="flex">
+        <div className="flex mx-5">
             <table className="w-full">
                 <tbody className="divide-y-1 divide-black-400">
                     <tr>
@@ -58,7 +58,7 @@ const AdminDashboardStudentPresentPage = ({ logsData }) => {
                 </tbody>
             </table>
         </div>
-        <div className="flex flex-col w-full max-w-1/3">
+        <div className="flex flex-col w-full min-w-1/6 max-w-1/6 mx-5">
             <div className="">Motif</div>
             <div className="bg-gray-300 border-1 border-black-300 h-full max-h-30 p-2">{student.presence === 1 && student.reason !== "" ? student.reason : ""}</div>
         </div>

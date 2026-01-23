@@ -27,12 +27,12 @@ const AdminDashboardStudentErrorPage = ({ logsData }) => {
 
   return (<>
   
-    <div className="flex flex-row justify-center my-20 items-center">
+    <div className="flex flex-row justify-center my-10 items-center">
         <p className="font-bold text-3xl mr-10">Présence : {student.name} {student.surname}</p>
     </div>    
 
-    <div className="flex justify-center w-full">
-        <div className="flex flex-col bg-gray-300 min-w-1/3 max-w-2/3 border border-gray-500">
+    <div className="flex justify-center w-full mt-20">
+        <div className="flex flex-col text-2xl bg-gray-300 min-w-1/3 max-w-2/3 border border-gray-500">
             <div className="flex flex-row justify-between p-5">
                 <div>{student.errorFound === 0 ? "✅" : "⚠️"}</div>
                 <div className="flex flex-row">
