@@ -1,23 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { getAdminData } from "./services/dataService";
+import TableLigne from "./components/tableLigne";
 
+const AdminDashboardDaily = () => {
+    const navigate = useNavigate();
+    const [data, setData] = useState(null);
 
-const AdminDashboardDaily = ({ logsData }) => {
+    useEffect(() => {
+        getAdminData().then(setData);
+    }, []);
 
-  const navigate = useNavigate();
-  const [data, setData] = useState(logsData || null);
-
-  useEffect(() => {
-    if (!logsData) {
-      fetch('/data/mock-data-admin.json')
-      .then((res) => res.json())
-      .then((json) => setData(json))
-      .catch((err) => console.error("Erreur JSON :", err));
-    }
-  }, [logsData]);  
-
-  if (!data) return <div>Chargement...</div>;
+    if (!data) return <div>Chargement...</div>
+  
 
   const nom = data.surname;
   const prenom = data.name;
@@ -53,14 +49,18 @@ const AdminDashboardDaily = ({ logsData }) => {
                         <tr
                             key={student.id}
                         >
-                            <div className="flex flex-row">
+                            {student.presence === 0 ? 
+                                    <TableLigne id={student.id} surname={student.surname} name={student.name} presence={student.presence} reason={student.reason}></TableLigne>
+                                : ""
+                            }
+                            {/*<div className="flex flex-row">
                                 <td className={student.presence === 0 ? "py-4 font-bold text-lg" : ""}>
                                     {student.presence === 0 ? "✅" + student.name + " " + student.surname : ""}
                                 </td>
                                 <Link to={`/admin-dashboard-student/${student.id}`} className={student.presence === 0 ? "p-4 text-right" : ""}>
                                     {student.presence === 0 ? <a>🪪</a> : ""}
                                 </Link>
-                            </div>
+                            </div>*/}
                         </tr>
                     ))}
                 </tbody>
@@ -74,14 +74,10 @@ const AdminDashboardDaily = ({ logsData }) => {
                         <tr
                             key={student.id}
                         >
-                            <div className="flex flex-row">
-                                <td className={student.presence === 1 && student.reason === "" ? "py-4 font-bold text-lg" : ""}>
-                                    {student.presence === 1 && student.reason === "" ? "‼️" + student.name + " " + student.surname : ""}
-                                </td>
-                                <Link to={`/admin-dashboard-student/${student.id}`} className={student.presence === 1 && student.reason === "" ? "p-4 text-right" : ""}>
-                                        {student.presence === 1 && student.reason === "" ? <a>🪪</a> : ""}
-                                </Link>
-                            </div>
+                            {student.presence === 1 && student.reason === "" ? 
+                                    <TableLigne id={student.id} surname={student.surname} name={student.name} presence={student.presence} reason={student.reason}></TableLigne>
+                                : ""
+                            }
                         </tr>
                     ))}
                 </tbody>
@@ -95,14 +91,10 @@ const AdminDashboardDaily = ({ logsData }) => {
                         <tr
                             key={student.id}
                         >
-                            <div className="flex flex-row">
-                                <td className={student.presence === 1 && student.reason !== "" ? "py-4 font-bold text-lg" : ""}>
-                                    {student.presence === 1 && student.reason !== "" ? "⚠️" + student.name + " " + student.surname : ""}
-                                </td>
-                                <Link to={`/admin-dashboard-student/${student.id}`} className={student.presence === 1 && student.reason !== "" ? "p-4 text-right" : ""}>
-                                        {student.presence === 1 && student.reason !== "" ? <a>🪪</a> : ""}
-                                </Link>
-                            </div>                           
+                            {student.presence === 1 && student.reason !== "" ? 
+                                    <TableLigne id={student.id} surname={student.surname} name={student.name} presence={student.presence} reason={student.reason}></TableLigne>
+                                : ""
+                            }                          
                         </tr>
                     ))}
                 </tbody>

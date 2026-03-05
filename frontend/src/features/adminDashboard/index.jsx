@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { getAdminData } from "./services/dataService";
+import TableLigneResumeLog from "./components/tableLigneResumeLog";
 
 
-const AdminDashboard = ({ logsData }) => {
+const AdminDashboard = () => {
 
-  const [data, setData] = useState(logsData || null);
+  const [data, setData] = useState(null);
 
-  useEffect(() => {
-    if (!logsData) {
-      fetch('/data/mock-data-admin.json')
-      .then((res) => res.json())
-      .then((json) => setData(json))
-      .catch((err) => console.error("Erreur JSON :", err));
-    }
-  }, [logsData]);  
+    useEffect(() => {
+        getAdminData().then(setData);
+    }, []);
 
-  if (!data) return <div>Chargement...</div>;
+    if (!data) return <div>Chargement...</div>
 
   const nom = data.surname;
   const prenom = data.name;
@@ -35,6 +32,9 @@ const AdminDashboard = ({ logsData }) => {
               key={student.id}
               className={"bg-gray-200"}
             >
+              <TableLigneResumeLog id={student.id} surname={student.surname} name={student.name} errorFound={student.errorFound} workTime={student.workTime}></TableLigneResumeLog>
+
+              {/*
               <td className="p-2">
                 {student.errorFound === 0 ? "✅" : "⚠️"}
               </td>
@@ -49,6 +49,7 @@ const AdminDashboard = ({ logsData }) => {
                   ✏️
                 </Link>
               </td>
+              */}
             </tr>
           ))}
         </tbody>

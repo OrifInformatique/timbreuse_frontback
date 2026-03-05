@@ -1,22 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { getAdminData } from "./services/dataService";
 
 
-const AdminDashboardStudentPresentPage = ({ logsData }) => {
+const AdminDashboardStudentPresentPage = () => {
 
   const navigate = useNavigate();
-  const [data, setData] = useState(logsData || null);
-
-  useEffect(() => {
-    if (!logsData) {
-      fetch('/data/mock-data-admin.json')
-      .then((res) => res.json())
-      .then((json) => setData(json))
-      .catch((err) => console.error("Erreur JSON :", err));
-    }
-  }, [logsData]);  
-
-  if (!data) return <div>Chargement...</div>;
+  const [data, setData] = useState(null);
+  
+      useEffect(() => {
+          getAdminData().then(setData);
+      }, []);
+  
+      if (!data) return <div>Chargement...</div>
 
   const { id } = useParams();
 
