@@ -1,5 +1,6 @@
+import axios from 'axios';
+
 let data = null;
-let isLoading = false;
 let promise = null;
 
 export function getAdminData() {
@@ -8,27 +9,27 @@ export function getAdminData() {
     return Promise.resolve(data);
   }
 
-  if (isLoading) {
-    return promise;
+  if (!promise) {
+
+    // Récupère les données du JSON
+    // Modification futur : changer l'adresse de la requête par l'adresse des données backend
+    //                      et intégrer le code du token d'authentification 
+    
+    promise = axios.get('/data/mock-data-admin.json')
+        .then((res) => {
+          data = res.data;   
+          return data;
+        })
+        .catch((err) => {
+          promise = null;
+          throw err;
+        });
   }
-
-  isLoading = true;
-
-  promise = fetch('/data/mock-data-admin.json')
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error("Erreur chargement JSON");
-      }
-      return res.json();
-    })
-    .then((json) => {
-      data = json;   
-      return data;
-    })
-    .catch((err) => {
-      console.error(err);
-      throw err;
-    });
 
   return promise;
 }
+
+
+
+
+

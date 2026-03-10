@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { getAdminData } from "./services/dataService";
 import TableLigneResumeLog from "./components/tableLigneResumeLog";
 
-
 const AdminDashboard = () => {
 
   const [data, setData] = useState(null);
@@ -55,8 +54,6 @@ const AdminDashboard = () => {
         </tbody>
       </table>
     </div>
-
-
   </>);
 }
 
