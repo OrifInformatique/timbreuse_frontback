@@ -30,19 +30,19 @@ const AdminDashboardDaily = () => {
 
   return (<>
   
-    <div className="flex flex-row justify-center my-10 items-center">
-        <p className="font-bold text-3xl mr-10">{prenom} {nom}</p>
-        <div className="flex flex-row items-start">
+    <div className="flex flex-col md:flex-row justify-items-center md:justify-center md:min-w-4xl my-10 items-center">
+        <p className="font-bold text-3xl mb-5 md:mb-0 md:mr-10">{prenom} {nom}</p>
+        <div className="flex flex-row items-start mb-5 md:mb-0">
             <div className="text-2xl pl-3 pr-3 mr-1 bg-gray-300">◁</div>
             <div className="text-2xl pl-3 pr-3 bg-gray-300">{readingDate}</div>
             <div className="text-2xl pl-3 pr-3 ml-1 bg-gray-300">▷</div>
         </div>
-        <button className="p-3 ml-10 bg-gray-300 rounded-4xl border-2 border-gray-400" onClick={() => navigate("/admin-dashboard")}>voir les bénéficiaires</button>
+        <button className="p-3 md:ml-10 bg-gray-300 rounded-4xl border-2 border-gray-400" onClick={() => navigate("/admin-dashboard")}>voir les bénéficiaires</button>
     </div>
 
-    <div className="flex flex-row justify-center mb-20 pt-10">
-        <div className="flex flex-col w-full max-w-1/6 min-w-3xs mx-5">
-            <div className="py-2 font-bold text-xl text-blue-600">Bénéficiaires présents</div>
+    <div className="flex flex-col md:flex-row justify-center py-10 items-center md:items-stretch">
+        <div className="flex flex-col w-full w-1/6 max-w-3xs min-w-3xs mx-5">
+            <div className="py-2 font-bold text-xl text-blue-600 text-center md:text-left">Bénéficiaires présents</div>
             <table className="flex flex-row justify-center bg-gray-300 border border-gray-400">
                 <tbody className="">
                     {listStudent.map((student) =>(
@@ -66,8 +66,8 @@ const AdminDashboardDaily = () => {
                 </tbody>
             </table>
         </div>
-        <div className="flex flex-col w-full max-w-1/6 min-w-3xs mx-5">
-            <div className="py-2 font-bold text-xl text-blue-600">Bénéficiaires absents</div>
+        <div className="flex flex-col w-full w-1/6 max-w-3xs min-w-3xs mx-5">
+            <div className="py-2 font-bold text-xl text-blue-600 text-center md:text-left">Bénéficiaires absents</div>
             <table className="flex flex-row justify-center bg-gray-300 border border-gray-400">
                 <tbody>
                     {listStudent.map((student) =>(
@@ -83,8 +83,8 @@ const AdminDashboardDaily = () => {
                 </tbody>
             </table>
         </div>
-        <div className="flex flex-col w-full max-w-1/6 min-w-3xs mx-5">
-            <div className="py-2 font-bold text-xl text-blue-600">Bénéficiaires excusés</div>
+        <div className="flex flex-col w-full w-1/6 max-w-3xs min-w-3xs mx-5">
+            <div className="py-2 font-bold text-xl text-blue-600 text-center md:text-left">Bénéficiaires excusés</div>
             <table className="flex flex-row justify-center bg-gray-300 border border-gray-400">
                 <tbody>
                     {listStudent.map((student) =>(

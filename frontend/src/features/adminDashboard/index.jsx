@@ -24,7 +24,7 @@ const AdminDashboard = () => {
       <p className="font-bold text-2xl">Liste des bénéficiaires</p>
     </div>
     <div className="flex justify-center my-8 text-2xl">
-      <table className="py-3 border min-w-2/5 max-w-1/2">
+      <table className="py-3 border sm:min-w-2xl max-w-4xl">
         <tbody className="divide-y-1 divide-gray-500">
           {listStudent.map((student) => (
             <tr

@@ -25,11 +25,11 @@ const AdminDashboardStudentPresentPage = () => {
   return (<>
   
     <div className="flex flex-row justify-center my-10 items-center">
-        <p className="font-bold text-3xl mr-10">Présence : {student.name} {student.surname}</p>
+        <p className="font-bold text-3xl md:mr-10">Présence : {student.name} {student.surname}</p>
     </div>    
 
-    <div className="flex justify-center my-20 py-20">
-        <div className="flex flex-row max-w-1/4 min-w-1/8 h-30 mx-5 justify-center p-3 border border-black-400">
+    <div className="flex flex-col md:flex-row items-center md:justify-center my-20 md:py-20 md:contend-around gap-5">
+        <div className="flex flex-row md:max-w-1/4 w-1/2 md:min-w-1/8 h-30 mx-5 justify-center md:p-3 border border-black-400">
             <div className={
                 student.presence === 0 ? "flex text-green-500 text-2xl font-bold items-center" : 
                     student.presence === 1 && student.reason === "" ? "flex text-red-500 text-2xl font-bold items-center" :
@@ -44,19 +44,19 @@ const AdminDashboardStudentPresentPage = () => {
             <table className="w-full">
                 <tbody className="divide-y-1 divide-black-400">
                     <tr>
-                        <th scope="row" className="text-left px-3">Temps exigé du jour</th>
+                        <th scope="row" className="text-left px-3 py-2">Temps exigé du jour</th>
                         <td className="text-right px-3">08:12</td>
                     </tr>
                     <tr>
-                        <th scope="row" className="text-left px-3">Temps de travail</th>
+                        <th scope="row" className="text-left px-3 py-2">Temps de travail</th>
                         <td className="text-right px-3">00:00</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div className="flex flex-col w-full min-w-1/6 max-w-1/6 mx-5">
+        <div className="flex flex-col md:w-full w-1/2 md:w-1/6 md:max-w-1/6 mx-5 h-30">
             <div className="">Motif</div>
-            <div className="bg-gray-300 border-1 border-black-300 h-full max-h-30 p-2">{student.presence === 1 && student.reason !== "" ? student.reason : ""}</div>
+            <div className="bg-gray-300 border-1 border-black-300 h-full max-h-30 p-2 flex text-center items-center">{student.presence === 1 && student.reason !== "" ? student.reason : ""}</div>
         </div>
     </div>
 
