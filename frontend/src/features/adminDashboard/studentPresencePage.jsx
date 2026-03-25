@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getAdminData } from "./services/dataService";
-
+import TableDailyHour from "./components/tableDailyHour";
 
 const AdminDashboardStudentPresentPage = () => {
 
@@ -41,18 +41,20 @@ const AdminDashboardStudentPresentPage = () => {
             </div>
         </div>
         <div className="flex mx-5">
-            <table className="w-full">
+
+            <TableDailyHour dailyHourNeeded={student.dailyHourNeeded} dailyLogs={student.dailyLogs}></TableDailyHour>
+            {/*<table className="w-full">
                 <tbody className="divide-y-1 divide-black-400">
                     <tr>
                         <th scope="row" className="text-left px-3 py-2">Temps exigé du jour</th>
-                        <td className="text-right px-3">08:12</td>
+                        <td className="text-right px-3">{student.dailyHourNeeded}</td>
                     </tr>
                     <tr>
                         <th scope="row" className="text-left px-3 py-2">Temps de travail</th>
                         <td className="text-right px-3">00:00</td>
                     </tr>
                 </tbody>
-            </table>
+            </table>*/}
         </div>
         <div className="flex flex-col md:w-full w-1/2 md:w-1/6 md:max-w-1/6 mx-5 h-30">
             <div className="">Motif</div>
