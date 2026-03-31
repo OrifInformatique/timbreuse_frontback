@@ -2,16 +2,19 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAdminData } from "./services/dataService";
 import TableLigneResumeLog from "./components/tableLigneResumeLog";
+import Title from "./components/title";
 
 const AdminDashboard = () => {
 
   const [data, setData] = useState(null);
 
-    useEffect(() => {
-        getAdminData().then(setData);
-    }, []);
+  // Il va récupérer la variable data dans le json via le dataService.js
+  useEffect(() => {
+      getAdminData().then(setData);
+  }, []);
 
-    if (!data) return <div>Chargement...</div>
+  // Si data n'a aucune donnée, il n'affiche qu'un chargement
+  if (!data) return <div>Chargement...</div>
 
   const nom = data.surname;
   const prenom = data.name;
@@ -19,11 +22,16 @@ const AdminDashboard = () => {
 
 
   return (<>
+
+    {/*Titre de la page*/}
     <div className="flex flex-col">
-      <h1 className="font-bold text-3xl">{nom} {prenom}</h1>
+      <Title titre={nom + " " + prenom}></Title>
       <p className="font-bold text-2xl">Liste des bénéficiaires</p>
     </div>
+
     <div className="flex justify-center my-8 text-2xl">
+
+      {/*Tableau qui contiendra la liste de tous les bénéficiaires du responsable*/}
       <table className="py-3 border sm:min-w-2xl max-w-4xl">
         <tbody className="divide-y-1 divide-gray-500">
           {listStudent.map((student) => (
@@ -31,9 +39,13 @@ const AdminDashboard = () => {
               key={student.id}
               className={"bg-gray-200"}
             >
+              {/*Composant qui représente une ligne de la liste*/}
               <TableLigneResumeLog id={student.id} surname={student.surname} name={student.name} errorFound={student.errorFound} workTime={student.workTime}></TableLigneResumeLog>
 
               {/*
+
+              J'ai laisser le code qui à été remplacé par le composant
+
               <td className="p-2">
                 {student.errorFound === 0 ? "✅" : "⚠️"}
               </td>

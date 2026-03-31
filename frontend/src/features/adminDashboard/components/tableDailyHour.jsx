@@ -1,21 +1,28 @@
 import React, { useEffect, useState } from "react";
 
+// Récupère les variables nécessaires :
+// - dailyHourNeeded --> heure de travail demandé dans la journée (format hh:mm)
+// - dailyLogs --> Liste des logs de l'utilisateur (permet de calculer les heures de travail déjà réalisée)
 const TableDailyHour = ({
     dailyHourNeeded = "08:12",
     dailyLogs = []
 }) => {
 
     const calculWorkTime = (dailyLogs) => {
+        // Permet de convertir le string "HH:mm" en nombre (minutes)
         const toMinutes = (time) => {
             const [hours, minutes] = time.split(":").map(Number);
             return hours * 60 + minutes;
         };
 
+        // Créer une date pour avoir l'heure actuelle
         const now = new Date();
         const currentMinutes = now.getHours() * 60 + now.getMinutes();
 
         let totalMinutes = 0;
 
+        // Vérifie les entrées/sorties de la liste des logs afin de déterminer si l'utilisateur est en pause ou non 
+        // --> Cela permet de choisir s'il doit calculer seulement avec les heures des logs ou avec l'heure actuelle
         for (let i = 0; i < dailyLogs.length; i++) {
             const current = dailyLogs[i];
             const next = dailyLogs[i + 1];
@@ -33,9 +40,11 @@ const TableDailyHour = ({
             }
         }
 
+        // Convertit les nombres en minutes et heures
         const hours = Math.floor(totalMinutes / 60);
         const minutes = totalMinutes % 60;
         
+        // Retourne l'heure de travail réalisée en chaîne de charactères 
         return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
     };
 

@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-
+// Récupère les variables nécessaires :
+// - id         --> id de l'utilisateur
+// - surname    --> nom de l'utilisateur
+// - name       --> prénom de l'utilisateur
+// - errorFound --> Si une erreur à été détectée sur le profil de l'utilisateur ('0' pour aucune erreur, '1' pour une erreur) --> Fournie par le backend
+// - workTime   --> La balance de l'utilisateur
 const TableLigneResumeLog = ({
     id = 0,
     surname = "nom",
