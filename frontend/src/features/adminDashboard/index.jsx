@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAdminData } from "./services/dataService";
-import TableLigneResumeLog from "./components/tableLigneResumeLog";
 import Title from "./components/title";
+import ListAllStudent from "./components/listAllStudent";
 
 const AdminDashboard = () => {
 
@@ -30,41 +30,7 @@ const AdminDashboard = () => {
     </div>
 
     <div className="flex justify-center my-8 text-2xl">
-
-      {/*Tableau qui contiendra la liste de tous les bénéficiaires du responsable*/}
-      <table className="py-3 border sm:min-w-2xl max-w-4xl">
-        <tbody className="divide-y-1 divide-gray-500">
-          {listStudent.map((student) => (
-            <tr
-              key={student.id}
-              className={"bg-gray-200"}
-            >
-              {/*Composant qui représente une ligne de la liste*/}
-              <TableLigneResumeLog id={student.id} surname={student.surname} name={student.name} errorFound={student.errorFound} workTime={student.workTime}></TableLigneResumeLog>
-
-              {/*
-
-              J'ai laisser le code qui à été remplacé par le composant
-
-              <td className="p-2">
-                {student.errorFound === 0 ? "✅" : "⚠️"}
-              </td>
-              <td className="p-2 font-bold text-center">
-                {student.name} {student.surname}
-              </td>
-              <td className={student.workTime.startsWith("+") ? "p-2 text-green-500" : "p-2 text-red-500"}>
-                {student.workTime}
-              </td>
-              <td>
-                <Link to={`/admin-dashboard-student-error/${student.id}`}>
-                  ✏️
-                </Link>
-              </td>
-              */}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <ListAllStudent listStudent={listStudent}></ListAllStudent>
     </div>
   </>);
 }

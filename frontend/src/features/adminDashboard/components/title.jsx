@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 // Récupère les variables nécessaires 
+// - titre      --> text à afficher
 const Title = ({
     titre = "titre"
 }) => {
