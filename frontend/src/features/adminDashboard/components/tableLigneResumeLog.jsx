@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Icon } from "@orif-informatique/react-components-library";
 
 // Récupère les variables nécessaires :
 // - id         --> id de l'utilisateur
@@ -15,9 +16,18 @@ const TableLigneResumeLog = ({
     workTime = ""
 }) => {
 
+    let icon;
+    let editIcon = <><Icon color="black" name="edit" size="8"></Icon></>
+
+    if (errorFound === 0) {
+        icon = <><Icon color="primary" name="check" size="8"></Icon></>
+    } else {
+        icon = <><Icon color="danger" name="cross" size="8"></Icon></>
+    }
+
     return (<>
         <td className="p-2">
-            {errorFound === 0 ? "✅" : "⚠️"}
+            {icon}
         </td>
         <td className="p-2 font-bold text-center">
             {name} {surname}
@@ -27,7 +37,7 @@ const TableLigneResumeLog = ({
         </td>
         <td>
             <Link to={`/admin-dashboard-student-error/${id}`}>
-                ✏️
+                {editIcon}
             </Link>
         </td>
     </>);

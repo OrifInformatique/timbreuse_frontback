@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { getAdminData } from "./services/dataService";
 import Title from "./components/title";
 import ListAllStudent from "./components/listAllStudent";
+import Subtitle from "./components/subtitle";
 
 const AdminDashboard = () => {
 
@@ -26,7 +27,8 @@ const AdminDashboard = () => {
     {/*Titre de la page*/}
     <div className="flex flex-col">
       <Title titre={nom + " " + prenom}></Title>
-      <p className="font-bold text-2xl">Liste des bénéficiaires</p>
+      {/*Composant sous-titre*/}
+      <Subtitle sousTitre="Liste des bénéficiaires"></Subtitle>
     </div>
 
     <div className="flex justify-center my-8 text-2xl">

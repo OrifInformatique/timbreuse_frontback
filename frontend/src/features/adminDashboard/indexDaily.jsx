@@ -62,7 +62,7 @@ const AdminDashboardDaily = () => {
 
             {/*Cette balise représente la colonne des bénéficiaires excusés*/}
             <div className="flex flex-col w-full w-1/6 max-w-3xs min-w-3xs mx-5">
-                <StudentDailyList titleList="Bénéficiaires absents" listStudent={listStudent} typeList={2}></StudentDailyList>
+                <StudentDailyList titleList="Bénéficiaires excusés" listStudent={listStudent} typeList={2}></StudentDailyList>
             </div>
         </div>
         

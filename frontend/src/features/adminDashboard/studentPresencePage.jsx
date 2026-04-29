@@ -43,7 +43,7 @@ const AdminDashboardStudentPresentPage = () => {
             <div className="flex mx-5">
                 <TableDailyHour dailyHourNeeded={student.dailyHourNeeded} dailyLogs={student.dailyLogs}></TableDailyHour>
             </div>
-            <LabelMotif studentPresence={student.presence} studentReason={student.reason}></LabelMotif>
+            {/*<LabelMotif studentPresence={student.presence} studentReason={student.reason}></LabelMotif>*/} 
         </div>
     </>);
 }
