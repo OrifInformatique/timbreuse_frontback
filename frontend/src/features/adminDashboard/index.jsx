@@ -8,10 +8,11 @@ import Subtitle from "./components/subtitle";
 const AdminDashboard = () => {
 
   const [data, setData] = useState(null);
+  let dateDemande = "2026-01-21";
 
   // Il va récupérer la variable data dans le json via le dataService.js
   useEffect(() => {
-      getAdminData().then(setData);
+      getAdminData(dateDemande).then(setData);
   }, []);
 
   // Si data n'a aucune donnée, il n'affiche qu'un chargement

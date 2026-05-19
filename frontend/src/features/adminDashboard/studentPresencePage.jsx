@@ -3,18 +3,23 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getAdminData } from "./services/dataService";
 import TableDailyHour from "./components/tableDailyHour";
 import Title from "./components/title";
-import LabelMotif from "./components/labelMotif";
 import LabelPresence from "./components/labelPresence";
 
 const AdminDashboardStudentPresentPage = () => {
 
     const navigate = useNavigate();
     const [data, setData] = useState(null);
+    const [dateDemande, setDateDemande] = useState(() => {
+        return localStorage.getItem("selectedDate") || "2026-01-21"});
   
     // Il va récupérer la variable data dans le json via le dataService.js
     useEffect(() => {
-        getAdminData().then(setData);
-    }, []);
+        getAdminData(dateDemande).then(setData);
+    }, [dateDemande]);
+
+    useEffect(() => {
+        localStorage.setItem("selectedDate", dateDemande);
+    }, [dateDemande]);
   
     // Si data n'a aucune donnée, il n'affiche qu'un chargement
     if (!data) return <div>Chargement...</div>

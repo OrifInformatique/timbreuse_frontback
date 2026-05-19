@@ -2,31 +2,30 @@ import axios from 'axios';
 
 let data = null;
 let promise = null;
+// Changer l'adresse de la requête pour le backend et le token d'authentification
+let pathJSON = "/data/mock-data-admin-";
 
-export function getAdminData() {
 
-  if (data) {
-    return Promise.resolve(data);
-  }
+// Export function
 
-  if (!promise) {
+export async function getAdminData(dateString) {
 
-    // Récupère les données du JSON
-    // Modification futur : changer l'adresse de la requête par l'adresse des données backend
-    //                      et intégrer le code du token d'authentification 
-    
-    promise = axios.get('/data/mock-data-admin.json')
-        .then((res) => {
-          data = res.data;   
-          return data;
-        })
-        .catch((err) => {
-          promise = null;
-          throw err;
-        });
-  }
-
-  return promise;
+  const result = await axios.get(pathJSON + dateString + ".json");
+  console.log(result.data);
+/*
+  promise = axios.get(pathJSON + dateString + ".json")
+    .then((res) => {
+      data = res.data;  
+      return data;
+    })
+    .catch((err) => {
+      promise = null;
+      throw err;
+    });
+*/
+  //console.log(promise);
+  
+  return result.data;
 }
 
 
