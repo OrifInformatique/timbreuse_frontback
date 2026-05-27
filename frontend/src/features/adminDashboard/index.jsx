@@ -8,12 +8,18 @@ import Subtitle from "./components/subtitle";
 const AdminDashboard = () => {
 
   const [data, setData] = useState(null);
-  let dateDemande = "2026-01-21";
+  const [idUser] = useState(() => {
+    return Number(localStorage.getItem("idUser")) || 1});
+  let dateDisplayed = "2026-01-19";
 
   // Il va récupérer la variable data dans le json via le dataService.js
   useEffect(() => {
-      getAdminData(dateDemande).then(setData);
+      getAdminData(dateDisplayed, idUser).then(setData);
   }, []);
+
+  useEffect(() => {
+      localStorage.setItem("idUser", idUser);
+  }, [idUser]);  
 
   // Si data n'a aucune donnée, il n'affiche qu'un chargement
   if (!data) return <div>Chargement...</div>

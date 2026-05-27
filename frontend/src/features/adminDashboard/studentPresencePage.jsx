@@ -9,23 +9,30 @@ const AdminDashboardStudentPresentPage = () => {
 
     const navigate = useNavigate();
     const [data, setData] = useState(null);
-    const [dateDemande, setDateDemande] = useState(() => {
-        return localStorage.getItem("selectedDate") || "2026-01-21"});
+    const [idUser] = useState(() => {
+        return Number(localStorage.getItem("idUser")) || 1});
+    const [dateDisplayed, setDateDisplayed] = useState(() => {
+        return localStorage.getItem("selectedDate") || "2026-01-19"});;
   
     // Il va récupérer la variable data dans le json via le dataService.js
     useEffect(() => {
-        getAdminData(dateDemande).then(setData);
-    }, [dateDemande]);
+        getAdminData(dateDisplayed, idUser).then(setData);
+    }, [dateDisplayed]);
 
     useEffect(() => {
-        localStorage.setItem("selectedDate", dateDemande);
-    }, [dateDemande]);
-  
-    // Si data n'a aucune donnée, il n'affiche qu'un chargement
-    if (!data) return <div>Chargement...</div>
+        localStorage.setItem("selectedDate", dateDisplayed);
+    }, [dateDisplayed]);
+
+    useEffect(() => {
+        localStorage.setItem("idUser", idUser);
+    }, [idUser]);
 
     // Récupère l'id utilisé dans la route pour la page et va chercher dans data le bénéficiaire qui correspond à l'id
-    const { id } = useParams();
+    const {id} = useParams();
+    
+    // Si data n'a aucune donnée, il n'affiche qu'un chargement
+    if (!data) return <div>Chargement...</div>
+    
     const student = data.listStudent.find(
         (s) => s.id === Number(id)
     );

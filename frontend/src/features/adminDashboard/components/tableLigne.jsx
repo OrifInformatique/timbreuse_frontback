@@ -48,19 +48,6 @@ const TableLigne = ({
                 {edit}
             </Link>
         </div>
-
-        {/*
-        <div className="flex flex-row">
-            <td className="py-4 font-bold text-lg">
-                {presence === 0 ? "✅" + name + " " + surname : 
-                    presence === 1 && reason === "" ? "‼️" + name + " " + surname : 
-                        presence === 1 && reason !== "" ? "⚠️" + name + " " + surname : ""}
-            </td>
-            <Link to={`/admin-dashboard-student/${id}`} className="p-4 text-right">
-                <a>🪪</a>
-            </Link>
-        </div>
-        */}
     </>);
 }
 

@@ -1,17 +1,22 @@
 import axios from 'axios';
 
-let data = null;
-let promise = null;
-// Changer l'adresse de la requête pour le backend et le token d'authentification
 let pathJSON = "/data/mock-data-admin-";
+let pathJSONUser = "data/mock-data-admin-users";
 
+export async function getAdminData(dateString, idAdmin) {
 
-// Export function
-
-export async function getAdminData(dateString) {
-
+  // Changer l'adresse de la requête pour le backend et le token d'authentification
   const result = await axios.get(pathJSON + dateString + ".json");
-  console.log(result.data);
+
+  const adminData = result.data.find(
+    admin => admin.id_admin === idAdmin
+  );
+
+  if (!adminData) {
+    throw new Error("Admin introuvable");
+  }
+
+  console.log(adminData);
 /*
   promise = axios.get(pathJSON + dateString + ".json")
     .then((res) => {
@@ -25,7 +30,23 @@ export async function getAdminData(dateString) {
 */
   //console.log(promise);
   
-  return result.data;
+  return adminData;
+}
+
+export async function getUserData(idUser) {
+
+  const result = await axios.get(pathJSONUser + ".json");
+
+  const userData = result.data.find(
+    user => user.id_admin === idUser    
+  );
+
+  if (!userData) {
+    throw new Error("Utilisateur introuvable");
+  }  
+
+  console.log(userData);
+  return userData;
 }
 
 
