@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { getAdminData, getUserData } from "./services/dataService";
-import Title from "./components/title";
-import SelectDate from "./components/selectDate";
+import { getAdminData, getUserAdminData } from "/src/features/services/dataService";
+import Title from "/src/features/components/title";
+import SelectDate from "/src/features/components/selectDate";
 import StudentDailyList from "./components/studentDailyList";
 import { Button } from "@orif-informatique/react-components-library";
 
@@ -19,12 +19,14 @@ const AdminDashboardDaily = () => {
     const [error, setError] = useState(false);
 
     useEffect(() => {
+        localStorage.setItem("selectedDate", dateDisplayed);
+
         async function loadData() {
             try {
                 const result = await getAdminData(dateDisplayed, idUser);
-                //console.log(result);
                 setData(result);
                 setError(false);
+
             } catch(err) {
                 setError(true);
                 setData(null);
@@ -34,22 +36,14 @@ const AdminDashboardDaily = () => {
     }, [dateDisplayed, idUser]);
 
     useEffect(() => {
-        localStorage.setItem("selectedDate", dateDisplayed);
-    }, [dateDisplayed]); 
-    /*
-        useEffect(() => {
-            localStorage.setItem("idUser", idUser);
-        }, [idUser]);
-    */
-    useEffect(() => {
-
         localStorage.setItem("idUser", idUser);
 
         async function loadDataUser() {
             try {
-                const result = await getUserData(idUser);
+                const result = await getUserAdminData(idUser);
                 setError(false);
                 setUserData(result);
+
             } catch(err) {
                 setError(true);
                 setUserData(null);
@@ -65,7 +59,7 @@ const AdminDashboardDaily = () => {
             weekday: "long",
             year: "numeric",
             month: "long",
-            day: "numeric"
+            day: "numeric" 
         });
 
         return (<>
@@ -127,7 +121,6 @@ const AdminDashboardDaily = () => {
             
             {/*Nom du responsable (administrateur)*/}
             <Title titre={prenom + " " + nom}></Title>
-            {/*<p className="font-bold text-3xl mb-5 md:mb-0 md:mr-10">{prenom} {nom}</p>*/}
             
             {/*Balise qui affiche le jour sélectionné (la navigation entre les jour n'est pas encore implémenté)*/}
             <SelectDate stringDate={readingDate} decrementDate={() => decrementDate(dateDisplayed)} incrementDate={() => incrementDate(dateDisplayed)}></SelectDate>

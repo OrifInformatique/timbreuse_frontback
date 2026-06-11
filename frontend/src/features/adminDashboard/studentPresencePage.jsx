@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getAdminData } from "./services/dataService";
+import { getAdminData } from "/src/features/services/dataService";
 import TableDailyHour from "./components/tableDailyHour";
-import Title from "./components/title";
+import Title from "/src/features/components/title";
 import LabelPresence from "./components/labelPresence";
+import { Button } from "@orif-informatique/react-components-library";
+
 
 const AdminDashboardStudentPresentPage = () => {
 
@@ -12,7 +14,7 @@ const AdminDashboardStudentPresentPage = () => {
     const [idUser] = useState(() => {
         return Number(localStorage.getItem("idUser")) || 1});
     const [dateDisplayed, setDateDisplayed] = useState(() => {
-        return localStorage.getItem("selectedDate") || "2026-01-19"});;
+        return localStorage.getItem("selectedDate") || "2026-01-19"});
   
     // Il va récupérer la variable data dans le json via le dataService.js
     useEffect(() => {
@@ -45,6 +47,7 @@ const AdminDashboardStudentPresentPage = () => {
         {/*Titre de la page*/}
         <div className="flex flex-row justify-center my-10 items-center">
             <Title titre={"Présence : " + student.name + " " + student.surname}></Title>
+            <Button className="p-3 md:ml-10" variant="secondary" label="Présence du jour" onClick={() => navigate("/admin-dashboard-daily")}></Button>
         </div>    
         <div className="flex flex-col md:flex-row items-center md:justify-center my-20 md:py-20 md:contend-around gap-5">
 

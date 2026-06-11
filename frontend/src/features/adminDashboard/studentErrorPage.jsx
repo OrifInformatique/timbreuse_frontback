@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getAdminData } from "./services/dataService";
-import Title from "./components/title";
+import { getAdminData } from "/src/features/services/dataService";
+import Title from "/src/features/components/title";
+import { Button } from "@orif-informatique/react-components-library";
 
 const AdminDashboardStudentErrorPage = () => {
 
@@ -9,19 +10,50 @@ const AdminDashboardStudentErrorPage = () => {
     const [data, setData] = useState(null);
     const [idUser] = useState(() => {
         return Number(localStorage.getItem("idUser")) || 1});
-    let dateDisplayed = "2026-01-19";
+    const [dateDisplayed, setDateDisplayed] = useState(() => {
+        return localStorage.getItem("selectedDate") || "2026-01-19"});
+    const [userData, setUserData] = useState(null);
+    const [error, setError] = useState(false);        
   
-    // Il va récupérer la variable data dans le json via le dataService.js
     useEffect(() => {
-        getAdminData(dateDisplayed, idUser).then(setData);
-    }, []);
+        localStorage.setItem("selectedDate", dateDisplayed);
+
+        async function loadData() {
+            try {
+                const result = await getAdminData(dateDisplayed, idUser);
+                setData(result);
+                setError(false);
+
+            } catch(err) {
+                setError(true);
+                setData(null);
+            }
+        }
+        loadData();
+    }, [dateDisplayed, idUser]);
 
     useEffect(() => {
         localStorage.setItem("idUser", idUser);
-    }, [idUser]);    
+
+        async function loadDataUser() {
+            try {
+                const result = await getUserData(idUser);
+                setError(false);
+                setUserData(result);
+
+            } catch(err) {
+                setError(true);
+                setUserData(null);
+            }              
+        }
+        loadDataUser();
+    }, [idUser]);  
   
     // Si data n'a aucune donnée, il n'affiche qu'un chargement
-    if (!data) return <div>Chargement...</div>
+    if (!data) return (<>
+        <Button className="p-3 md:ml-10" variant="secondary" label="Retour" onClick={() => navigate("/admin-dashboard")}></Button>
+        <div>Chargement...</div>
+    </>);
 
     // Récupère l'id utilisé dans la route pour la page et va chercher dans data le bénéficiaire qui correspond à l'id
     const { id } = useParams();
@@ -30,13 +62,17 @@ const AdminDashboardStudentErrorPage = () => {
     );
 
     // Si aucun bénéficiaire correspond à l'id, il affiche que le bénéficiaire est introuvable
-    if (!student) return <div>Bénéficiaire introuvable</div>
+    if (!student) return (<>
+        <Button className="p-3 md:ml-10" variant="secondary" label="Retour" onClick={() => navigate("/admin-dashboard")}></Button>
+        <div>Bénéficiaire introuvable</div>
+    </>); 
 
     return (<>
 
         {/*Titre de la page*/}
         <div className="flex flex-row justify-center my-10 items-center">
             <Title titre={student.name + " " + student.surname}></Title>
+            <Button className="p-3 md:ml-10" variant="secondary" label="Retour" onClick={() => navigate("/admin-dashboard")}></Button>
         </div>    
 
 
