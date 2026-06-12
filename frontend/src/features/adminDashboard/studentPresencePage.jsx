@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getAdminData } from "/src/features/services/dataService";
+import { getAdminData } from "/src/common/services/dataService";
 import TableDailyHour from "./components/tableDailyHour";
-import Title from "/src/features/components/title";
+import Title from "/src/common/components/title";
 import LabelPresence from "./components/labelPresence";
 import { Button } from "@orif-informatique/react-components-library";
 

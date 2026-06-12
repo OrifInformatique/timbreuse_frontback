@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getAdminData } from "/src/features/services/dataService";
-import Title from "/src/features/components/title";
+import { getAdminData } from "/src/common/services/dataService";
+import Title from "/src/common/components/title";
 import { Button } from "@orif-informatique/react-components-library";
 
 const AdminDashboardStudentErrorPage = () => {

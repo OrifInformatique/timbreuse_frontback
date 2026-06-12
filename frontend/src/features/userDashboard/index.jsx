@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@orif-informatique/react-components-library";
-import SelectDate from "/src/features/components/selectDate";
-import Title from "/src/features/components/title";
-import { getUserData } from "/src/features/services/dataService";
+import SelectDate from "/src/common/components/selectDate";
+import Title from "/src/common/components/title";
+import InfoBubble from "./components/infoBubble";
+import { getUserData } from "/src/common/services/dataService";
 
 const UserDashboard = () => {
 
@@ -62,6 +63,7 @@ const UserDashboard = () => {
         const diff = end-start;
         duration.push(diff);
       }
+      console.log(duration);
     }
     return duration.reduce((acc, currentVal) => acc + currentVal, 0);
   }
@@ -130,9 +132,9 @@ const UserDashboard = () => {
         <SelectDate stringDate={readingDate}></SelectDate>
         <nav className="ml-3">
           <ol className="flex flex-row justify-center text-center">
-            <li className="py-3 px-5 m-3 border-2 border-gray-400 bg-gray-300 rounded-4xl"><div>{displayReformatedDateBubble("2026-01-19")}<br/>+00:15</div></li>
-            <li className="py-3 px-5 m-3 border-2 border-orange-400 bg-orange-300 rounded-4xl"><div>{displayReformatedDateBubble("2026-01-20")}<br/>⁉️</div></li>
-            <li className="py-3 px-5 m-3 border-2 border-gray-400 bg-gray-300 rounded-4xl"><div>{displayReformatedDateBubble("2026-01-21")}<br/>Today</div></li>
+            <InfoBubble textDate={displayReformatedDateBubble("2026-01-19")} textTime="+00:15" state={1}></InfoBubble>
+            <InfoBubble textDate={displayReformatedDateBubble("2026-01-20")} textTime="⁉️" state={2}></InfoBubble>
+            <InfoBubble textDate={displayReformatedDateBubble("2026-01-21")} textTime="Today" state={1}></InfoBubble>
           </ol>
         </nav>            
       </div>      

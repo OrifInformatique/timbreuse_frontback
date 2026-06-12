@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { getAdminData, getUserAdminData } from "/src/features/services/dataService";
-import Title from "/src/features/components/title";
+import { getAdminData, getUserAdminData } from "/src/common/services/dataService";
+import Title from "/src/common/components/title";
 import ListAllStudent from "./components/listAllStudent";
 import Subtitle from "./components/subtitle";
 import { Button } from "@orif-informatique/react-components-library";
