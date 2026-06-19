@@ -14,7 +14,7 @@ const TableLigne = ({
     id = 0,
     surname = "nom",
     name = "prénom",
-    presence = null,
+    presence = 0,
     reason = ""
 }) => {
 

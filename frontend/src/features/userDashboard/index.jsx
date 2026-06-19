@@ -4,6 +4,7 @@ import SelectDate from "/src/common/components/selectDate";
 import Title from "/src/common/components/title";
 import InfoBubble from "./components/infoBubble";
 import { getUserData } from "/src/common/services/dataService";
+import { workTime, formatDuration, reformatDate, displayReformatedDateBubble } from "./utils/index.utils";
 
 const UserDashboard = () => {
 
@@ -11,11 +12,11 @@ const UserDashboard = () => {
   const [idUser] = useState(() => {
     return Number(localStorage.getItem("idUser")) || 1});
   const [dateDisplayed, setDateDisplayed] = useState(() => {
-    return localStorage.getItem("selectedDate") || "2026-01-21"});
+    return localStorage.getItem("selectedDateUser") || "2026-01-21"});
   const [whenNewLogButtonClick, setWhenNewLogButtonClick] = useState(false);
   
   useEffect(() => {
-    localStorage.setItem("selectedDate", dateDisplayed);
+    localStorage.setItem("selectedDateUser", dateDisplayed);
 
     async function loadDataUser() {
       try {
@@ -48,7 +49,7 @@ const UserDashboard = () => {
     month: "long",
     day: "numeric"
   });
-
+  /*
   function workTime(logs) {
     const duration = [];
 
@@ -115,7 +116,7 @@ const UserDashboard = () => {
   
     return dateFormated;
   }
-  
+  */
 
   return (<>
       <nav>

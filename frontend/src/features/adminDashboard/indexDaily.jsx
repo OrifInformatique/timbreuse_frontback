@@ -6,6 +6,7 @@ import Title from "/src/common/components/title";
 import SelectDate from "/src/common/components/selectDate";
 import StudentDailyList from "./components/studentDailyList";
 import { Button } from "@orif-informatique/react-components-library";
+import { addOneDay, removeOneDay } from "./utils";
 
 const AdminDashboardDaily = () => {
     
@@ -13,13 +14,13 @@ const AdminDashboardDaily = () => {
     const [idUser] = useState(() => {
         return Number(localStorage.getItem("idUser")) || 2});
     const [dateDisplayed, setDateDisplayed] = useState(() => {
-        return localStorage.getItem("selectedDate") || "2026-01-19"});
+        return localStorage.getItem("selectedDateAdmin") || "2026-01-19"});
     const [data, setData] = useState(null);
     const [userData, setUserData] = useState(null);
     const [error, setError] = useState(false);
 
     useEffect(() => {
-        localStorage.setItem("selectedDate", dateDisplayed);
+        localStorage.setItem("selectedDateAdmin", dateDisplayed);
 
         async function loadData() {
             try {
@@ -52,7 +53,7 @@ const AdminDashboardDaily = () => {
         loadDataUser();
     }, [idUser]);
     
-    // Si data n'a aucune donnée, il n'affiche qu'un chargement
+    // Si data ou userData n'ont aucune donnée, il affiche qu'il n'a trouvé aucune donnée
     if (!data || !userData) {
 
         let date = new Date(dateDisplayed).toLocaleDateString("ch-CH", {
@@ -65,7 +66,7 @@ const AdminDashboardDaily = () => {
         return (<>
             <div className="flex flex-col md:flex-row justify-items-center md:justify-center md:min-w-4xl my-10 items-center">
                 <Title titre={userData ? `${userData.name} ${userData.surname}` : "Chargement..."}></Title>
-                <SelectDate stringDate={date} decrementDate={() => decrementDate(dateDisplayed)} incrementDate={() => incrementDate(dateDisplayed)}></SelectDate>
+                <SelectDate stringDate={date} decrementDate={() => decrementDateDisplayed(dateDisplayed)} incrementDate={() => incrementDateDisplayed(dateDisplayed)}></SelectDate>
                 <Button className="p-3 md:ml-10" variant="secondary" label="Voir les bénéficiaires" onClick={() => navigate("/admin-dashboard")}></Button>
             </div>
             <div>Aucune données trouvées</div>
@@ -83,35 +84,14 @@ const AdminDashboardDaily = () => {
         month: "long",
         day: "numeric"
     });
-
-    function addOneDay(dateString) {
-        const date = new Date(dateString);
-        date.setDate(date.getDate() + 1);
-
-        return reformatDate(date);
-    }
-
-    function removeOneDay(dateString) {
-        const date = new Date(dateString);
-        date.setDate(date.getDate() - 1);
-
-        return reformatDate(date);
-    }
-
-    function reformatDate(dateToReform) {
-        const year = dateToReform.getFullYear();
-        const month = String(dateToReform.getMonth() + 1).padStart(2, "0");
-        const day = String(dateToReform.getDate()).padStart(2, "0");
-        const dateFormated = `${year}-${month}-${day}`;
-
-        return dateFormated;
-    }
-
-    function incrementDate(stringDate) {
+    
+    // Permet de mettre à jour la constante dateDisplayed en ajoutant un jour à celle-ci
+    function incrementDateDisplayed(stringDate) {
         setDateDisplayed(addOneDay(stringDate));
     }
 
-    function decrementDate(stringDate) {
+    // Permet de mettre à jour la constante dateDisplayed en retirant un jour à celle-ci
+    function decrementDateDisplayed(stringDate) {
         setDateDisplayed(removeOneDay(stringDate));
     }
 
@@ -123,7 +103,7 @@ const AdminDashboardDaily = () => {
             <Title titre={prenom + " " + nom}></Title>
             
             {/*Balise qui affiche le jour sélectionné (la navigation entre les jour n'est pas encore implémenté)*/}
-            <SelectDate stringDate={readingDate} decrementDate={() => decrementDate(dateDisplayed)} incrementDate={() => incrementDate(dateDisplayed)}></SelectDate>
+            <SelectDate stringDate={readingDate} decrementDate={() => decrementDateDisplayed(dateDisplayed)} incrementDate={() => incrementDateDisplayed(dateDisplayed)}></SelectDate>
             
             {/*Bouton qui permet de naviguer à la page qui contient la liste des bénéficiaires*/}
             <Button className="p-3 md:ml-10" variant="secondary" label="Voire les bénéficiaires" onClick={() => navigate("/admin-dashboard")}></Button>
