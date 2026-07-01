@@ -1,6 +1,9 @@
-import { workTime, formatDuration, reformatDate, displayReformatedDateBubble } from "./utils/index.utils";
+import { workTime, formatDuration, reformatDate, displayReformatedDateBubble } from "./utils";
 
-test('Temps de travail réalisé', () => {
+
+// Tests for the function workTime
+describe("workTime", () => {
+
     const logs1 = [
         { id: 1, log_type: 1, time: '2026-01-21T08:00:00' },
         { id: 2, log_type: 0, time: '2026-01-21T09:45:00' },
@@ -19,66 +22,73 @@ test('Temps de travail réalisé', () => {
     const logs4 = [];
     const logs5 = null;
 
-    const result1 = workTime(logs1);
-    const result2 = workTime(logs2);
-    const result3 = workTime(logs3);
-    const result4 = workTime(logs4);
-    const result5 = workTime(logs5);
-
-    expect(result1).toBe(13500000); // 3 hours and 45 minutes in milliseconds
-    expect(result2).toBe(6300000); // 1 hour and 45 minutes in milliseconds
-    expect(result3).toBe(6300000); // 1 hour and 45 minutes in milliseconds
-    expect(result4).toBe(0); // No logs
-    expect(result5).toBe("Tableau de de logs null");
+    test("Work time with 4 logs", () => {
+        expect(workTime(logs1)).toBe(13500000);
+    });
+    test("Work time with 3 logs", () => {
+        expect(workTime(logs2)).toBe(6300000);
+    });
+    test("Work time with 2 logs", () => {
+        expect(workTime(logs3)).toBe(6300000);
+    });
+    test("Work time with no logs", () => {
+        expect(workTime(logs4)).toBe(0);
+    });
+    test("Work time with logs null", () => {
+        expect(() => workTime(logs5)).toThrow("Table of log is null");
+    });
 });
 
-test('Changement de format de date', () => {
-    const dateString1 = 6300000;
-    const dateString2 = -6300000;
-    const dateString3 = 0;
-    const dateString4 = null;
 
-    const result1 = formatDuration(dateString1);
-    const result2 = formatDuration(dateString2);
-    const result3 = formatDuration(dateString3);
-    const result4 = formatDuration(dateString4);
+// Tests for the function formatDuration
+describe("Changing the format of a date", () => {
 
-    expect(result1).toBe("01:45");
-    expect(result2).toBe("-01:45");
-    expect(result3).toBe("00:00");
-    expect(result4).toBe("Durée null");
+    test("Changing positive millisecondes time into new format", () => {
+        expect(formatDuration(6300000)).toBe("01:45");
+    });
+    test("Changing negative millisecondes time into new format", () => {
+        expect(formatDuration(-6300000)).toBe("-01:45");
+    });
+    test("Changing 0 milliseconde time into new format", () => {
+        expect(formatDuration(0)).toBe("00:00");
+    });
+    test("Changing time format null", () => {
+        expect(() => formatDuration(null)).toThrow("Parameter is null");
+    });
 });
 
-test('Affichage des informations dans une bulle', () => {
-    const dateString1 = "2026-01-19";
-    const dateString2 = "2026-01-21";
-    const dateString3 = "19-01-2026";
-    const dateString4 = null;
 
-    const result1 = displayReformatedDateBubble(dateString1);
-    const result2 = displayReformatedDateBubble(dateString2);
-    const result3 = displayReformatedDateBubble(dateString3);
-    const result4 = displayReformatedDateBubble(dateString4);
+// Tests for the function displayReformatedDateBubble
+describe("Display the info in bubble", () => {
 
-    expect(result1).toBe("lu 19.01");
-    expect(result2).toBe("me 21.01");
-    expect(result3).toBe("In NaN.NaN");
-    expect(result4).toBe("Date nulle");
+    test("Display correct date into bubble", () => {
+        expect(displayReformatedDateBubble("2026-01-19")).toBe("lu 19.01");
+    });
+    test("Display different correct date into bubble", () => {
+        expect(displayReformatedDateBubble("2026-01-21")).toBe("me 21.01");
+    });
+    test("Display incorrect date into bubble", () => {
+        expect(() => displayReformatedDateBubble("19-01-2026")).toThrow("The format need to be like YYYY-MM-DD");
+    });
+    test("Display null date into bubble", () => {
+        expect(() => displayReformatedDateBubble(null)).toThrow("date is null");
+    });
 });
 
-test('Changement de format d\'une date', () => {
-    const dateToReform1 = new Date("2026-01-19");
-    const dateToReform2 = new Date("2026-01-21");
-    const dateToReform3 = new Date("19-01-2026");
-    const dateToReform4 = null;
 
-    const result1 = reformatDate(dateToReform1);
-    const result2 = reformatDate(dateToReform2);
-    const result3 = reformatDate(dateToReform3);
-    const result4 = reformatDate(dateToReform4);
+// Tests for the function reformatDate
+describe("Changing the format of a date", () => {
 
-    expect(result1).toBe("19.01");
-    expect(result2).toBe("21.01");
-    expect(result3).toBe("NaN.NaN");
-    expect(result4).toBe("Date is null");
+    test("Changing a correct date", () => {
+        expect(reformatDate(new Date("2026-01-19"))).toBe("19.01");
+    });
+    test("Changing a correct date", () => {
+        expect(reformatDate(new Date("2026-01-21"))).toBe("21.01");
+    });
+    test("Changing a correct date", () => {
+        expect(() => reformatDate("19-01-2026")).toThrow("The parameter need to be a instance of Date");
+    });
+    test("Changing a correct date", () => {
+        expect(() => reformatDate(null)).toThrow("Date is null");
+    });
 });

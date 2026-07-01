@@ -37,17 +37,19 @@ const TableLigne = ({
 
     return (<>
 
-        <div className="flex flex-row">
+        {/*<td className="flex flex-row">*/}
             <td className="py-4 font-bold text-lg">
                 {content}
             </td>
             <td className="py-4 font-bold text-lg">
                 {name} {surname}
             </td>
-            <Link to={`/admin-dashboard-student/${id}`} className="p-4 text-right">
-                {edit}
-            </Link>
-        </div>
+            <td className="p-4 text-right">
+                <Link to={`/admin-dashboard-student/${id}`} className="p-4 text-right">
+                    {edit}
+                </Link>
+            </td>
+        {/*</td>*/}
     </>);
 }
 

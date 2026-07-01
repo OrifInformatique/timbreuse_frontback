@@ -6,7 +6,7 @@ import TableLigne from "./tableLigne";
 // - listStudent    --> Liste des étudiants
 // - typeList       --> Le type de liyte (0 pour présent, 1 pour absent, 2 pour excusé)
 const StudentDailyList = ({
-    titleList = "Nom de la liste",
+    titleList = "Name of the list",
     listStudent = [],
     typeList = 0
 }) => {
@@ -22,19 +22,19 @@ const StudentDailyList = ({
                         {typeList === 0 ?
                             student.presence === 0 ? 
                                 <TableLigne id={student.id} surname={student.surname} name={student.name} presence={student.presence} reason={student.reason}></TableLigne>
-                            : ""
+                            : null
                         
                         : typeList === 1 ?
                             student.presence === 1 && student.reason === "" ? 
                                 <TableLigne id={student.id} surname={student.surname} name={student.name} presence={student.presence} reason={student.reason}></TableLigne>
-                            : ""
+                            : null
                         
                         : typeList === 2 ?
                             student.presence === 1 && student.reason !== "" ? 
                                 <TableLigne id={student.id} surname={student.surname} name={student.name} presence={student.presence} reason={student.reason}></TableLigne>
-                            : ""
+                            :  null
                         
-                        : ""}
+                        : null}
                     </tr>
                 ))}
             </tbody>

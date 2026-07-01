@@ -15,50 +15,85 @@ const AdminDashboardStudentPresentPage = () => {
         return Number(localStorage.getItem("idUser")) || 1});
     const [dateDisplayed, setDateDisplayed] = useState(() => {
         return localStorage.getItem("selectedDate") || "2026-01-19"});
+    const [userData, setUserData] = useState(null);
+    const [error, setError] = useState(false);          
   
-    // Il va récupérer la variable data dans le json via le dataService.js
-    useEffect(() => {
-        getAdminData(dateDisplayed, idUser).then(setData);
-    }, [dateDisplayed]);
-
+    // Go searching the variable "selectedDateAdmin" in the local storage and paste the data in the constante dateDisplayed
+    // He will repeat this method every time that dateDisplayed or idUser change
     useEffect(() => {
         localStorage.setItem("selectedDate", dateDisplayed);
-    }, [dateDisplayed]);
 
+        // Send a request to get the data in the JSON. If there is no error, he will update the constante data with the data gotten
+        async function loadData() {
+            try {
+                const result = await getAdminData(dateDisplayed, idUser);
+                setData(result);
+                setError(false);
+
+            } catch(err) {
+                setError(true);
+                setData(null);
+            }
+        }
+        loadData();
+    }, [dateDisplayed, idUser]);
+
+    // Go searching the variable "idUser" in the local storage and paste the data in the constante idUser
+    // He will repeat this method every time that idUser change
     useEffect(() => {
         localStorage.setItem("idUser", idUser);
-    }, [idUser]);
 
-    // Récupère l'id utilisé dans la route pour la page et va chercher dans data le bénéficiaire qui correspond à l'id
+        // Send a request to get the data in the JSON. If there is no error, he will update the constante userData with the data gotten
+        async function loadDataUser() {
+            try {
+                const result = await getUserData(idUser);
+                setError(false);
+                setUserData(result);
+
+            } catch(err) {
+                setError(true);
+                setUserData(null);
+            }              
+        }
+        loadDataUser();
+    }, [idUser]);  
+
+    // If data have no data, he display that he did not found data
+    if (!data) return (<>
+        <Button className="p-3 md:ml-10" variant="secondary" label="Retour" onClick={() => navigate("/admin-dashboard-daily")}></Button>
+        <div>No data found</div>
+    </>);
+        
+    // Take the id used in the route by the View and will search in data the student that have this id
     const {id} = useParams();
-    
-    // Si data n'a aucune donnée, il n'affiche qu'un chargement
-    if (!data) return <div>Chargement...</div>
-    
     const student = data.listStudent.find(
         (s) => s.id === Number(id)
     );
 
-    // Si aucun bénéficiaire correspond à l'id, il affiche que le bénéficiaire est introuvable
-    if (!student) return <div>Bénéficiaire introuvable</div>
+    // If no student have the id, he will display that the student is not found
+    if (!student) return (<>
+        <Button className="p-3 md:ml-10" variant="secondary" label="Retour" onClick={() => navigate("/admin-dashboard-daily")}></Button>
+        <div>Student not found</div>
+    </>); 
 
     return (<>
     
-        {/*Titre de la page*/}
+        {/*Title of the page*/}
         <div className="flex flex-row justify-center my-10 items-center">
             <Title titre={"Présence : " + student.name + " " + student.surname}></Title>
+
+            {/*Button that when click, will navigate to the view of the presence of the day*/}
             <Button className="p-3 md:ml-10" variant="secondary" label="Présence du jour" onClick={() => navigate("/admin-dashboard-daily")}></Button>
         </div>    
         <div className="flex flex-col md:flex-row items-center md:justify-center my-20 md:py-20 md:contend-around gap-5">
 
-            {/*Cette balise affiche l'état de présence de l'utilisateur, s'il est présent, absent ou excusé*/}
+            {/*This HTML tag display the presence state of the student (if he's present, not here or plea)*/}
             <LabelPresence studentPresence={student.presence} studentReason={student.reason}></LabelPresence>
 
-            {/*Cette balise contient un composant qui affiche l'heure de travail demandé du jour et le temps de travail effectué en temps réel*/}
+            {/*This HTML tag contain a component that display the time of work needed of the day and the time of work already done in real time*/}
             <div className="flex mx-5">
                 <TableDailyHour dailyHourNeeded={student.dailyHourNeeded} dailyLogs={student.dailyLogs}></TableDailyHour>
             </div>
-            {/*<LabelMotif studentPresence={student.presence} studentReason={student.reason}></LabelMotif>*/} 
         </div>
     </>);
 }

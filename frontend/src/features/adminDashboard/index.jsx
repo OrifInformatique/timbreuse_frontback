@@ -18,9 +18,12 @@ const AdminDashboard = () => {
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(false);
 
+  // Go searching the variable "selectedDateAdmin" in the local storage and paste the data in the constante dateDisplayed
+  // He will repeat this method every time that dateDisplayed or idUser change  
   useEffect(() => {
     localStorage.setItem("selectedDate", dateDisplayed);
 
+    // Send a request to get the data in the JSON. If there is no error, he will update the constante data with the data gotten
     async function loadData() {
         try {
           const result = await getAdminData(dateDisplayed, idUser);
@@ -35,9 +38,12 @@ const AdminDashboard = () => {
     loadData();
   }, [dateDisplayed, idUser]);
 
+  // Go searching the variable "idUser" in the local storage and paste the data in the constante idUser
+  // He will repeat this method every time that idUser change
   useEffect(() => {
     localStorage.setItem("idUser", idUser);
       
+    // Send a request to get the data in the JSON. If there is no error, he will update the constante userData with the data gotten
     async function loadDataUser() {
         try {
           const result = await getUserAdminData(idUser);
@@ -52,8 +58,8 @@ const AdminDashboard = () => {
       loadDataUser();
   }, [idUser]);
 
-  // Si data n'a aucune donnée, il n'affiche qu'un chargement
-  if (!data) {
+  // If data or userData have no data, he display that he did not found data
+  if (!data || !userData) {
     return (<>
       <div className="flex flex-row justify-around">
         <div className="flex flex-col">
@@ -62,7 +68,7 @@ const AdminDashboard = () => {
         </div>
         <Button className="p-3 md:ml-10" variant="secondary" label="Présence du jour" onClick={() => navigate("/admin-dashboard-daily")}></Button>
       </div>         
-      <div>Chargement...</div>
+      <div>No data found</div>
     </>);
   }
 
@@ -74,18 +80,22 @@ const AdminDashboard = () => {
   return (<>
 
     <div className="flex flex-row justify-around">
-      {/*Titre de la page*/}
+      
+      {/*Title of the page*/}
       <div className="flex flex-col">
         <Title titre={nom + " " + prenom}></Title>
-        {/*Composant sous-titre*/}
         <Subtitle sousTitre="Liste des bénéficiaires"></Subtitle>
       </div>
+
+      {/*Button that when click, will navigate to the view of the presence of the day*/}
       <Button className="p-3 md:ml-10" variant="secondary" label="Présence du jour" onClick={() => navigate("/admin-dashboard-daily")}></Button>
     </div>
     
+    {/*List of all the student of the present user*/}
     <div className="flex justify-center my-8 text-2xl">
       <ListAllStudent listStudent={listStudent}></ListAllStudent>
     </div>
+    
   </>);
 }
 

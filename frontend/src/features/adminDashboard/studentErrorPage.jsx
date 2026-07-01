@@ -15,9 +15,12 @@ const AdminDashboardStudentErrorPage = () => {
     const [userData, setUserData] = useState(null);
     const [error, setError] = useState(false);        
   
+    // Go searching the variable "selectedDateAdmin" in the local storage and paste the data in the constante dateDisplayed
+    // He will repeat this method every time that dateDisplayed or idUser change
     useEffect(() => {
         localStorage.setItem("selectedDate", dateDisplayed);
 
+        // Send a request to get the data in the JSON. If there is no error, he will update the constante data with the data gotten
         async function loadData() {
             try {
                 const result = await getAdminData(dateDisplayed, idUser);
@@ -32,9 +35,12 @@ const AdminDashboardStudentErrorPage = () => {
         loadData();
     }, [dateDisplayed, idUser]);
 
+    // Go searching the variable "idUser" in the local storage and paste the data in the constante idUser
+    // He will repeat this method every time that idUser change
     useEffect(() => {
         localStorage.setItem("idUser", idUser);
 
+        // Send a request to get the data in the JSON. If there is no error, he will update the constante userData with the data gotten
         async function loadDataUser() {
             try {
                 const result = await getUserData(idUser);
@@ -49,38 +55,38 @@ const AdminDashboardStudentErrorPage = () => {
         loadDataUser();
     }, [idUser]);  
   
-    // Si data n'a aucune donnée, il n'affiche qu'un chargement
+    // If data have no data, he display that he did not found data
     if (!data) return (<>
         <Button className="p-3 md:ml-10" variant="secondary" label="Retour" onClick={() => navigate("/admin-dashboard")}></Button>
-        <div>Chargement...</div>
+        <div>No data found</div>
     </>);
 
-    // Récupère l'id utilisé dans la route pour la page et va chercher dans data le bénéficiaire qui correspond à l'id
+    // Take the id used in the route by the View and will search in data the student that have this id
     const { id } = useParams();
     const student = data.listStudent.find(
         (s) => s.id === Number(id)
     );
 
-    // Si aucun bénéficiaire correspond à l'id, il affiche que le bénéficiaire est introuvable
+    // If no student have the id, he will display that the student is not found
     if (!student) return (<>
         <Button className="p-3 md:ml-10" variant="secondary" label="Retour" onClick={() => navigate("/admin-dashboard")}></Button>
-        <div>Bénéficiaire introuvable</div>
+        <div>Student not found</div>
     </>); 
 
     return (<>
 
-        {/*Titre de la page*/}
+        {/*Title of the page*/}
         <div className="flex flex-row justify-center my-10 items-center">
             <Title titre={student.name + " " + student.surname}></Title>
+
+            {/*Button that when click will navigate at the View that display the list of the students*/}
             <Button className="p-3 md:ml-10" variant="secondary" label="Retour" onClick={() => navigate("/admin-dashboard")}></Button>
         </div>    
-
-
         
         <div className="flex justify-center w-full mt-20">
             <div className="flex flex-col text-2xl bg-gray-300 min-w-1/3 max-w-2/3 border border-gray-500">
                 
-                {/*Balise qui indique la balance et si elle est positive ou négative*/}
+                {/*HTML tag that display the balance and if she's positive or negative*/}
                 <div className="flex flex-row justify-between p-5">
                     <div>{student.errorFound === 0 ? "✅" : "⚠️"}</div>
                     <div className="flex flex-row">
@@ -93,12 +99,12 @@ const AdminDashboardStudentErrorPage = () => {
                     </div>
                 </div>
 
-                {/*Affiche s'il y a une anomalie dans le compte du bénéficiaire*/}
+                {/*Display if there is a error in the profil of the student*/}
                 <div className="p-5">
                     Anomalie : {student.whatError !== "" ? student.whatError : "-"}
                 </div>
 
-                {/*S'il a détecté une anomalie, il affiche à quel jour elle a été trouvé*/}
+                {/*If a error was found, he display when that error was found*/}
                 <div className="p-5">
                     Quand : {student.whenError ? 
                                 new Date(student.whenError).toLocaleDateString("fr-CH", {

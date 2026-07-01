@@ -19,9 +19,12 @@ const AdminDashboardDaily = () => {
     const [userData, setUserData] = useState(null);
     const [error, setError] = useState(false);
 
+    // Go searching the variable "selectedDateAdmin" in the local storage and paste the data in the constante dateDisplayed
+    // He will repeat this method every time that dateDisplayed or idUser change
     useEffect(() => {
         localStorage.setItem("selectedDateAdmin", dateDisplayed);
 
+        // Send a request to get the data in the JSON. If there is no error, he will update the constante data with the data gotten
         async function loadData() {
             try {
                 const result = await getAdminData(dateDisplayed, idUser);
@@ -36,9 +39,12 @@ const AdminDashboardDaily = () => {
         loadData();
     }, [dateDisplayed, idUser]);
 
+    // Go searching the variable "idUser" in the local storage and paste the data in the constante idUser
+    // He will repeat this method every time that idUser change
     useEffect(() => {
         localStorage.setItem("idUser", idUser);
 
+        // Send a request to get the data in the JSON. If there is no error, he will update the constante userData with the data gotten
         async function loadDataUser() {
             try {
                 const result = await getUserAdminData(idUser);
@@ -53,7 +59,7 @@ const AdminDashboardDaily = () => {
         loadDataUser();
     }, [idUser]);
     
-    // Si data ou userData n'ont aucune donnée, il affiche qu'il n'a trouvé aucune donnée
+    // If data or userData have no data, he display that he did not found data
     if (!data || !userData) {
 
         let date = new Date(dateDisplayed).toLocaleDateString("ch-CH", {
@@ -69,7 +75,7 @@ const AdminDashboardDaily = () => {
                 <SelectDate stringDate={date} decrementDate={() => decrementDateDisplayed(dateDisplayed)} incrementDate={() => incrementDateDisplayed(dateDisplayed)}></SelectDate>
                 <Button className="p-3 md:ml-10" variant="secondary" label="Voir les bénéficiaires" onClick={() => navigate("/admin-dashboard")}></Button>
             </div>
-            <div>Aucune données trouvées</div>
+            <div>No data found</div>
         </>)
     }
 
@@ -85,12 +91,12 @@ const AdminDashboardDaily = () => {
         day: "numeric"
     });
     
-    // Permet de mettre à jour la constante dateDisplayed en ajoutant un jour à celle-ci
+    // Update the constante dateDisplayed by adding a day within it
     function incrementDateDisplayed(stringDate) {
         setDateDisplayed(addOneDay(stringDate));
     }
 
-    // Permet de mettre à jour la constante dateDisplayed en retirant un jour à celle-ci
+    // Update the constante dateDisplayed by removing a day within it
     function decrementDateDisplayed(stringDate) {
         setDateDisplayed(removeOneDay(stringDate));
     }
@@ -99,29 +105,29 @@ const AdminDashboardDaily = () => {
     
         <div className="flex flex-col md:flex-row justify-items-center md:justify-center md:min-w-4xl my-10 items-center">
             
-            {/*Nom du responsable (administrateur)*/}
+            {/*Name of the present user (administrator)*/}
             <Title titre={prenom + " " + nom}></Title>
             
-            {/*Balise qui affiche le jour sélectionné (la navigation entre les jour n'est pas encore implémenté)*/}
+            {/*Display the day chossen (the arrows will modify the date, updating the view)*/}
             <SelectDate stringDate={readingDate} decrementDate={() => decrementDateDisplayed(dateDisplayed)} incrementDate={() => incrementDateDisplayed(dateDisplayed)}></SelectDate>
             
-            {/*Bouton qui permet de naviguer à la page qui contient la liste des bénéficiaires*/}
+            {/*Button that when click will navigate at the View that display the list of the students*/}
             <Button className="p-3 md:ml-10" variant="secondary" label="Voire les bénéficiaires" onClick={() => navigate("/admin-dashboard")}></Button>
         </div>
 
         <div className="flex flex-col md:flex-row justify-center py-10 items-center md:items-stretch">
 
-            {/*Cette balise représente la colonne des bénéficiaires présents*/}
+            {/*this HTML tag represent the column of the students present*/}
             <div className="flex flex-col w-full w-1/6 max-w-3xs min-w-3xs mx-5">
                 <StudentDailyList titleList="Bénéficiaires présents" listStudent={listStudent} typeList={0}></StudentDailyList>
             </div>
 
-            {/*Cette balise représente la colonne des bénéficiaires absents*/}
+            {/*this HTML tag represent the column of the students not here*/}
             <div className="flex flex-col w-full w-1/6 max-w-3xs min-w-3xs mx-5">
                 <StudentDailyList titleList="Bénéficiaires absents" listStudent={listStudent} typeList={1}></StudentDailyList>
             </div>
 
-            {/*Cette balise représente la colonne des bénéficiaires excusés*/}
+            {/*this HTML tag represent the column of the students plea*/}
             <div className="flex flex-col w-full w-1/6 max-w-3xs min-w-3xs mx-5">
                 <StudentDailyList titleList="Bénéficiaires excusés" listStudent={listStudent} typeList={2}></StudentDailyList>
             </div>
