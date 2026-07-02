@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import TableLigne from "./tableLigne";
 
-// Récupère la variable nécessaire
-// - titleList      --> Titre de la liste
-// - listStudent    --> Liste des étudiants
-// - typeList       --> Le type de liyte (0 pour présent, 1 pour absent, 2 pour excusé)
+// Obtain the variables from the props of the component:
+// - titleList      --> Title of the list
+// - listStudent    --> List of students
+// - typeList       --> The type of list (0 for present, 1 for absent, 2 for excused)
 const StudentDailyList = ({
     titleList = "Name of the list",
     listStudent = [],

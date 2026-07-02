@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-// Récupère la variable nécessaire
-// - stringDate     --> date sous format texte (Exemple : Lundi 1 janvier 2026)
+// Obtain the variables from the props of the component:
+// - stringDate     --> date in text format (Example: Lundi 1 janvier 2026)
+// - decrementDate  --> function to decrement the date (need to put the function itself in the parent component and pass it as a prop to this component)
+// - incrementDate  --> function to increment the date (need to put the function itself in the parent component and pass it as a prop to this component)
 const SelectDate = ({
     stringDate = "date du jour",
     decrementDate,

@@ -8,7 +8,7 @@ describe("workTime", () => {
         { id: 1, log_type: 1, time: '2026-01-21T08:00:00' },
         { id: 2, log_type: 0, time: '2026-01-21T09:45:00' },
         { id: 3, log_type: 1, time: '2026-01-21T10:00:00' },
-        { id: 4, log_type: 0, time: '2026-01-21T12:00:00' },
+        { id: 4, log_type: 0, time: '2026-01-21T12:00:00' }
     ];
     const logs2 = [
         { id: 1, log_type: 1, time: '2026-01-21T08:00:00' },
@@ -71,7 +71,7 @@ describe("Display the info in bubble", () => {
         expect(() => displayReformatedDateBubble("19-01-2026")).toThrow("The format need to be like YYYY-MM-DD");
     });
     test("Display null date into bubble", () => {
-        expect(() => displayReformatedDateBubble(null)).toThrow("date is null");
+        expect(() => displayReformatedDateBubble(null)).toThrow("Date is null");
     });
 });
 

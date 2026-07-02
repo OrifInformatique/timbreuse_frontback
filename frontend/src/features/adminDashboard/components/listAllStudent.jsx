@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import TableLigneResumeLog from "./tableLigneResumeLog";
 
-// Récupère la variable nécessaire
-// - listStudent    --> Liste des étudiants
+// Obtain the variables from the props of the component:
+// - listStudent    --> List of students
 const ListAllStudent = ({
     listStudent = []
 }) => {

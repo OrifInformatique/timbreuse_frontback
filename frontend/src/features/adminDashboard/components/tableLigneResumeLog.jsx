@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Icon } from "@orif-informatique/react-components-library";
 
-// Récupère les variables nécessaires :
-// - id         --> id de l'utilisateur
-// - surname    --> nom de l'utilisateur
-// - name       --> prénom de l'utilisateur
-// - errorFound --> Si une erreur à été détectée sur le profil de l'utilisateur ('0' pour aucune erreur, '1' pour une erreur) --> Fournie par le backend
-// - workTime   --> La balance de l'utilisateur
+// Obtain the variables from the props of the component:
+// - id         --> id of the user
+// - surname    --> surname of the user
+// - name       --> name of the user
+// - errorFound --> If an error was found on the user's profile ('0' for no error, '1' for an error) --> Provided by the backend
+// - workTime   --> The user's balance
 const TableLigneResumeLog = ({
     id = 0,
     surname = "nom",

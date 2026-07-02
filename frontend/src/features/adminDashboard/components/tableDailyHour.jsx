@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from "react";
 
-// Récupère les variables nécessaires :
-// - dailyHourNeeded --> heure de travail demandé dans la journée (format hh:mm)
-// - dailyLogs --> Liste des logs de l'utilisateur (permet de calculer les heures de travail déjà réalisée)
+// Obtain the variables from the props of the component:
+// - dailyHourNeeded --> hour of work requested for the day (format hh:mm)
+// - dailyLogs --> List of the user's logs (used to calculate the hours of work already done)
 const TableDailyHour = ({
     dailyHourNeeded = "08:12",
     dailyLogs = []
 }) => {
 
     const calculWorkTime = (dailyLogs) => {
-        // Permet de convertir le string "HH:mm" en nombre (minutes)
+        // Convert the string "HH:mm" to a number (minutes)
         const toMinutes = (time) => {
             const [hours, minutes] = time.split(":").map(Number);
             return hours * 60 + minutes;
         };
 
-        // Créer une date pour avoir l'heure actuelle
+        // Create a date to get the current time
         const now = new Date();
         const currentMinutes = now.getHours() * 60 + now.getMinutes();
 
         let totalMinutes = 0;
 
-        // Vérifie les entrées/sorties de la liste des logs afin de déterminer si l'utilisateur est en pause ou non 
-        // --> Cela permet de choisir s'il doit calculer seulement avec les heures des logs ou avec l'heure actuelle
+        // Check the entries/exits of the log list to determine if the user is on break or not
+        // --> This allows to choose whether to calculate only with the log hours or with the current time
         for (let i = 0; i < dailyLogs.length; i++) {
             const current = dailyLogs[i];
             const next = dailyLogs[i + 1];
@@ -40,11 +40,11 @@ const TableDailyHour = ({
             }
         }
 
-        // Convertit les nombres en minutes et heures
+        // Convert the numbers to minutes and hours
         const hours = Math.floor(totalMinutes / 60);
         const minutes = totalMinutes % 60;
-        
-        // Retourne l'heure de travail réalisée en chaîne de charactères 
+
+        // Return the hour of work done as a string
         return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
     };
 

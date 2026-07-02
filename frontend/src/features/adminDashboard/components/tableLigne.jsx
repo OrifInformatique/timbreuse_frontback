@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Icon } from "@orif-informatique/react-components-library";
 
-// Récupère les variables nécessaires :
-// - id         --> id de l'utilisateur
-// - surname    --> nom de l'utilisateur
-// - name       --> prénom de l'utilisateur
-// - presence   --> si l'utilisateur est présent ou non ('0' pour présent, '1' pour absent)
-// - reason     --> La raison si l'utilisateur est absent (utilisé si l'utilisateur est absent et que le champs n'est pas vide)
+// Obtain the variables from the props of the component:
+// - id         --> id of the user
+// - surname    --> last name of the user
+// - name       --> first name of the user
+// - presence   --> whether the user is present or not ('0' for present, '1' for absent)
+// - reason     --> The reason if the user is absent (used if the user is absent and the field is not empty)
 
-// Renommer en PresenceTableLine
+// Rename to PresenceTableLine
 const TableLigne = ({
     id = 0,
     surname = "nom",

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-// Récupère les variables nécessaires 
-// - studentPresence        --> 0 si présent, 1 si absent
-// - studentReason          --> Motif de l'absence
+// Obtain the variables from the props of the component:
+// - studentPresence        --> 0 if present, 1 if absent
+// - studentReason          --> Reason for absence
 const LabelMotif = ({
     studentPresence = 0,
     studentReason = ""

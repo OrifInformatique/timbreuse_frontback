@@ -8,7 +8,6 @@ import React from "react";
 import "@testing-library/jest-dom";
 
 describe("SelectDate component", () => {
-    
     test("Render the component selectDate correctly", () => {
         render(<SelectDate stringDate="lundi 19 janvier"/>)
 

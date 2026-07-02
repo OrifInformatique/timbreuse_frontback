@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-
+// Obtain the variables from the props of the component:
+// - textDate     --> date in text format
+// - state        --> state of the bubble (1 for gray, 2 for orange, 3 for red)
+// - textTime     --> time in text format
 const infoBubble = ({
     textDate,
     state = 1,
