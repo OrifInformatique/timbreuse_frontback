@@ -18,6 +18,7 @@ import AdminDashboard from './features/adminDashboard';
 import AdminDashboardDaily from './features/adminDashboard/indexDaily';
 import AdminDashboardStudentPresentPage from './features/adminDashboard/studentPresencePage';
 import AdminDashboardStudentErrorPage from './features/adminDashboard/studentErrorPage'
+import Planning from './features/planning';
 
 // Utils
 import Redirect from './common/utils/Redirect'
@@ -105,6 +106,11 @@ root.render(
                 <Route
                     path="/admin-dashboard-student-error/:id"
                     element={<AdminDashboardStudentErrorPage />}
+                />
+
+                <Route
+                    path="/planning"
+                    element={<Planning />}
                 />
             </Route>
         </Routes>

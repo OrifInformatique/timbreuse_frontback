@@ -1,0 +1,33 @@
+{
+    "id_planning": 1,
+    "planningName": "Mon planning de test",
+    "planningDateStart": "19.01.2026",
+    "planningDateEnd": "25.01.2026",
+    "days": [
+        {
+            "day": "lundi",
+            "workTime": "08:12",
+            "breakTime": "00:30"
+        },
+        {
+            "day": "mardi",
+            "workTime": "08:12",
+            "breakTime": "00:30"
+        },
+        {
+            "day": "mercredi",
+            "workTime": "08:12",
+            "breakTime": "00:30"
+        },
+        {
+            "day": "jeudi",
+            "workTime": "08:12",
+            "breakTime": "00:30"
+        },
+        {
+            "day": "vendredi",
+            "workTime": "08:12",
+            "breakTime": "00:30"
+        }
+    ]
+}
