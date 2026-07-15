@@ -1,37 +1,20 @@
 import React, { useEffect, useState } from "react";
 
-const jourSemaine= ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"];
+export default function TableHourWeek({
+  data = [],
+  modifierJour
+}) {
 
-export default function TableHourWeek({data = null}) {
-
-    const [planning, setPlanning] = useState([]);
-
-    useEffect(() => {
-        if (data) {
-            setPlanning(data);
-        } else {
-            setPlanning(
-                jourSemaine.map((day) => ({
-                    day,
-                    workTime: "",
-                    breakTime: "",
-                }))
-            );
-        }
-    }, [data]);
-
-    const modifierValeur = (index, champ, valeur) => {
-        const nouveauPlanning = [...planning];
-        nouveauPlanning[index][champ] = valeur;
-        setPlanning(nouveauPlanning);
-    };
+  const modifierValeur = (index, champ, valeur) => {
+    modifierJour(index, champ, valeur);
+  };
 
   return (
     <div className="mt-8">
       <div className="grid grid-cols-6 gap-4 items-center">
         <div></div>
 
-        {planning.map((jour) => (
+        {data.map((jour) => (
           <div
             key={jour.day}
             className="text-center font-semibold"
@@ -45,7 +28,7 @@ export default function TableHourWeek({data = null}) {
           Temps de travail
         </div>
         
-        {planning.map((jour, index) => (
+        {data.map((jour, index) => (
           <input
             key={jour.day + "-travail"}
             type="time"
@@ -63,7 +46,7 @@ export default function TableHourWeek({data = null}) {
           Pause offerte
         </div>
 
-        {planning.map((jour, index) => (
+        {data.map((jour, index) => (
           <input
             key={jour.day + "-pause"}
             type="time"
@@ -77,15 +60,15 @@ export default function TableHourWeek({data = null}) {
         ))}
       </div>
 
-      {/* Pour voir les données
+      {/* Pour voir les données    
       <div className="mt-8">
         <h2 className="font-bold mb-2">Planning :</h2>
 
         <pre className="bg-gray-100 p-3 rounded">
-          {JSON.stringify(planning, null, 2)}
+          {JSON.stringify(data, null, 2)}
         </pre>
       </div>
-      */}
+ */} 
     </div>
   );
 }

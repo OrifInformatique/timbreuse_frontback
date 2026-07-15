@@ -1,5 +1,7 @@
 {
     "id_planning": 1,
+    "userName": "Ethan",
+    "userSurname": "Ummel",
     "planningName": "Mon planning de test",
     "planningDateStart": "19.01.2026",
     "planningDateEnd": "25.01.2026",

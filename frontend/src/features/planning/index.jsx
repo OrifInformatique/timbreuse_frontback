@@ -23,7 +23,14 @@ const Planning = () => {
 
   return (<>
     <div className="justify-items-center md:justify-center md:min-w-4xl my-10 items-center">
-      <PlanningComponent id={1} name="Ethan" surname="Ummel" dataPlanning={planningData} />
+      <PlanningComponent 
+        id={planningData?.id_planning || 1} 
+        name={planningData?.userName || ""} 
+        surname={planningData?.userSurname || ""}
+        titlePlanning={planningData?.planningName || ""}
+        startingDatePlanning={planningData?.planningDateStart || ""}
+        endingDatePlanning={planningData?.planningDateEnd || ""}
+        dataPlanning={planningData} />
     </div>
   </>);
 }
