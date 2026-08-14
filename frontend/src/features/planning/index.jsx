@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@orif-informatique/react-components-library";
 import PlanningComponent from "./components/planning";
-import { getPlanningData } from "./dataService";
+import { getPlanningData, getPlanningDefaultData } from "./dataService";
 
 const Planning = () => {
 
@@ -10,7 +10,11 @@ const Planning = () => {
   useEffect(() => {
     async function loadPlanningData() {
       try {
+        // getPlanningData() si c'est une modification d'un planning, getPlanningDefaultData() si c'est un nouveau planning
+        
+        // const data = await getPlanningDefaultData(); 
         const data = await getPlanningData();
+
         setPlanningData(data);
         console.log("Planning data loaded:", data);
       } catch (error) {

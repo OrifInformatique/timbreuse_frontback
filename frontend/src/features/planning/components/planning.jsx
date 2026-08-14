@@ -79,7 +79,7 @@ const PlanningComponent = ({
             <div className="basis-1/5 text-center">Valable du </div>
             <input type="date" className="border-2 border-gray-300 basis-1/4" value={dateDebut} onChange={(e) => setDateDebut(e.target.value)} />
             <div className="basis-1/6 text-center">au </div>
-            <input type="date" className="border-2 border-gray-300 basis-1/4" value={dateFin} onChange={(e) => setDateFin(e.target.value)} />
+            <input type="date" className="border-2 border-gray-300 basis-1/4" value={dateFin !== "" ? dateFin : ""} onChange={(e) => setDateFin(e.target.value)} />
         </div>
 
         <div className="flex flex-row items-center justify-start mt-5 w-full max-w-3xl">
@@ -87,17 +87,13 @@ const PlanningComponent = ({
             <input type="text" className="border-2 border-gray-300 basis-2/3" value={titrePlanning} onChange={(e) => setTitrePlanning(e.target.value)} />
         </div>
 
-        {/* If it's for create a new planning, then it's TableHourWeek without a parameter
-        If it's for modify, then it's TableHourWeek with data */}
-
         <TableHourWeek data={days} modifierJour={modifierJour} />
-        {/* <TableHourWeek /> */}
 
         <div className="flex flex-row mt-10 items-center w-full max-w-3xl">
             <div className="basis-1/5 text-center">Taux</div>
             <input type="text" disabled className="border-2 border-gray-300 basis-1/4" value={`${tauxPresence} %`} />
-            <Button className="p-3 m-3" variant="secondary" label="Annuler" />
-            <Button className="p-3" variant="primary" label="Valider" />
+            <Button className="p-3 m-3" variant="secondary" label="Annuler" onClick={() => console.log("Annuler")} />
+            <Button className="p-3" variant="primary" label="Valider" onClick={() => titrePlanning !== "" ? console.log("Valider") : console.log("Planning incorrect")} />
         </div>
 
     </>);

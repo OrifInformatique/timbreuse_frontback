@@ -1,0 +1,35 @@
+{
+    "id_planning": 1,
+    "userName": "Prénom",
+    "userSurname": "Nom",
+    "planningName": "Titre du planning",
+    "planningDateStart": "01.01.2026",
+    "planningDateEnd": "",
+    "days": [
+        {
+            "day": "lundi",
+            "workTime": "00:00",
+            "breakTime": "00:00"
+        },
+        {
+            "day": "mardi",
+            "workTime": "00:00",
+            "breakTime": "00:00"
+        },
+        {
+            "day": "mercredi",
+            "workTime": "00:00",
+            "breakTime": "00:00"
+        },
+        {
+            "day": "jeudi",
+            "workTime": "00:00",
+            "breakTime": "00:00"
+        },
+        {
+            "day": "vendredi",
+            "workTime": "00:00",
+            "breakTime": "00:00"
+        }
+    ]
+}
