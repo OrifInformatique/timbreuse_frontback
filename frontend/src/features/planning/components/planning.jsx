@@ -77,9 +77,9 @@ const PlanningComponent = ({
 
         <div className="flex flex-row items-center justify-start mt-10 w-full max-w-3xl">
             <div className="basis-1/5 text-center">Valable du </div>
-            <input type="date" className="border-2 border-gray-300 basis-1/4" value={dateDebut} onChange={(e) => setDateDebut(e.target.value)} />
+            <input type="date" className="border-2 border-gray-300 basis-1/4" value={dateDebut} max={dateFin} onChange={(e) => setDateDebut(e.target.value)} />
             <div className="basis-1/6 text-center">au </div>
-            <input type="date" className="border-2 border-gray-300 basis-1/4" value={dateFin !== "" ? dateFin : ""} onChange={(e) => setDateFin(e.target.value)} />
+            <input type="date" className="border-2 border-gray-300 basis-1/4" value={dateFin !== "" ? dateFin : ""} min={dateDebut} onChange={(e) => setDateFin(e.target.value)} />
         </div>
 
         <div className="flex flex-row items-center justify-start mt-5 w-full max-w-3xl">
