@@ -1,0 +1,47 @@
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { Icon } from "@orif-informatique/react-components-library";
+
+// Récupère les variables nécessaires :
+// - id         --> id de l'utilisateur
+// - surname    --> nom de l'utilisateur
+// - name       --> prénom de l'utilisateur
+// - errorFound --> Si une erreur à été détectée sur le profil de l'utilisateur ('0' pour aucune erreur, '1' pour une erreur) --> Fournie par le backend
+// - workTime   --> La balance de l'utilisateur
+const TableLigneResumeLog = ({
+    id = 0,
+    surname = "nom",
+    name = "prénom",
+    errorFound = 0,
+    workTime = ""
+}) => {
+
+    let icon;
+    let editIcon = <><Icon color="black" name="edit" size="8"></Icon></>
+
+    if (errorFound === 0) {
+        icon = <><Icon color="primary" name="check" size="8"></Icon></>
+    } else {
+        icon = <><Icon color="danger" name="cross" size="8"></Icon></>
+    }
+
+    return (<>
+        <td className="p-2">
+            {icon}
+        </td>
+        <td className="p-2 font-bold text-center">
+            {name} {surname}
+        </td>
+        <td className={workTime.startsWith("+") ? "p-2 text-green-500" : "p-2 text-red-500"}>
+            {workTime}
+        </td>
+        <td>
+            <Link to={`/admin-dashboard-student-error/${id}`}>
+                {editIcon}
+            </Link>
+        </td>
+    </>);
+}
+
+export default TableLigneResumeLog;
+
