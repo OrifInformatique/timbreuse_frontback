@@ -1,91 +1,61 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { getAdminData, getUserAdminData } from "/src/common/services/dataService";
-import Title from "/src/common/components/title";
-import ListAllStudent from "./components/listAllStudent";
-import Subtitle from "./components/subtitle";
-import { Button } from "@orif-informatique/react-components-library";
 
-const AdminDashboard = () => {
 
-  const navigate = useNavigate();
-  const [data, setData] = useState(null);
-  const [idUser] = useState(() => {
-    return Number(localStorage.getItem("idUser")) || 1});
-  const [dateDisplayed, setDateDisplayed] = useState(() => {
-      return localStorage.getItem("selectedDate") || "2026-01-19"});
-  const [userData, setUserData] = useState(null);
-  const [error, setError] = useState(false);
+const AdminDashboard = ({ logsData }) => {
+
+  const [data, setData] = useState(logsData || null);
 
   useEffect(() => {
-    localStorage.setItem("selectedDate", dateDisplayed);
-
-    async function loadData() {
-        try {
-          const result = await getAdminData(dateDisplayed, idUser);
-          setData(result);
-          setError(false);
-
-        } catch(err) {
-          setError(true);
-          setData(null);
-        }
+    if (!logsData) {
+      fetch('/data/mock-data-admin.json')
+      .then((res) => res.json())
+      .then((json) => setData(json))
+      .catch((err) => console.error("Erreur JSON :", err));
     }
-    loadData();
-  }, [dateDisplayed, idUser]);
+  }, [logsData]);  
 
-  useEffect(() => {
-    localStorage.setItem("idUser", idUser);
-      
-    async function loadDataUser() {
-        try {
-          const result = await getUserAdminData(idUser);
-          setError(false);
-          setUserData(result);
+  if (!data) return <div>Chargement...</div>;
 
-        } catch(err) {
-          setError(true);
-          setUserData(null);
-        }              
-      }
-      loadDataUser();
-  }, [idUser]);
-
-  // Si data n'a aucune donnée, il n'affiche qu'un chargement
-  if (!data) {
-    return (<>
-      <div className="flex flex-row justify-around">
-        <div className="flex flex-col">
-          <Title titre={userData ? `${userData.name} ${userData.surname}` : "Chargement..."}></Title>
-          <Subtitle sousTitre="Liste des bénéficiaires"></Subtitle>
-        </div>
-        <Button className="p-3 md:ml-10" variant="secondary" label="Présence du jour" onClick={() => navigate("/admin-dashboard-daily")}></Button>
-      </div>         
-      <div>Chargement...</div>
-    </>);
-  }
-
-  const nom = userData.surname;
-  const prenom = userData.name;
+  const nom = data.surname;
+  const prenom = data.name;
   const listStudent = data.listStudent;
 
 
   return (<>
-
-    <div className="flex flex-row justify-around">
-      {/*Titre de la page*/}
-      <div className="flex flex-col">
-        <Title titre={nom + " " + prenom}></Title>
-        {/*Composant sous-titre*/}
-        <Subtitle sousTitre="Liste des bénéficiaires"></Subtitle>
-      </div>
-      <Button className="p-3 md:ml-10" variant="secondary" label="Présence du jour" onClick={() => navigate("/admin-dashboard-daily")}></Button>
+    <div className="flex flex-col">
+      <h1 className="font-bold text-3xl">{nom} {prenom}</h1>
+      <p className="font-bold text-2xl">Liste des bénéficiaires</p>
     </div>
-    
     <div className="flex justify-center my-8 text-2xl">
-      <ListAllStudent listStudent={listStudent}></ListAllStudent>
+      <table className="py-3 border min-w-2/5 max-w-1/2">
+        <tbody className="divide-y-1 divide-gray-500">
+          {listStudent.map((student) => (
+            <tr
+              key={student.id}
+              className={"bg-gray-200"}
+            >
+              <td className="p-2">
+                {student.errorFound === 0 ? "✅" : "⚠️"}
+              </td>
+              <td className="p-2 font-bold text-center">
+                {student.name} {student.surname}
+              </td>
+              <td className={student.workTime.startsWith("+") ? "p-2 text-green-500" : "p-2 text-red-500"}>
+                {student.workTime}
+              </td>
+              <td>
+                <Link to={`/admin-dashboard-student-error/${student.id}`}>
+                  ✏️
+                </Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
+
+
   </>);
 }
 
