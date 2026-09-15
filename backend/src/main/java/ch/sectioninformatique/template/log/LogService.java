@@ -1,5 +1,9 @@
 package ch.sectioninformatique.template.log;
 
+import ch.sectioninformatique.template.user.UserRepository;
+import ch.sectioninformatique.template.user.User;
+import ch.sectioninformatique.template.user.UserExceptions.UserNotFoundException;
+
 import jakarta.persistence.EntityManager;
 
 import java.util.ArrayList;
@@ -26,10 +30,13 @@ public class LogService {
     private LogRepository logRepository;
     @Autowired
     private EntityManager entityManager;
+    @Autowired
+    private UserRepository userRepository;
 
     public LogService(LogRepository logRepository, EntityManager entityManager) {
         this.logRepository = logRepository;
         this.entityManager = entityManager;
+        this.userRepository = userRepository;
     }
 
     private String getCurrentUserEmail() {
@@ -46,9 +53,12 @@ public class LogService {
     public Log createLog(Log log) {
         String currentUserEmail = getCurrentUserEmail();
 
+        User user = userRepository.findByLogin(currentUserEmail)
+            .orElseThrow(UserNotFoundException::new);
+
         if (!logRepository.existsByLogin(currentUserEmail)) {
             Log newLog = new Log();
-            newLog.setLogin(currentUserEmail);
+            newLog.setUser(user);
             newLog.setDate(log.getDate());
             logRepository.save(newLog);
         }
@@ -125,7 +135,7 @@ public class LogService {
 
                 log.setDate(updatedLog.getDate());
                 log.setIsOuting(updatedLog.getIsOuting());
-                log.setAuthor(currentLog);
+                //log.setLog(currentLog);
                 return logRepository.save(log);
             })
             .orElseThrow(() -> new LogNotFoundException(id));

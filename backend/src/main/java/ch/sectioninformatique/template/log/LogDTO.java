@@ -19,7 +19,7 @@ public class LogDTO {
         this.id = log.getId();
         this.user = log.getUser();
         this.date = log.getDate();
-        this.isOuting = log.isOuting();
+        this.isOuting = log.getIsOuting();
         this.createdAt = log.getCreatedAt();
         this.updatedAt = log.getUpdatedAt();
         this.deleted = log.isDeleted();

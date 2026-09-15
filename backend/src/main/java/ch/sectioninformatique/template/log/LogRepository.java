@@ -17,6 +17,8 @@ public interface LogRepository extends CrudRepository<Log, Long> {
 
     boolean existsById(Long id);
 
+    boolean existsByLogin(String login);
+
     @Modifying
     @Transactional
     @Query("DELETE FROM Log l WHERE l.id = :id")

@@ -64,6 +64,7 @@ public class Log {
         Date updatedAt,
         boolean deleted
     ) {
+        super();
         this.id = id;
         this.user = user;
         this.date = date;
@@ -71,5 +72,10 @@ public class Log {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deleted = deleted;
+    }
+
+
+    public boolean getIsOuting() {
+        return isOuting;
     }
 }

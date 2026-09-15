@@ -14,6 +14,7 @@ import ch.sectioninformatique.template.security.RoleRepository;
 import org.springframework.core.annotation.Order;
 
 import java.util.Arrays;
+import java.util.Date;
 
 @Component
 @Order(3)
@@ -66,9 +67,13 @@ public class LogSeeder implements CommandLineRunner {
 					.mainRole(adminRole)
 					.build();
 
-            Log log1 = new Log(0, user0, "09.09.2026 08:00:00", 0, "09.09.2026 08:00:00", "09.09.2026 08:00:00", 0);
-            Log log2 = new Log(1, user1, "09.09.2026 09:45:00", 1, "09.09.2026 09:45:00", "09.09.2026 09:45:00", 0);
-            Log log3 = new Log(2, user2, "09.09.2026 10:30:00", 0, "09.09.2026 10:30:00", "09.09.2026 10:30:00", 0);
+            Date hourLog1 = new Date(2026 - 1900, 8, 9, 8, 0, 0); // September 9, 2026, 08:00:00
+            Date hourLog2 = new Date(2026 - 1900, 8, 9, 9, 45, 0); // September 9, 2026, 09:45:00
+            Date hourLog3 = new Date(2026 - 1900, 8, 9, 10, 30, 0); // September 9, 2026, 10:30:00
+
+            Log log1 = new Log(0, user0, hourLog1, false, hourLog1, hourLog1, false);
+            Log log2 = new Log(1, user0, hourLog2, true, hourLog2, hourLog2, false);
+            Log log3 = new Log(2, user0, hourLog3, false, hourLog3, hourLog3, false);
 
             logRepository.saveAll(Arrays.asList(log1, log2, log3));
         
