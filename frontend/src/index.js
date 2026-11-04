@@ -1,26 +1,27 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
+// Initialize translations before rendering the app
+import './i18n';
 
 // Layouts
-import MainLayout from './common/layouts/MainLayout';
+import MainLayout from './features/layouts/MainLayout';
 
 // Modules
 import Home from './features/home';
-import Contact from './features/contact';
-import Login from './features/auth/ui/login';
-import Azure from './features/auth/ui/login/azure';
-import ChangePassword from './features/auth/ui/change-password';
-import ResetPassword from './features/auth/ui/reset-password';
-import ApiAuthCall from './features/auth';
+import Login from './template/auth/ui/login';
+import AzureCallback from './template/auth/ui/login/AzureCallback';
+import ChangePassword from './template/auth/ui/change-password';
+import ResetPassword from './template/auth/ui/reset-password';
+import Admin from './features/admin';
+import UserList from './template/users';
+
 import UserDashboard from './features/userDashboard';
 import AdminDashboard from './features/adminDashboard';
 import AdminDashboardDaily from './features/adminDashboard/indexDaily';
 import AdminDashboardStudentPresentPage from './features/adminDashboard/studentPresencePage';
 import AdminDashboardStudentErrorPage from './features/adminDashboard/studentErrorPage'
-
-// Utils
-import Redirect from './common/utils/Redirect'
 
 // Styles
 import '@orif-informatique/react-components-library/styles.css';
@@ -30,83 +31,82 @@ const container = document.getElementById('root');
 const root = createRoot(container);
 
 root.render(
-    <BrowserRouter basename={process.env.APP_ROOT}>
-        <Routes>
-            {/* Standalone routes, not using a specific layout */}
-			<Route
-				path="/testAPI"
-				element={<ApiAuthCall />}
-			/>
-
-            {/* 
-            Routes nested to the Main layout.
-            For each route, the React module specified in "element" is rendered at the place of the
-            <Outlet /> tag in the MainLayout.
-            */}
-            <Route
-                path="/"
-                element={<MainLayout />}
-            >
+    <Suspense fallback={null}>
+        <BrowserRouter basename={process.env.APP_ROOT}>
+            <Routes>
+                {/* 
+                Routes nested to the Main layout.
+                For each route, the React module specified in "element" is rendered at the place of the
+                <Outlet /> tag in the MainLayout.
+                */}
                 <Route
-                    index
-                    element={<Home />}
-                />
+                    path="/"
+                    element={<MainLayout />}
+                >
+                    <Route
+                        index
+                        element={<Home />}
+                    />
 
-                <Route
-                    path="contact"
-                    element={<Contact />}
-                />
+                    <Route
+                        path="*"
+                        element={<Navigate to="/" replace />}
+                    />
 
-                <Route
-                    path="*"
-                    element={<Redirect to="/" />}
-                />
+                    <Route
+                        path="/login"
+                        element={<Login />}
+                    />
 
-                <Route
-                    path="/login"
-                    element={<Login />}
-                />
+                    <Route
+                        path="/admin"
+                        element={<Admin />}
+                    >
+                        <Route path="users" element={<UserList />} />
+                        // You can add more admin routes here for other admin pages
+                    </Route>
 
-                <Route
-                    path="/azure"
-                    element={<Azure />}
-                />
+                    <Route
+                        path="/azure"
+                        element={<AzureCallback />}
+                    />
 
-                <Route
-                    path="/change-password"
-                    element={<ChangePassword />}
-                />
+                    <Route
+                        path="/change-password"
+                        element={<ChangePassword />}
+                    />
 
-                <Route
-                    path="/reset-password"
-                    element={<ResetPassword />}
-                />
+                    <Route
+                        path="/reset-password"
+                        element={<ResetPassword />}
+                    />
 
-                <Route
-                    path="/user-dashboard"
-                    element={<UserDashboard />}
-                />
+                     <Route
+                        path="/user-dashboard"
+                        element={<UserDashboard />}
+                    />
 
-                <Route
-                    path="/admin-dashboard"
-                    element={<AdminDashboard />}
-                />
+                    <Route
+                        path="/admin-dashboard"
+                        element={<AdminDashboard />}
+                    />
 
-                <Route
-                    path="/admin-dashboard-daily"
-                    element={<AdminDashboardDaily />}
-                />
+                    <Route
+                        path="/admin-dashboard-daily"
+                        element={<AdminDashboardDaily />}
+                    />
 
-                <Route
-                    path="/admin-dashboard-student/:id"
-                    element={<AdminDashboardStudentPresentPage />}
-                />
+                    <Route
+                        path="/admin-dashboard-student/:id"
+                        element={<AdminDashboardStudentPresentPage />}
+                    />
 
-                <Route
-                    path="/admin-dashboard-student-error/:id"
-                    element={<AdminDashboardStudentErrorPage />}
-                />
-            </Route>
-        </Routes>
-    </BrowserRouter>
+                    <Route
+                        path="/admin-dashboard-student-error/:id"
+                        element={<AdminDashboardStudentErrorPage />}
+                    />
+                </Route>
+            </Routes>
+        </BrowserRouter>
+    </Suspense>
 );

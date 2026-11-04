@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { getAdminData, getUserAdminData } from "/src/common/services/dataService";
-import Title from "/src/common/components/title";
-import SelectDate from "/src/common/components/selectDate";
 import StudentDailyList from "./components/studentDailyList";
-import { Button } from "@orif-informatique/react-components-library";
+import { Button, Title, InputDate } from "@orif-informatique/react-components-library";
 
 const AdminDashboardDaily = () => {
     
@@ -65,7 +63,7 @@ const AdminDashboardDaily = () => {
         return (<>
             <div className="flex flex-col md:flex-row justify-items-center md:justify-center md:min-w-4xl my-10 items-center">
                 <Title titre={userData ? `${userData.name} ${userData.surname}` : "Chargement..."}></Title>
-                <SelectDate stringDate={date} decrementDate={() => decrementDate(dateDisplayed)} incrementDate={() => incrementDate(dateDisplayed)}></SelectDate>
+                <InputDate stringDate={date} decrementDate={() => decrementDate(dateDisplayed)} incrementDate={() => incrementDate(dateDisplayed)}></InputDate>
                 <Button className="p-3 md:ml-10" variant="secondary" label="Voir les bénéficiaires" onClick={() => navigate("/admin-dashboard")}></Button>
             </div>
             <div>Aucune données trouvées</div>
@@ -123,7 +121,7 @@ const AdminDashboardDaily = () => {
             <Title titre={prenom + " " + nom}></Title>
             
             {/*Balise qui affiche le jour sélectionné (la navigation entre les jour n'est pas encore implémenté)*/}
-            <SelectDate stringDate={readingDate} decrementDate={() => decrementDate(dateDisplayed)} incrementDate={() => incrementDate(dateDisplayed)}></SelectDate>
+            <InputDate stringDate={readingDate} decrementDate={() => decrementDate(dateDisplayed)} incrementDate={() => incrementDate(dateDisplayed)}></InputDate>
             
             {/*Bouton qui permet de naviguer à la page qui contient la liste des bénéficiaires*/}
             <Button className="p-3 md:ml-10" variant="secondary" label="Voire les bénéficiaires" onClick={() => navigate("/admin-dashboard")}></Button>

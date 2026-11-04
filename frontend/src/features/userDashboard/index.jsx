@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "@orif-informatique/react-components-library";
-import SelectDate from "/src/common/components/selectDate";
-import Title from "/src/common/components/title";
+import { Button, Title, InputDate } from "@orif-informatique/react-components-library";
 import InfoBubble from "./components/infoBubble";
 import { getUserData } from "/src/common/services/dataService";
 
@@ -129,7 +127,7 @@ const UserDashboard = () => {
 
       <div className="flex flex-col lg:flex-row justify-items-center lg:justify-center lg:min-w-4xl my-10 items-center"> 
         <Title titre={prenom + " " + nom}></Title>
-        <SelectDate stringDate={readingDate}></SelectDate>
+        <InputDate stringDate={readingDate}></InputDate>
         <nav className="ml-3">
           <ol className="flex flex-row justify-center text-center">
             <InfoBubble textDate={displayReformatedDateBubble("2026-01-19")} textTime="+00:15" state={1}></InfoBubble>

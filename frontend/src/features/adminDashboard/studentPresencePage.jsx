@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getAdminData } from "/src/common/services/dataService";
 import TableDailyHour from "./components/tableDailyHour";
-import Title from "/src/common/components/title";
 import LabelPresence from "./components/labelPresence";
-import { Button } from "@orif-informatique/react-components-library";
+import { Button, Title } from "@orif-informatique/react-components-library";
 
 
 const AdminDashboardStudentPresentPage = () => {
