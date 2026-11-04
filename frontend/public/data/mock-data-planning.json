@@ -1,0 +1,36 @@
+{
+    "id_planning": 1,
+    "id_user": 1,
+    "userName": "Ethan",
+    "userSurname": "Ummel",
+    "planningName": "Planning 80% - mercredi après-midi et vendredi libre",
+    "planningDateStart": "19.01.2026",
+    "planningDateEnd": "30.06.2026",
+    "days": [
+        {
+            "day": "Lundi",
+            "workTime": "08:12",
+            "breakTime": "00:30"
+        },
+        {
+            "day": "Mardi",
+            "workTime": "08:12",
+            "breakTime": "00:30"
+        },
+        {
+            "day": "Mercredi",
+            "workTime": "04:00",
+            "breakTime": "00:15"
+        },
+        {
+            "day": "Jeudi",
+            "workTime": "08:12",
+            "breakTime": "00:30"
+        },
+        {
+            "day": "Vendredi",
+            "workTime": "04:12",
+            "breakTime": "00:15"
+        }
+    ]
+}
