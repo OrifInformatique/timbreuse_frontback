@@ -1,0 +1,74 @@
+{
+    "id_admin": 1,
+    "surname": "Viret",
+    "name": "Didier",
+    "date": "2026-01-21",
+    "listStudent": [
+        {
+            "id": 1,
+            "surname": "Ummel",
+            "name": "Ethan",
+            "presence": 0,
+            "reason": "",
+            "workTime": "+00:35",
+            "errorFound": 0,
+            "whatError": "",
+            "whenError": ""
+        },
+        {
+            "id": 2,
+            "surname": "Jack",
+            "name": "Jean",
+            "presence": 0,
+            "reason": "",
+            "workTime": "+00:15",
+            "errorFound": 1,
+            "whatError": "Timbrage manquant",
+            "whenError": "2026-01-05"
+        },
+        {
+            "id": 3,
+            "surname": "Knee",
+            "name": "David",
+            "presence": 0,
+            "reason": "",
+            "workTime": "+00:00",
+            "errorFound": 1,
+            "whatError": "Timbrage doublon",
+            "whenError": "2026-01-05"
+        },
+        {
+            "id": 4,
+            "surname": "Dupont",
+            "name": "Didier",
+            "presence": 1,
+            "reason": "",
+            "workTime": "-00:20",
+            "errorFound": 1,
+            "whatError": "Balance négative",
+            "whenError": ""
+        },
+        {
+            "id": 5,
+            "surname": "Lee",
+            "name": "Mike",
+            "presence": 1,
+            "reason": "",
+            "workTime": "+00:07",
+            "errorFound": 0,
+            "whatError": "",
+            "whenError": ""
+        },
+        {
+            "id": 6,
+            "surname": "Chêne",
+            "name": "Evan",
+            "presence": 1,
+            "reason": "Rendez-vous chez le médecin",
+            "workTime": "+00:10",
+            "errorFound": 0,
+            "whatError": "",
+            "whenError": ""
+        }
+    ]
+}
