@@ -17,6 +17,7 @@ import ResetPassword from './template/auth/ui/reset-password';
 import Admin from './features/admin';
 import UserList from './template/users';
 
+import Planning from './features/planning';
 import UserDashboard from './features/userDashboard';
 import AdminDashboard from './features/adminDashboard';
 import AdminDashboardDaily from './features/adminDashboard/indexDaily';
@@ -104,6 +105,11 @@ root.render(
                     <Route
                         path="/admin-dashboard-student-error/:id"
                         element={<AdminDashboardStudentErrorPage />}
+                    />
+
+                    <Route
+                        path="/planning"
+                        element={<Planning />}
                     />
                 </Route>
             </Routes>
