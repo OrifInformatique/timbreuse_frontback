@@ -1,0 +1,12 @@
+{
+    "eventSeries": [
+        {"id":1,"startDate":"2027-07-19","endDate":"2027-07-23","daysOfWeek":["monday", "tuesday", "wednesday", "thursday", "friday"]},
+        {"id":2,"startDate":"2027-06-09","endDate":"2027-06-16","daysOfWeek":["wednesday", "thursday"]},
+        {"id":3,"startDate":"2027-03-02","endDate":"2027-03-30","daysOfWeek":["tuesday"]},
+        {"id":4,"startDate":"2027-02-15","endDate":"2027-02-16","daysOfWeek":["monday", "tuesday"]},
+        {"id":5,"startDate":"2027-05-10","endDate":"2027-05-14","daysOfWeek":["monday", "tuesday", "wednesday", "thursday", "friday"]},
+        {"id":6,"startDate":"2027-03-04","endDate":"2027-03-18","daysOfWeek":["thursday"]},
+        {"id":7,"startDate":"2027-08-23","endDate":"2027-09-27","daysOfWeek":["monday"]},
+        {"id":8,"startDate":"2027-09-20","endDate":"2027-09-22","daysOfWeek":["monday", "tuesday", "wednesday"]}
+    ]
+}

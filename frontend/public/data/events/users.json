@@ -1,9 +1,9 @@
 {
   "users": [
-    {"id": 42,"login": "lea.rossier@etml-es.ch","firstName": "Lea","lastName": "Rossier","userGroupIds": ["6"]},
-    {"id": 43,"login": "jules.meyer@etml-es.ch","firstName": "Jules","lastName": "Meyer","userGroupIds": ["7"]},
-    {"id": 44,"login": "lina.keller@etml-es.ch","firstName": "Lina","lastName": "Keller","userGroupIds": ["31"]},
-    {"id": 45,"login": "maximilien.wagner@etml-es.ch","firstName": "Maximilien","lastName": "Wagner","userGroupIds": ["12"]},
+    {"id": 42,"login": "lea.rossier@etml-es.ch","firstName": "Lea","lastName": "Rossier","userGroupIds": [6]},
+    {"id": 43,"login": "jules.meyer@etml-es.ch","firstName": "Jules","lastName": "Meyer","userGroupIds": [7]},
+    {"id": 44,"login": "lina.keller@etml-es.ch","firstName": "Lina","lastName": "Keller","userGroupIds": [31]},
+    {"id": 45,"login": "maximilien.wagner@etml-es.ch","firstName": "Maximilien","lastName": "Wagner","userGroupIds": [12]},
     {"id": 46,"login": "sophie.leroy@etml-es.ch","firstName": "Sophie","lastName": "Leroy","userGroupIds": []}
   ]
 }

@@ -7,18 +7,18 @@
             "lastName": "Rossier"
         },
         "events": [
-            {"id":"1","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-19","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"2","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-20","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"3","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-21","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"4","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-22","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"5","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-23","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"7","EventSerieId":null,"userGroupId":null,"userId":"42","eventTypeId":"2","eventDate":"2027-03-22","startTime":"08:00:00","endTime":"12:00:00","isWorkTime":"0"},
-            {"id":"8","EventSerieId":"2","userGroupId":"6","userId":null,"eventTypeId":"4","eventDate":"2027-06-09","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"9","EventSerieId":"2","userGroupId":"6","userId":null,"eventTypeId":"4","eventDate":"2027-06-10","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"10","EventSerieId":null,"userGroupId":null,"userId":"42","eventTypeId":"6","eventDate":"2027-07-26","startTime":"11:00:00","endTime":"12:00:00","isWorkTime":"0"},
-            {"id":"39","EventSerieId":"2","userGroupId":"6","userId":null,"eventTypeId":"4","eventDate":"2027-06-16","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"40","EventSerieId":null,"userGroupId":null,"userId":"42","eventTypeId":"5","eventDate":"2027-09-14","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"41","EventSerieId":null,"userGroupId":null,"userId":"42","eventTypeId":"3","eventDate":"2027-10-05","startTime":"08:00:00","endTime":"12:00:00","isWorkTime":"0"}
+            {"id":1,"EventSerieId":1,"userGroupId":15,"userId":null,"eventTypeId":1,"eventDate":"2027-07-19","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":2,"EventSerieId":1,"userGroupId":15,"userId":null,"eventTypeId":1,"eventDate":"2027-07-20","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":3,"EventSerieId":1,"userGroupId":15,"userId":null,"eventTypeId":1,"eventDate":"2027-07-21","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":4,"EventSerieId":1,"userGroupId":15,"userId":null,"eventTypeId":1,"eventDate":"2027-07-22","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":5,"EventSerieId":1,"userGroupId":15,"userId":null,"eventTypeId":1,"eventDate":"2027-07-23","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":7,"EventSerieId":null,"userGroupId":null,"userId":42,"eventTypeId":2,"eventDate":"2027-03-22","startTime":"08:00:00","endTime":"12:00:00","isWorkTime":"0"},
+            {"id":8,"EventSerieId":2,"userGroupId":6,"userId":null,"eventTypeId":4,"eventDate":"2027-06-09","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":9,"EventSerieId":2,"userGroupId":6,"userId":null,"eventTypeId":4,"eventDate":"2027-06-10","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":10,"EventSerieId":null,"userGroupId":null,"userId":42,"eventTypeId":6,"eventDate":"2027-07-26","startTime":"11:00:00","endTime":"12:00:00","isWorkTime":"0"},
+            {"id":39,"EventSerieId":2,"userGroupId":6,"userId":null,"eventTypeId":4,"eventDate":"2027-06-16","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":40,"EventSerieId":null,"userGroupId":null,"userId":42,"eventTypeId":5,"eventDate":"2027-09-14","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":41,"EventSerieId":null,"userGroupId":null,"userId":42,"eventTypeId":3,"eventDate":"2027-10-05","startTime":"08:00:00","endTime":"12:00:00","isWorkTime":"0"}
         ]
     },
     {
@@ -29,24 +29,24 @@
             "lastName": "Meyer"
         },
         "events": [
-            {"id":"1","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-19","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"2","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-20","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"3","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-21","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"4","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-22","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"5","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-23","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"11","EventSerieId":"3","userGroupId":"7","userId":null,"eventTypeId":"4","eventDate":"2027-03-02","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"12","EventSerieId":"3","userGroupId":"7","userId":null,"eventTypeId":"4","eventDate":"2027-03-09","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"13","EventSerieId":"3","userGroupId":"7","userId":null,"eventTypeId":"4","eventDate":"2027-03-16","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"14","EventSerieId":"3","userGroupId":"7","userId":null,"eventTypeId":"4","eventDate":"2027-03-23","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"42","EventSerieId":"3","userGroupId":"7","userId":null,"eventTypeId":"4","eventDate":"2027-03-30","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"15","EventSerieId":"4","userGroupId":null,"userId":"43","eventTypeId":"3","eventDate":"2027-02-15","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"0"},
-            {"id":"16","EventSerieId":"4","userGroupId":null,"userId":"43","eventTypeId":"3","eventDate":"2027-02-16","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"0"},
-            {"id":"17","EventSerieId":"5","userGroupId":null,"userId":"43","eventTypeId":"5","eventDate":"2027-05-10","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"18","EventSerieId":"5","userGroupId":null,"userId":"43","eventTypeId":"5","eventDate":"2027-05-11","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"19","EventSerieId":"5","userGroupId":null,"userId":"43","eventTypeId":"5","eventDate":"2027-05-12","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"20","EventSerieId":"5","userGroupId":null,"userId":"43","eventTypeId":"5","eventDate":"2027-05-13","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"21","EventSerieId":"5","userGroupId":null,"userId":"43","eventTypeId":"5","eventDate":"2027-05-14","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"22","EventSerieId":null,"userGroupId":null,"userId":"43","eventTypeId":"6","eventDate":"2027-04-06","startTime":"14:00:00","endTime":"15:30:00","isWorkTime":"0"}
+            {"id":1,"EventSerieId":1,"userGroupId":15,"userId":null,"eventTypeId":1,"eventDate":"2027-07-19","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":2,"EventSerieId":1,"userGroupId":15,"userId":null,"eventTypeId":1,"eventDate":"2027-07-20","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":3,"EventSerieId":1,"userGroupId":15,"userId":null,"eventTypeId":1,"eventDate":"2027-07-21","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":4,"EventSerieId":1,"userGroupId":15,"userId":null,"eventTypeId":1,"eventDate":"2027-07-22","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":5,"EventSerieId":1,"userGroupId":15,"userId":null,"eventTypeId":1,"eventDate":"2027-07-23","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":11,"EventSerieId":3,"userGroupId":7,"userId":null,"eventTypeId":4,"eventDate":"2027-03-02","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":12,"EventSerieId":3,"userGroupId":7,"userId":null,"eventTypeId":4,"eventDate":"2027-03-09","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":13,"EventSerieId":3,"userGroupId":7,"userId":null,"eventTypeId":4,"eventDate":"2027-03-16","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":14,"EventSerieId":3,"userGroupId":7,"userId":null,"eventTypeId":4,"eventDate":"2027-03-23","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":42,"EventSerieId":3,"userGroupId":7,"userId":null,"eventTypeId":4,"eventDate":"2027-03-30","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":15,"EventSerieId":4,"userGroupId":null,"userId":43,"eventTypeId":3,"eventDate":"2027-02-15","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"0"},
+            {"id":16,"EventSerieId":4,"userGroupId":null,"userId":43,"eventTypeId":3,"eventDate":"2027-02-16","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"0"},
+            {"id":17,"EventSerieId":5,"userGroupId":null,"userId":43,"eventTypeId":5,"eventDate":"2027-05-10","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":18,"EventSerieId":5,"userGroupId":null,"userId":43,"eventTypeId":5,"eventDate":"2027-05-11","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":19,"EventSerieId":5,"userGroupId":null,"userId":43,"eventTypeId":5,"eventDate":"2027-05-12","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":20,"EventSerieId":5,"userGroupId":null,"userId":43,"eventTypeId":5,"eventDate":"2027-05-13","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":21,"EventSerieId":5,"userGroupId":null,"userId":43,"eventTypeId":5,"eventDate":"2027-05-14","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":22,"EventSerieId":null,"userGroupId":null,"userId":43,"eventTypeId":6,"eventDate":"2027-04-06","startTime":"14:00:00","endTime":"15:30:00","isWorkTime":"0"}
         ]
     },
     {
@@ -57,17 +57,17 @@
             "lastName": "Keller"
         },
         "events": [
-            {"id":"1","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-19","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"2","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-20","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"3","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-21","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"4","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-22","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"5","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-23","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"23","EventSerieId":"6","userGroupId":"31","userId":null,"eventTypeId":"4","eventDate":"2027-03-04","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"24","EventSerieId":"6","userGroupId":"31","userId":null,"eventTypeId":"4","eventDate":"2027-03-11","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"25","EventSerieId":"6","userGroupId":"31","userId":null,"eventTypeId":"4","eventDate":"2027-03-18","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"26","EventSerieId":null,"userGroupId":null,"userId":"44","eventTypeId":"2","eventDate":"2027-04-19","startTime":"13:00:00","endTime":"16:57:00","isWorkTime":"0"},
-            {"id":"27","EventSerieId":null,"userGroupId":null,"userId":"44","eventTypeId":"3","eventDate":"2027-06-07","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"0"},
-            {"id":"28","EventSerieId":null,"userGroupId":null,"userId":"44","eventTypeId":"6","eventDate":"2027-06-21","startTime":"08:00:00","endTime":"09:30:00","isWorkTime":"0"}
+            {"id":1,"EventSerieId":1,"userGroupId":15,"userId":null,"eventTypeId":1,"eventDate":"2027-07-19","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":2,"EventSerieId":1,"userGroupId":15,"userId":null,"eventTypeId":1,"eventDate":"2027-07-20","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":3,"EventSerieId":1,"userGroupId":15,"userId":null,"eventTypeId":1,"eventDate":"2027-07-21","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":4,"EventSerieId":1,"userGroupId":15,"userId":null,"eventTypeId":1,"eventDate":"2027-07-22","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":5,"EventSerieId":1,"userGroupId":15,"userId":null,"eventTypeId":1,"eventDate":"2027-07-23","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":23,"EventSerieId":6,"userGroupId":31,"userId":null,"eventTypeId":4,"eventDate":"2027-03-04","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":24,"EventSerieId":6,"userGroupId":31,"userId":null,"eventTypeId":4,"eventDate":"2027-03-11","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":25,"EventSerieId":6,"userGroupId":31,"userId":null,"eventTypeId":4,"eventDate":"2027-03-18","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":26,"EventSerieId":null,"userGroupId":null,"userId":44,"eventTypeId":2,"eventDate":"2027-04-19","startTime":"13:00:00","endTime":"16:57:00","isWorkTime":"0"},
+            {"id":27,"EventSerieId":null,"userGroupId":null,"userId":44,"eventTypeId":3,"eventDate":"2027-06-07","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"0"},
+            {"id":28,"EventSerieId":null,"userGroupId":null,"userId":44,"eventTypeId":6,"eventDate":"2027-06-21","startTime":"08:00:00","endTime":"09:30:00","isWorkTime":"0"}
         ]
     },
     {
@@ -78,64 +78,64 @@
             "lastName": "Wagner"
         },
         "events": [
-            {"id":"1","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-19","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"2","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-20","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"3","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-21","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"4","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-22","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"5","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-23","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"29","EventSerieId":"7","userGroupId":"12","userId":null,"eventTypeId":"4","eventDate":"2027-08-23","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"30","EventSerieId":"7","userGroupId":"12","userId":null,"eventTypeId":"4","eventDate":"2027-08-30","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"31","EventSerieId":"7","userGroupId":"12","userId":null,"eventTypeId":"4","eventDate":"2027-09-06","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"32","EventSerieId":"7","userGroupId":"12","userId":null,"eventTypeId":"4","eventDate":"2027-09-13","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"43","EventSerieId":"7","userGroupId":"12","userId":null,"eventTypeId":"4","eventDate":"2027-09-27","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"33","EventSerieId":"8","userGroupId":null,"userId":"45","eventTypeId":"5","eventDate":"2027-09-20","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"34","EventSerieId":"8","userGroupId":null,"userId":"45","eventTypeId":"5","eventDate":"2027-09-21","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"35","EventSerieId":"8","userGroupId":null,"userId":"45","eventTypeId":"5","eventDate":"2027-09-22","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"36","EventSerieId":null,"userGroupId":null,"userId":"45","eventTypeId":"2","eventDate":"2027-10-04","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"0"},
-            {"id":"37","EventSerieId":null,"userGroupId":null,"userId":"45","eventTypeId":"6","eventDate":"2027-10-12","startTime":"15:00:00","endTime":"16:00:00","isWorkTime":"0"},
-            {"id":"38","EventSerieId":null,"userGroupId":null,"userId":"45","eventTypeId":"3","eventDate":"2027-11-02","startTime":"08:00:00","endTime":"12:00:00","isWorkTime":"0"}
+            {"id":1,"EventSerieId":1,"userGroupId":15,"userId":null,"eventTypeId":1,"eventDate":"2027-07-19","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":2,"EventSerieId":1,"userGroupId":15,"userId":null,"eventTypeId":1,"eventDate":"2027-07-20","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":3,"EventSerieId":1,"userGroupId":15,"userId":null,"eventTypeId":1,"eventDate":"2027-07-21","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":4,"EventSerieId":1,"userGroupId":15,"userId":null,"eventTypeId":1,"eventDate":"2027-07-22","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":5,"EventSerieId":1,"userGroupId":15,"userId":null,"eventTypeId":1,"eventDate":"2027-07-23","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":29,"EventSerieId":7,"userGroupId":12,"userId":null,"eventTypeId":4,"eventDate":"2027-08-23","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":30,"EventSerieId":7,"userGroupId":12,"userId":null,"eventTypeId":4,"eventDate":"2027-08-30","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":31,"EventSerieId":7,"userGroupId":12,"userId":null,"eventTypeId":4,"eventDate":"2027-09-06","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":32,"EventSerieId":7,"userGroupId":12,"userId":null,"eventTypeId":4,"eventDate":"2027-09-13","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":43,"EventSerieId":7,"userGroupId":12,"userId":null,"eventTypeId":4,"eventDate":"2027-09-27","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":33,"EventSerieId":8,"userGroupId":null,"userId":45,"eventTypeId":5,"eventDate":"2027-09-20","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":34,"EventSerieId":8,"userGroupId":null,"userId":45,"eventTypeId":5,"eventDate":"2027-09-21","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":35,"EventSerieId":8,"userGroupId":null,"userId":45,"eventTypeId":5,"eventDate":"2027-09-22","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":36,"EventSerieId":null,"userGroupId":null,"userId":45,"eventTypeId":2,"eventDate":"2027-10-04","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"0"},
+            {"id":37,"EventSerieId":null,"userGroupId":null,"userId":45,"eventTypeId":6,"eventDate":"2027-10-12","startTime":"15:00:00","endTime":"16:00:00","isWorkTime":"0"},
+            {"id":38,"EventSerieId":null,"userGroupId":null,"userId":45,"eventTypeId":3,"eventDate":"2027-11-02","startTime":"08:00:00","endTime":"12:00:00","isWorkTime":"0"}
         ]
     },
     {
         "userGroup": {
-            "id": "15",
+            "id": 15,
             "name": "Orif Pomy",
             "parentId": null
         },
         "events": [
-            {"id":"1","EventSerieId":"1","eventTypeId":"1","eventDate":"2027-07-19","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"2","EventSerieId":"1","eventTypeId":"1","eventDate":"2027-07-20","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"3","EventSerieId":"1","eventTypeId":"1","eventDate":"2027-07-21","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"4","EventSerieId":"1","eventTypeId":"1","eventDate":"2027-07-22","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"5","EventSerieId":"1","eventTypeId":"1","eventDate":"2027-07-23","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"}
+            {"id":1,"EventSerieId":1,"eventTypeId":1,"eventDate":"2027-07-19","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":2,"EventSerieId":1,"eventTypeId":1,"eventDate":"2027-07-20","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":3,"EventSerieId":1,"eventTypeId":1,"eventDate":"2027-07-21","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":4,"EventSerieId":1,"eventTypeId":1,"eventDate":"2027-07-22","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":5,"EventSerieId":1,"eventTypeId":1,"eventDate":"2027-07-23","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"}
         ]
     },
     {
         "userGroup": {
-            "id": "7",
+            "id": 7,
             "name": "Informaticien - 2ème",
-            "parentId": "1"
+            "parentId": 1
         },
         "events": [
-            {"id":"11","EventSerieId":"3","eventTypeId":"4","eventDate":"2027-03-02","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"12","EventSerieId":"3","eventTypeId":"4","eventDate":"2027-03-09","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"13","EventSerieId":"3","eventTypeId":"4","eventDate":"2027-03-16","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"14","EventSerieId":"3","eventTypeId":"4","eventDate":"2027-03-23","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"42","EventSerieId":"3","eventTypeId":"4","eventDate":"2027-03-30","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"}
+            {"id":11,"EventSerieId":3,"eventTypeId":4,"eventDate":"2027-03-02","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":12,"EventSerieId":3,"eventTypeId":4,"eventDate":"2027-03-09","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":13,"EventSerieId":3,"eventTypeId":4,"eventDate":"2027-03-16","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":14,"EventSerieId":3,"eventTypeId":4,"eventDate":"2027-03-23","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":42,"EventSerieId":3,"eventTypeId":4,"eventDate":"2027-03-30","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"}
         ]
     },
     {
         "userGroup": {
-            "id": "12",
+            "id": 12,
             "name": "Opérateur - 3ème",
-            "parentId": "1"
+            "parentId": 1
         },
         "events": [
-            {"id":"29","EventSerieId":"7","eventTypeId":"4","eventDate":"2027-08-23","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"30","EventSerieId":"7","eventTypeId":"4","eventDate":"2027-08-30","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"31","EventSerieId":"7","eventTypeId":"4","eventDate":"2027-09-06","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"32","EventSerieId":"7","eventTypeId":"4","eventDate":"2027-09-13","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
-            {"id":"43","EventSerieId":"7","eventTypeId":"4","eventDate":"2027-09-27","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"}
+            {"id":29,"EventSerieId":7,"eventTypeId":4,"eventDate":"2027-08-23","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":30,"EventSerieId":7,"eventTypeId":4,"eventDate":"2027-08-30","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":31,"EventSerieId":7,"eventTypeId":4,"eventDate":"2027-09-06","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":32,"EventSerieId":7,"eventTypeId":4,"eventDate":"2027-09-13","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+            {"id":43,"EventSerieId":7,"eventTypeId":4,"eventDate":"2027-09-27","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"}
         ]
     }
 ]

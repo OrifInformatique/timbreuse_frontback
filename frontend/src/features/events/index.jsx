@@ -1,27 +1,55 @@
 import React, { useEffect, useState } from "react";
 import { Title, SingleSelect, Button, List, Icon } from "@orif-informatique/react-components-library";
 import SelectDate from "./components/selectDate";
-
-
+import { 
+    getEventDataUserGroup, 
+    getEventDataUsers,
+    getEventDataUser, 
+    getEventType, 
+    getEventSeries, 
+    getEventData 
+} from "/src/common/services/dataService";
 
 
 const Events = () => {
 
     const [dataEvent, setDataEvent] = useState(null);
-
-
+    const [usersSelect, setUsersSelect] = useState([]);
+    const [dataEventGroupUser, setDataEventGroupUser] = useState(null);
+    const [dataEventType, setDataEventType] = useState(null);
+    const [dataEventSeries, setDataEventSeries] = useState(null);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         async function loadDataEvent() {
             try {
-                // const result = await getEventData();
-
+                const result = await getEventData();
+                setDataEvent(result);
+                setError(null);
             } catch(err) {
                 setDataEvent(null);
+                setError(err);
             }
         }
         loadDataEvent();
     }, []);
+
+    // Loading for the users
+    useEffect(() => {
+        getEventDataUsers()
+            .then(
+                data => {
+                    setUsersSelect(
+                        data.map(user => ({
+                            label: user.firstName + " " + user.lastName,
+                            value: user.id
+                        }))
+                    );
+                }
+            )
+        .catch(error => console.error(error));
+    }, []);
+
 
     return (<>
     
@@ -32,7 +60,11 @@ const Events = () => {
                 <SingleSelect name="userGroup" placeholder="Groupe" />
             </div>
             <div className="basis-1/3">
-                <SingleSelect name="user" placeholder="Utilisateur" />
+                <SingleSelect 
+                    name="user" 
+                    placeholder="Utilisateur" 
+                    options={usersSelect}
+                />
             </div>
         </div>
 
