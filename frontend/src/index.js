@@ -23,6 +23,7 @@ import AdminDashboard from './features/adminDashboard';
 import AdminDashboardDaily from './features/adminDashboard/indexDaily';
 import AdminDashboardStudentPresentPage from './features/adminDashboard/studentPresencePage';
 import AdminDashboardStudentErrorPage from './features/adminDashboard/studentErrorPage'
+import Events from './features/events';
 
 // Styles
 import '@orif-informatique/react-components-library/styles.css';
@@ -46,7 +47,7 @@ root.render(
                 >
                     <Route
                         index
-                        element={<Home />}
+                        element={<Events />}
                     />
 
                     <Route

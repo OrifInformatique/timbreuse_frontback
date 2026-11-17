@@ -4,6 +4,12 @@ let pathJSON = "/data/mock-data-admin-";
 let pathJSONAdminUser = "data/mock-data-admin-users";
 let pathJSONUser = "data/mock-data-";
 
+
+// Path of the JSON files for data event
+let pathJSONEventType = "data/events/eventTypes.json";
+let pathJSONEventUser = "data/events/users.json";
+let pathJSONEventGroup = "data/events/userGroups.json";
+
 export async function getAdminData(dateString, idAdmin) {
 
   // Changer l'adresse de la requête pour le backend et le token d'authentification

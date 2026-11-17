@@ -1,0 +1,10 @@
+{
+    "eventTypes": [
+        {"id":"1","name":"Vacances","isGroupEventType":"1","isPersonalEventType":"0"},
+        {"id":"2","name":"Congé octroyé","isGroupEventType":"0","isPersonalEventType":"1"},
+        {"id":"3","name":"Maladie","isGroupEventType":"0","isPersonalEventType":"1"},
+        {"id":"4","name":"Cours professionnels (école)","isGroupEventType":"1","isPersonalEventType":"1"},
+        {"id":"5","name":"Cours interentreprises","isGroupEventType":"0","isPersonalEventType":"1"},
+        {"id":"6","name":"Rendez-vous médical","isGroupEventType":"0","isPersonalEventType":"1"}
+    ]
+}

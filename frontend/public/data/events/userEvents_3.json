@@ -1,0 +1,20 @@
+{
+"user": {
+    "id": 44,
+    "login": "lina.keller@etml-es.ch",
+    "firstName": "Lina",
+    "lastName": "Keller"
+},
+"events": [
+    {"id":"1","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-19","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"2","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-20","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"3","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-21","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"4","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-22","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"5","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-23","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"23","EventSerieId":"6","userGroupId":"31","userId":null,"eventTypeId":"4","eventDate":"2027-03-04","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"24","EventSerieId":"6","userGroupId":"31","userId":null,"eventTypeId":"4","eventDate":"2027-03-11","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"25","EventSerieId":"6","userGroupId":"31","userId":null,"eventTypeId":"4","eventDate":"2027-03-18","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"26","EventSerieId":null,"userGroupId":null,"userId":"44","eventTypeId":"2","eventDate":"2027-04-19","startTime":"13:00:00","endTime":"16:57:00","isWorkTime":"0"},
+    {"id":"27","EventSerieId":null,"userGroupId":null,"userId":"44","eventTypeId":"3","eventDate":"2027-06-07","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"0"},
+    {"id":"28","EventSerieId":null,"userGroupId":null,"userId":"44","eventTypeId":"6","eventDate":"2027-06-21","startTime":"08:00:00","endTime":"09:30:00","isWorkTime":"0"}
+]}

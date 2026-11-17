@@ -1,0 +1,20 @@
+{
+"userGroups": [
+    {"id":"15", "name":"Orif Pomy", "subgroups": [
+        {"id":"1", "name":"Informatique", "subgroups": [
+            {"id":"6","name":"Informaticien - 1ère", "subgroups":null},
+            {"id":"7","name":"Informaticien - 2ème", "subgroups":null},
+            {"id":"8","name":"Informaticien - 3ème", "subgroups":null},
+            {"id":"9","name":"Informaticien - 4ème", "subgroups":null},
+            {"id":"10","name":"Opérateur - 1ère", "subgroups":null},
+            {"id":"11","name":"Opérateur - 2ème", "subgroups":null},
+            {"id":"12","name":"Opérateur - 3ème", "subgroups":null}
+        ]},
+        {"id":"3", "name":"Médiamatique", "subgroups": [
+            {"id":"31","name":"Médiamatique - 1ère", "subgroups":null},
+            {"id":"32","name":"Médiamatique - 2ème", "subgroups":null},
+            {"id":"33","name":"Médiamatique - 3ème", "subgroups":null},
+            {"id":"34","name":"Médiamatique - 4ème", "subgroups":null}
+        ]}
+    ]}
+]}

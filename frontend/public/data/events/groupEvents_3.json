@@ -1,0 +1,14 @@
+{
+"userGroup": {
+    "id": "12",
+    "name": "Opérateur - 3ème",
+    "parentId": "1"
+},
+"events": [
+    {"id":"29","EventSerieId":"7","eventTypeId":"4","eventDate":"2027-08-23","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"30","EventSerieId":"7","eventTypeId":"4","eventDate":"2027-08-30","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"31","EventSerieId":"7","eventTypeId":"4","eventDate":"2027-09-06","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"32","EventSerieId":"7","eventTypeId":"4","eventDate":"2027-09-13","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"43","EventSerieId":"7","eventTypeId":"4","eventDate":"2027-09-27","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"}
+]
+}

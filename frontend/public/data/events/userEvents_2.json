@@ -1,0 +1,27 @@
+{
+"user": {
+    "id": 43,
+    "login": "jules.meyer@etml-es.ch",
+    "firstName": "Jules",
+    "lastName": "Meyer"
+},
+"events": [
+    {"id":"1","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-19","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"2","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-20","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"3","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-21","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"4","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-22","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"5","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-23","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"11","EventSerieId":"3","userGroupId":"7","userId":null,"eventTypeId":"4","eventDate":"2027-03-02","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"12","EventSerieId":"3","userGroupId":"7","userId":null,"eventTypeId":"4","eventDate":"2027-03-09","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"13","EventSerieId":"3","userGroupId":"7","userId":null,"eventTypeId":"4","eventDate":"2027-03-16","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"14","EventSerieId":"3","userGroupId":"7","userId":null,"eventTypeId":"4","eventDate":"2027-03-23","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"42","EventSerieId":"3","userGroupId":"7","userId":null,"eventTypeId":"4","eventDate":"2027-03-30","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"15","EventSerieId":"4","userGroupId":null,"userId":"43","eventTypeId":"3","eventDate":"2027-02-15","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"0"},
+    {"id":"16","EventSerieId":"4","userGroupId":null,"userId":"43","eventTypeId":"3","eventDate":"2027-02-16","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"0"},
+    {"id":"17","EventSerieId":"5","userGroupId":null,"userId":"43","eventTypeId":"5","eventDate":"2027-05-10","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"18","EventSerieId":"5","userGroupId":null,"userId":"43","eventTypeId":"5","eventDate":"2027-05-11","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"19","EventSerieId":"5","userGroupId":null,"userId":"43","eventTypeId":"5","eventDate":"2027-05-12","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"20","EventSerieId":"5","userGroupId":null,"userId":"43","eventTypeId":"5","eventDate":"2027-05-13","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"21","EventSerieId":"5","userGroupId":null,"userId":"43","eventTypeId":"5","eventDate":"2027-05-14","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"22","EventSerieId":null,"userGroupId":null,"userId":"43","eventTypeId":"6","eventDate":"2027-04-06","startTime":"14:00:00","endTime":"15:30:00","isWorkTime":"0"}
+]}

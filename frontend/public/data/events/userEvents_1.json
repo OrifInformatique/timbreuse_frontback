@@ -1,0 +1,21 @@
+{
+"user": {
+    "id": 42,
+    "login": "lea.rossier@etml-es.ch",
+    "firstName": "Lea",
+    "lastName": "Rossier"
+},
+"events": [
+    {"id":"1","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-19","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"2","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-20","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"3","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-21","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"4","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-22","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"5","EventSerieId":"1","userGroupId":"15","userId":null,"eventTypeId":"1","eventDate":"2027-07-23","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"7","EventSerieId":null,"userGroupId":null,"userId":"42","eventTypeId":"2","eventDate":"2027-03-22","startTime":"08:00:00","endTime":"12:00:00","isWorkTime":"0"},
+    {"id":"8","EventSerieId":"2","userGroupId":"6","userId":null,"eventTypeId":"4","eventDate":"2027-06-09","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"9","EventSerieId":"2","userGroupId":"6","userId":null,"eventTypeId":"4","eventDate":"2027-06-10","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"10","EventSerieId":null,"userGroupId":null,"userId":"42","eventTypeId":"6","eventDate":"2027-07-26","startTime":"11:00:00","endTime":"12:00:00","isWorkTime":"0"},
+    {"id":"39","EventSerieId":"2","userGroupId":"6","userId":null,"eventTypeId":"4","eventDate":"2027-06-16","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"40","EventSerieId":null,"userGroupId":null,"userId":"42","eventTypeId":"5","eventDate":"2027-09-14","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"41","EventSerieId":null,"userGroupId":null,"userId":"42","eventTypeId":"3","eventDate":"2027-10-05","startTime":"08:00:00","endTime":"12:00:00","isWorkTime":"0"}
+]}

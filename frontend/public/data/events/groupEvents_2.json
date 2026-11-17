@@ -1,0 +1,14 @@
+{
+"userGroup": {
+    "id": "7",
+    "name": "Informaticien - 2ème",
+    "parentId": "1"
+},
+"events": [
+    {"id":"11","EventSerieId":"3","eventTypeId":"4","eventDate":"2027-03-02","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"12","EventSerieId":"3","eventTypeId":"4","eventDate":"2027-03-09","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"13","EventSerieId":"3","eventTypeId":"4","eventDate":"2027-03-16","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"14","EventSerieId":"3","eventTypeId":"4","eventDate":"2027-03-23","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"},
+    {"id":"42","EventSerieId":"3","eventTypeId":"4","eventDate":"2027-03-30","startTime":"08:00:00","endTime":"16:57:00","isWorkTime":"1"}
+]
+}
