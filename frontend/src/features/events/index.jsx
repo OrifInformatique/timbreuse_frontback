@@ -6,7 +6,7 @@ import {
     getEventDataUserGroups, getEventDataUserGroup, 
     getEventDataUsers, getEventDataUser, 
     getEventTypes, getEventType, 
-    getEventSeries, 
+    getEventSeries, getEventSerie, 
     getEventData 
 } from "/src/common/services/dataService";
 
@@ -16,9 +16,9 @@ import {
 // FUNCTIONS OUSTIDE EVENT //
 /////////////////////////////
 
-/////////////////////////////
-//                         //
-/////////////////////////////
+////////
+//    //
+////////
 function getGroupIds(groups, selectedId) {
     const ids = new Set();
 
@@ -50,9 +50,9 @@ function getGroupIds(groups, selectedId) {
     return ids;
 }
 
-/////////////////////////////
-//                         //
-/////////////////////////////
+////////
+//    //
+////////
 function getDateRange(dateString, mode) {
     const [year, month, day] = dateString.split("-").map(Number);
     const date = new Date(year, month-1, day);
@@ -64,7 +64,7 @@ function getDateRange(dateString, mode) {
         case "day":
             break;
         case "week": {
-            const dayOfWeek = date.getDate();
+            const dayOfWeek = date.getDay();
             const diff = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
 
             start.setDate(date.getDate() + diff);
@@ -74,8 +74,8 @@ function getDateRange(dateString, mode) {
             break;
         }
         case "month":
-            start = new Date(year, 0, 1);
-            end = new Date(year, 11, 31);
+            start = new Date(year, month-1, 1);
+            end = new Date(year, month, 0);
             break;
         case "year":
             start = new Date(year, 0, 1);
@@ -119,46 +119,73 @@ function getGroupName(groups, groupId) {
     return null;
 }
 
-/////////////////////////////////////////
-/////////////////////////////////////////
-/////////////////////////////////////////
+
+//////////////////////////////////
+//  GET GROUP AND GROUP_PARENT  //
+//////////////////////////////////
+function getGroupAndParents(groups, selectedId) {
+    function findPath(groupList, path = []) {
+        for (const group of groupList) {
+            const currentPath = [...path, group.id];
+
+            if (group.id === selectedId) {
+                return currentPath;
+            }
+
+            const found = findPath(
+                group.subgroups || [],
+                currentPath
+            );
+
+            if (found) return found;
+        }
+
+        return null;
+    }
+
+    return new Set(findPath(groups) || []);
+}
+
+
+
+
+
+/********************************************/
+/*                  EVENTS                  */
+/********************************************/
 
 const Events = () => {
 
     // Display for the select
-    const [usersSelect, setUsersSelect] = useState([]);
-    const [userGroupSelect, setUserGroupSelect] = useState([]);
+    const [selectUser, setSelectUser] = useState([]);
+    const [selectUserGroup, setSelectUserGroup] = useState([]);
 
     // Display for the default select
     const [selectedGroup, setSelectedGroup] = useState(15);
     const [selectedUser, setSelectedUser] = useState(null);
 
+    // Data 
+    const [dataEvent, setDataEvent] = useState(null);               // Data of all the events
+    const [dataEventSeries, setDataEventSeries] = useState(null);   // Data of all the events series
+    const [dataEventTypes, setDataEventTypes] = useState([]);       // Data of all the types of event
+    const [dataGroups, setDataGroups] = useState([]);               // Data of all the groups of user
+    const [dataUsers, setDataUsers] = useState([]);                 // Data of all the profil of the users
 
-    // All of the event
-    const [dataEvent, setDataEvent] = useState(null);
-
-
-    const [groupsData, setGroupsData] = useState([]);
-    const [usersData, setUsersData] = useState([]);
-    const [currentDate, setCurrentDate] = useState("2026-11-11");
-
-
-    // Can be "day" / "week" / "month" / "year"
-    const [dataEventFilter, setDataEventFilter] = useState("day");
+    // For Error
     const [error, setError] = useState(null);
 
+    // Can be "day" / "week" / "month" / "year"
+    const [triggerButtonFilter, setTriggerButtonFilter] = useState("day");  
 
-    const [dataEventSeries, setDataEventSeries] = useState(null);
+    // Date of today (or substitute date for dev)
+    const [currentDate, setCurrentDate] = useState("2026-11-11");
 
-
-    const [listEventTypes, setListEventTypes] = useState([]);
-
-
-    /////////////////////////////////////////
-    /////////        UseEffect      /////////
-    /////////////////////////////////////////
+    //////////////////
+    //  USE_EFFECT  //
+    //////////////////
 
     useEffect(() => {
+        // Loading of all the events
         async function loadDataEvent() {
             try {
                 const result = await getEventData();
@@ -170,17 +197,12 @@ const Events = () => {
             }
         }
 
-        loadDataEvent();
-    }, []);
-    
-    useEffect(() => {
-        // Loading for the users
+        // Loading the data of all the profils of the users
         async function loadAllUsers() {
             try {
                 const result = await getEventDataUsers();
-
-                setUsersData(result);
-                setUsersSelect([
+                setDataUsers(result);
+                setSelectUser([
                     { 
                         label: "— Aucun utilisateur —", value: "" 
                     },
@@ -189,19 +211,16 @@ const Events = () => {
                         value: user.id
                     }))
                 ]);
-            
             } catch (err) {
                 console.error(err);
             }
         }
 
-        // Loading for the groups of users
+        // Loading the data of all the profil of the groups
         async function loadAllGroupsUser() {
             try {
                 const result = await getEventDataUserGroups();
-
-                setGroupsData(result);
-
+                setDataGroups(result);
                 const groups = [
                     {
                         label: "-- Aucun groupe --", value: ""
@@ -223,29 +242,38 @@ const Events = () => {
                         ])
                     ])
                 ];    
-                setUserGroupSelect(groups);
-            
+                setSelectUserGroup(groups);
             } catch (err) {
                 console.error(err);
             }
         }
 
-        loadAllUsers();
-        loadAllGroupsUser();
-    }, []);
-
-    useEffect(() => {
+        // Loading of all the data of the type of event
         async function loadEventTypes() {
             try {
                 const result = await getEventTypes();
-                setListEventTypes(result);
-
+                setDataEventTypes(result);
             } catch (err) {
                 console.error("Erorr during loading of the types : ", err);
             }
         }
 
+        // Loading of all the data of the profil of every series of event
+        async function loadEventSeries() {
+            try {
+                const result = await getEventSeries();
+                setDataEventSeries(result);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+
+        loadDataEvent();
+        loadAllUsers();
+        loadAllGroupsUser();
         loadEventTypes();
+        loadEventSeries();
+
     }, []);
 
 
@@ -253,71 +281,77 @@ const Events = () => {
     //  FUNCTIONS - VARIABLES  //
     /////////////////////////////
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //  RETURN THE LIST OF ALL THE USER BASE LINK BY THE ID OF THE GROUP (IF THERE'S A GROUPE SELECTED)       //
+    //  UPDATE IF THE DATAS OF ALL THE USERS / GROUPS IS MODIFY, OR THAT THE ID OF THE GROUP SELECTED CHANGE  //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     const filteredUserSelect = useMemo(() => {
-
         // If no group is selected, then display all user
         if (selectedGroup === null) {
             return [
-                { label: "— Aucun utilisateur —", value: "" },
-                ...usersData.map(user => ({
-                    label: `${user.firstName} ${user.lastName}`,
-                    value: user.id
-                }))
+                { 
+                    label: "— Aucun utilisateur —", value: "" 
+                },
+                ...dataUsers.map(user => (
+                    {
+                        label: `${user.firstName} ${user.lastName}`,
+                        value: user.id
+                    }
+                ))
             ];
         }
 
         // Get the ID of the selected group and his subgroups
-        const groupIds = getGroupIds(groupsData, selectedGroup);
+        const groupIds = getGroupIds(dataGroups, selectedGroup);
 
         // Keep only the users than are in the group
-        const filteredUsers = usersData.filter(user =>
-            (user.userGroupIds || []).length === 0 ||
-            user.userGroupIds.some(id => groupIds.has(id))
-        );
+        const filteredUsers = dataUsers.filter(user => (user.userGroupIds || []).length === 0 || user.userGroupIds.some(id => groupIds.has(id)));
 
         return [
-            { label: "— Aucun utilisateur —", value: "" },
-            ...filteredUsers.map(user => ({
-                label: `${user.firstName} ${user.lastName}`,
-                value: user.id
-            }))
+            { 
+                label: "— Aucun utilisateur —", value: "" 
+            },
+            ...filteredUsers.map(user => (
+                {
+                    label: `${user.firstName} ${user.lastName}`,
+                    value: user.id
+                }
+            ))
         ];        
-    }, [usersData, groupsData, selectedGroup])
+    }, [dataUsers, dataGroups, selectedGroup])
 
 
     const filteredEvents = useMemo(() => {
-
-        if (!dataEvent ||!groupsData.length) {
+        if (!dataEvent || !dataGroups.length) {
             return [];
         }
 
-        // Get the group selected and his subgroups
-        const groupIds = getGroupIds(groupsData, selectedGroup);
+        // Get the group selected and his subgroups id the selected group is not empty
+        const groupIds = selectedGroup !== null ? getGroupAndParents(dataGroups, selectedGroup) : new Set();
 
         // Get the user selected than is in this group
-        const groupUsers = usersData.filter(user => 
-            (user.userGroupIds || []).some(id => groupIds.has(id))
-        );
+        //const groupUsers = dataUsers.filter(user => (user.userGroupIds || []).some(id => groupIds.has(id)));
 
-        const groupUserIds = new Set(groupUsers.map(user => user.id));
+        //const groupUserIds = new Set(groupUsers.map(user => user.id));
 
         const events = new Map();
 
-        function addEvent(event, groupId = null) {
+        function addGroupEvent(event, groupId) {
+            if (groupId == null || !groupIds.has(groupId)) {
+                return;
+            }
+        
+            const key = `group-${groupId}-${event.id}-${event.eventDate}`;
 
-            if (groupId !== null && groupIds.has(groupId)) {
-                const key = `group-${groupId}-${event.id}-${event.eventDate}`;
+            events.set(key, {
+                ...event,
+                groupId,
+                userId: null
+            });
+        }
 
-                events.set(key, {
-                    ...event,
-                    groupId
-                });
-            
-            } else if (
-                event.userId !== null && 
-                event.userId !== undefined &&
-                groupUserIds.has(event.userId)
-            ) {
+        function addPersonalEvent(event) {
+            if (selectedUser !== null && event.userId === selectedUser) {
                 const key = `user-${event.userId}-${event.id}-${event.eventDate}`;
 
                 events.set(key, {
@@ -328,84 +362,56 @@ const Events = () => {
         }
 
         dataEvent.forEach(entry => {
-
             if (entry.userGroup) {
                 entry.events.forEach(event => {
-                    addEvent(event, entry.userGroup.id);
+                    addGroupEvent(event, entry.userGroup.id);
                 });
             }
 
             if (entry.user) {
                 entry.events.forEach(event => {
-                    
-                    if (event.userGroupId !== null) {
-                        addEvent(event, event.userGroupId);
-                    }else if (event.userId === entry.user.id) {
-                        addEvent(event);
+                    if (event.userGroupId != null) {
+                        addGroupEvent(event, event.userGroupId);
+                    } else {
+                        addPersonalEvent(event);
                     }
                 });
             }
-
         });
 
-        let result = Array.from(events.values());
+        return Array.from(events.values());
 
-        if (selectedUser !== null) {
-
-            const selectedUserData = usersData.find(
-                user => user.id === selectedUser
-            );
-
-            const selectedUserGroups = selectedUserData?.userGroupIds || [];
-
-            result = result.filter(event => 
-                event.userId === selectedUser || 
-                (
-                    event.userId == null &&
-                    (
-                        event.groupId === selectedGroup ||
-                        selectedUserGroups.includes(event.groupId)
-                    )
-                )
-            );
-        }
-
-        return result;
-
-    }, [dataEvent, groupsData, usersData, selectedGroup, selectedUser]);
+    }, [dataEvent, dataGroups, selectedGroup, selectedUser]);
 
 
     const eventsByDate = useMemo(() => {
+        const { start, end } = getDateRange(currentDate, triggerButtonFilter);
 
-        const { start, end } = getDateRange(
-            currentDate,
-            dataEventFilter
-        );
-
-        return filteredEvents
-            .filter(event =>
-                event.eventDate >= start &&
-                event.eventDate <= end
-            )
-            .sort((a, b) => 
-                a.eventDate.localeCompare(b.eventDate) ||
-                a.startTime.localeCompare(b.startTime)
-            );
-    }, [filteredEvents, currentDate, dataEventFilter]);
+        return filteredEvents.filter(event => event.eventDate >= start && event.eventDate <= end)
+            .sort((a, b) => a.eventDate.localeCompare(b.eventDate) || a.startTime.localeCompare(b.startTime));
+    }, [filteredEvents, currentDate, triggerButtonFilter]);
 
 
     const listItems = eventsByDate.map(event => {
-
-        const user = usersData.find(
-            user => user.id === event.userId
-        );
+        const user = dataUsers.find(user => user.id === event.userId);
 
         return {
             date: event.eventDate.split("-").reverse().join("."),
             hour: `${event.startTime.slice(0, 5)} - ${event.endTime.slice(0, 5)}`,
-            repeat: event.EventSerieId ? "Oui" : "-",
-            eventType: listEventTypes.find(type => type.id === event.eventTypeId)?.name || "Type inconnu",
-            user: user ? `${user.firstName} ${user.lastName}` : getGroupName(groupsData, event.groupId) || "Groupe inconnu"
+            repeat: (() => {
+                const serie = dataEventSeries.find(
+                    serie => serie.id === event.EventSerieId
+                );
+
+                if (!serie) return "-";
+
+                return `${translateDays(serie.daysOfWeek)} - ${formatDateRange(
+                    serie.startDate,
+                    serie.endDate
+                )}`;
+            })(),
+            eventType: dataEventTypes.find(type => type.id === event.eventTypeId)?.name || "Type inconnu",
+            user: user ? `${user.firstName} ${user.lastName}` : getGroupName(dataGroups, event.groupId) || "Groupe inconnu"
         };
     })
 
@@ -413,7 +419,7 @@ const Events = () => {
         const [year, month, day] = currentDate.split("-").map(Number);
         const date = new Date(year, month - 1, day);
 
-        switch (dataEventFilter) {
+        switch (triggerButtonFilter) {
             case "day":
                 date.setDate(date.getDate() + direction);
                 break;
@@ -443,6 +449,26 @@ const Events = () => {
         setCurrentDate(formatedDate);
     }
 
+    function translateDays(daysOfWeek) {
+        const days = {
+            monday: "Lu",
+            tuesday: "Ma",
+            wednesday: "Me",
+            thursday: "Je",
+            friday: "Ve"
+        };
+
+        return daysOfWeek.map(day => days[day]).join(", ");
+    }
+
+    function formatDate(date) {
+        return date.split("-").reverse().join(".");
+    }
+    
+    function formatDateRange(startDate, endDate) {
+        return `Du ${formatDate(startDate)} au ${formatDate(endDate)}`;
+    }
+
 
     ////////////////
     //  FRONTEND  //
@@ -457,7 +483,7 @@ const Events = () => {
                 <SingleSelect 
                     name="userGroup" 
                     placeholder="Groupe" 
-                    options={userGroupSelect} 
+                    options={selectUserGroup} 
                     value={selectedGroup ?? ""}
                     onChangeFunction={value => {
                         setSelectedGroup(value === "" ? null : Number(value));
@@ -479,14 +505,14 @@ const Events = () => {
         </div>
         
         <AreaButton 
-            funcFilterDay={() => setDataEventFilter("day")} 
-            funcFilterWeek={() => setDataEventFilter("week")} 
-            funcFilterMonth={() => setDataEventFilter("month")} 
-            funcFilterYear={() => setDataEventFilter("year")}
+            funcFilterDay={() => setTriggerButtonFilter("day")} 
+            funcFilterWeek={() => setTriggerButtonFilter("week")} 
+            funcFilterMonth={() => setTriggerButtonFilter("month")} 
+            funcFilterYear={() => setTriggerButtonFilter("year")}
         />
 
         <SelectDate 
-            dateMode={dataEventFilter} 
+            dateMode={triggerButtonFilter} 
             dateString={currentDate} 
             funcArrowLeft={() => changeDate(-1)} 
             funcArrowRight={() => changeDate(1)} 
