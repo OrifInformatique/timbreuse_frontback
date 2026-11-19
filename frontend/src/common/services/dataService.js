@@ -60,10 +60,18 @@ export async function getUserData(idUser, dateString) {
 }
 
 
+/////////////
+//// EVENTS 
+//// Function to get the data from the JSON files of the frontend Event
+/////////////////////////////////////////////////////////////////////////
 
-// Function to get the data from the JSON files of the frontend Event
+//////////////////
+//  USER GROUP  //
+//////////////////
 
-// Get all the groups of user
+////////////////////////////////////
+//  GET USER GROUP FROM GIVEN ID  //    --> id / name / subgroups
+////////////////////////////////////
 export async function getEventDataUserGroup(idUserGroup) {
   
   const result = await axios.get(pathJSONEventGroup + ".json");
@@ -78,7 +86,29 @@ export async function getEventDataUserGroup(idUserGroup) {
   return eventDataUserGroup;
 }
 
-// Get a users by the ID
+//////////////////////////
+//  GET ALL USER GROUP  //    --> id / name / subgroups
+//////////////////////////
+export async function getEventDataUserGroups() {
+
+  const result = await axios.get(pathJSONEventGroup + ".json");
+
+  if (!result.data || !result.data.userGroups) {
+    throw new Error("Groupes introuvables")
+  }
+
+  return result.data.userGroups;
+}
+
+
+
+////////////
+//  USER  //
+////////////
+
+/////////////////////////////////////
+//  GET USER PROFIL FROM GIVEN ID  //    --> id / login / firstName / lastName / userGroupIds
+/////////////////////////////////////
 export async function getEventDataUser(idUser) {
   
   const result = await axios.get(pathJSONEventUser + ".json");
@@ -93,20 +123,29 @@ export async function getEventDataUser(idUser) {
   return eventDataUser;
 }
 
-// Get all users
+///////////////////////////
+//  GET ALL USER PROFIL  //    --> id / login / firstName / lastName / userGroupIds
+///////////////////////////
 export async function getEventDataUsers() {
 
   const result = await axios.get(pathJSONEventUser + ".json");
 
-  if (!result.data) {
+  if (!result.data ||!result.data.users) {
     throw new Error("Utilisateurs introuvable");
   }
 
-  return result.data;
+  return result.data.users;
 }
 
 
-// Get all the type of event
+
+///////////////////
+//  EVENT TYPES  //
+///////////////////
+
+////////////////////////////////////
+//  GET EVENT TYPE FROM GIVEN ID  //    --> id / name / isGroupEventType / isPersonalEventType
+////////////////////////////////////
 export async function getEventType(idType) {
   
   const result = await axios.get(pathJSONEventType + ".json");
@@ -121,7 +160,29 @@ export async function getEventType(idType) {
   return eventType;
 }
 
-// Get all the event serie
+//////////////////////////
+//  GET ALL EVENT TYPE  //    --> id / name / isGroupEventType / isPersonalEventType
+//////////////////////////
+export async function getEventTypes() {
+  
+  const result = await axios.get(pathJSONEventType + ".json");
+
+  if (!result.data || !result.data.eventTypes) {
+    throw new Error("Listes d'événements introuvable");
+  }
+
+  return result.data.eventTypes;
+}
+
+
+
+////////////////////
+//  GROUP SERIES  //
+////////////////////
+
+///////////////////////////////
+//  GET SERIE FROM GIVEN ID  //    --> id / startDate / endDate / daysOfWeek
+///////////////////////////////
 export async function getEventSeries(idSerie) {
   
   const result = await axios.get(pathJSONEventSerie + ".json");
@@ -136,7 +197,15 @@ export async function getEventSeries(idSerie) {
   return eventSerie;
 }
 
-// Get all the events
+
+
+///////////////////
+//  DATA EVENTS  //
+///////////////////
+
+//////////////////////
+//  GET ALL EVENTS  //    --> users {id/login/firstName/lastName} --> events {id/EventSerieId/userGroupId/userId/eventTypeId/eventDate/startTime/endTime/isWorkTime}
+//////////////////////    --> userGroup {id/name/parentId} --> events {id/EventSerieId/eventTypeId/eventDate/startTime/endTime/isWorkTime}
 export async function getEventData() {
   
   const result = await axios.get(pathJSONAllEvent + ".json");
@@ -145,9 +214,22 @@ export async function getEventData() {
     throw new Error("Événement introuvable");
   }
 
-  return result;
+  return result.data;
 }
 
+/////////////////////////////////////////
+//  GET ALL EVENTS FROM GIVEN USER ID  //    --> id / EventSerieId / userGroupId / userId / eventTypeId / eventDate / startTime / endTime / isWorkTime
+/////////////////////////////////////////
+export async function getEventFromUserId(idUser) {
 
+  const result = await axios.get()
+}
+///////////////////////////////////////////////
+//  GET ALL EVENTS FROM GIVEN USER GROUP ID  //    --> id / EventSerieId / eventTypeId / eventDate / startTime / endTime / isWorkTime
+///////////////////////////////////////////////
+export async function getEventFromGroupId(idGroup) {
+
+  const result = await axios.get()
+}
 
 
