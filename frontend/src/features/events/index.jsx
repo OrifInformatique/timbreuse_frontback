@@ -228,9 +228,8 @@ const Events = () => {
     // Popup for update an event
     const [popupEditChoice, setPopupEditChoice] = useState(false);
 
-    // choice of update a serie
-    const [editScope, setEditScope] = useState(null);
-
+    // edit / delete
+    const [seriesAction, setSeriesAction] = useState(null);
 
     //////////////////
     //  USE_EFFECT  //
@@ -680,6 +679,23 @@ const Events = () => {
 
     const isFullEdit = !isEditing || editMode === "all" || (editMode === "single" && !eventToEdit?.EventSerieId);
 
+    const handleDeleteEvent = (event) => {
+        setEventToEdit(event);
+
+        const isRepeated = event.EventSerieId != null && dataEventSeries?.some(serie => serie.id === event.EventSerieId);
+
+        if (isRepeated) {
+            setSeriesAction("delete");
+            setPopupEditChoice(true);
+        } else {
+
+            console.log("Suppression d'un événement :", {
+                scope: "single",
+                event: event
+            });
+        }
+    };
+
     ////////////////
     //  FRONTEND  //
     ////////////////
@@ -738,13 +754,16 @@ const Events = () => {
         />
 
         <List
-            actions ={{
+            actions={{
                 delete: {
-                    onClick: function lY() {},
+                    onClick: (item) => handleDeleteEvent(item.event),
                     label: <Icon name="trash" size="small" />
                 },
                 edit: {
-                    onClick: (item) => handleEditEvent(item.event),
+                    onClick: (item) => {
+                        setSeriesAction("edit");
+                        handleEditEvent(item.event);
+                    },
                     label: <Icon name="edit" size="small" />
                 }
             }} 
@@ -770,7 +789,7 @@ const Events = () => {
         {popupEditChoice && (
             <PopUp
                 open={true}
-                title="Modifier un événement"
+                title={seriesAction === "delete" ? "Supprimer un événement" : "Modifier un événement"}
                 onClose={() => setPopupEditChoice(false)}
             >
                 <div className="flex flex-col gap-4">
@@ -780,21 +799,53 @@ const Events = () => {
                     </p>
 
                     <Button
-                        label="Modifier uniquement cet événement"
+                        label={seriesAction === "delete" ? "Supprimer uniquement cet événement" : "Modifier uniquement cet événement"}
                         variant="primary"
-                        onClick={() => openEditPopup(eventToEdit, "single")}
+                        onClick={() => {
+                            if (seriesAction === "delete") {
+                                console.log("Suppression :", {
+                                    scope: "single",
+                                    event: eventToEdit
+                                });
+                                setPopupEditChoice(false);
+                            } else {
+                                openEditPopup(eventToEdit, "single");
+                            }
+                        }}
                     />
 
                     <Button
-                        label="Modifier toute la série"
+                        label={seriesAction === "delete" ? "Supprimer toute la série" : "Modifier toute la série"}
                         variant="primary"
-                        onClick={() => openEditPopup(eventToEdit, "all")}
+                        onClick={() => {
+                            if (seriesAction === "delete") {
+                                console.log("Suppression :", {
+                                    scope: "all",
+                                    event: eventToEdit,
+                                    serieId: eventToEdit.EventSerieId
+                                });
+                                setPopupEditChoice(false);
+                            } else {
+                                openEditPopup(eventToEdit, "all");
+                            }
+                        }}
                     />
 
                     <Button
-                        label="Modifier cet événement et les suivants"
+                        label={seriesAction === "delete" ? "Supprimer cet événement et les suivants" : "Modifier cet événement et les suivants"}
                         variant="primary"
-                        onClick={() => openEditPopup(eventToEdit, "future")}
+                        onClick={() => {
+                            if (seriesAction === "delete") {
+                                console.log("Suppression :", {
+                                    scope: "future",
+                                    event: eventToEdit,
+                                    serieId: eventToEdit.EventSerieId
+                                });
+                                setPopupEditChoice(false);
+                            } else {
+                                openEditPopup(eventToEdit, "future");
+                            }
+                        }}
                     />
                 </div>
             </PopUp>
