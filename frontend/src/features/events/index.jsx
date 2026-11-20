@@ -1,5 +1,13 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { Title, SingleSelect, Button, List, Icon } from "@orif-informatique/react-components-library";
+import { 
+    Title, 
+    SingleSelect, 
+    Button, 
+    List, 
+    Icon, 
+    PopUp,
+    InputRadio 
+} from "@orif-informatique/react-components-library";
 import SelectDate from "./components/selectDate";
 import AreaButton from "./components/areaButton";
 import { 
@@ -180,6 +188,50 @@ const Events = () => {
     // Date of today (or substitute date for dev)
     const [currentDate, setCurrentDate] = useState("2026-11-11");
 
+    // Display of the type of popup     --> null / add / edit / delete
+    const [popupDisplay, setPopupDisplay] = useState(null);
+
+
+    // UseState for Popup
+    // In the select, the ID of the button radio for the type of user (groups = 1 or users = 2)
+    const [popupTypeUser, setPopupTypeUser] = useState(1);
+    
+    // In the field to indicate the strarting date of the event
+    const [popupEventDate, setPopupEventDate] = useState("");
+    
+    // Int the two fields, value of the starting time and ending time
+    const [popupStartTime, setPopupStartTime] = useState("");
+    const [popupEndTime, setPopupEndTime] = useState("");
+    
+    // For the repeat, popupRepeat is for the yes/no radio button (1 = Yes / 2 = no)
+    // popupDaysOfWeek is for save the days selected if there is a repeat
+    // popupRepeatUntil is until when the repeatition is active
+    const [repeatEvent, setRepeatEvent] = useState(null);
+    const [repeatDays, setRepeatDays] = useState([]);
+    const [repeatEndDate, setRepeatEndDate] = useState("");
+
+    // For the handleSubmit oof the popup
+    const [selectedTarget, setSelectedTarget] = useState("");
+    const [selectedEventType, setSelectedEventType] = useState("");
+
+    // Form if there is an error in the popup submit
+    const [formErrors, setFormErrors] = useState({});
+
+
+    // UseEffect for modify an event by popup
+    // Event to edit
+    const [eventToEdit, setEventToEdit] = useState(null);
+
+    // Type of edit authorize --> null / single / all / future
+    const [editMode, setEditMode] = useState(null);
+    
+    // Popup for update an event
+    const [popupEditChoice, setPopupEditChoice] = useState(false);
+
+    // choice of update a serie
+    const [editScope, setEditScope] = useState(null);
+
+
     //////////////////
     //  USE_EFFECT  //
     //////////////////
@@ -329,11 +381,6 @@ const Events = () => {
         // Get the group selected and his subgroups id the selected group is not empty
         const groupIds = selectedGroup !== null ? getGroupAndParents(dataGroups, selectedGroup) : new Set();
 
-        // Get the user selected than is in this group
-        //const groupUsers = dataUsers.filter(user => (user.userGroupIds || []).some(id => groupIds.has(id)));
-
-        //const groupUserIds = new Set(groupUsers.map(user => user.id));
-
         const events = new Map();
 
         function addGroupEvent(event, groupId) {
@@ -396,6 +443,8 @@ const Events = () => {
         const user = dataUsers.find(user => user.id === event.userId);
 
         return {
+            id: event.id,
+            event,
             date: event.eventDate.split("-").reverse().join("."),
             hour: `${event.startTime.slice(0, 5)} - ${event.endTime.slice(0, 5)}`,
             repeat: (() => {
@@ -470,6 +519,167 @@ const Events = () => {
     }
 
 
+    ///////////////////////
+    //  HANDLER - POPUP  //
+    ///////////////////////
+
+    const handleClosePopup = () => {
+        setPopupTypeUser(1);
+        setPopupDisplay(null);
+    }
+
+    const selectOptions = popupTypeUser === 1 ? selectUserGroup : selectUser;
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        // Check for errors
+        const errors = {};
+
+        const today = new Date();
+        const todayString = [
+            today.getFullYear(),
+            String(today.getMonth() + 1).padStart(2, "0"),
+            String(today.getDate()).padStart(2, "0")
+        ].join("-");
+
+        const currentTime = [
+            String(today.getHours()).padStart(2, "0"),
+            String(today.getMinutes()).padStart(2, "0")
+        ].join(":");
+
+        // Check if there is a group/user selected
+        if (!selectedTarget) {
+            errors.target = "Veuillez sélectionner un groupe ou un utilisateur.";
+        }
+
+        // Check if there is a type of event
+        if (!selectedEventType) {
+            errors.eventType = "Veuillez sélectionner un type d'événement.";
+        }
+
+        // Check the date
+        if (!popupEventDate) {
+            errors.popupEventDate = "Veuillez sélectionner une date.";
+        } else if (popupEventDate < todayString) {
+            errors.popupEventDate = "La date ne peut pas être antérieure à aujourd'hui.";
+        }        
+        
+        // Check if there is a starting hour and a ending hour
+        if (!popupStartTime) {
+            errors.popupStartTime = "Veuillez indiquer une heure de début.";
+        }
+
+        if (!popupEndTime) {
+            errors.popupEndTime = "Veuillez indiquer une heure de fin.";
+        }
+
+        if (popupStartTime && popupEndTime) {
+            if (popupEndTime <= popupStartTime) {
+                errors.popupEndTime = "L'heure de fin doit être après l'heure de début.";
+            }
+
+            if (popupEventDate === todayString && popupStartTime <= currentTime) {
+                errors.popupStartTime = "L'heure de début doit être ultérieure à l'heure actuelle.";
+            }
+        }
+
+        // Check the repeat
+        if (repeatEvent === null) {
+            errors.repeatEvent = "Veuillez indiquer si l'événement doit être répété.";
+        }
+
+        if (repeatEvent === 1) {
+            if (repeatDays.length === 0) {
+                errors.repeatDays = "Veuillez sélectionner au moins un jour.";
+            }
+
+            if (!repeatEndDate) {
+                errors.repeatEndDate = "Veuillez indiquer une date de fin.";
+            } else if (popupEventDate && repeatEndDate < popupEventDate) {
+                errors.repeatEndDate = "La date de fin doit être égale ou postérieure à la date de début.";
+            }
+        }
+
+        setFormErrors(errors);
+
+        if (Object.keys(errors).length > 0) {
+            console.log("Erreurs du formulaire :", errors);
+            return;
+        }
+
+        const newEvent = {
+            targetType: popupTypeUser === 1 ? "userGroup" : "user",
+            targetId: selectedTarget,
+            eventTypeId: selectedEventType,
+            popupEventDate,
+            popupStartTime,
+            popupEndTime,
+            repeat: repeatEvent === 1,
+            daysOfWeek: repeatEvent === 1 ? repeatDays : [],
+            repeatEndDate: repeatEvent === 1 ? repeatEndDate : null
+        };
+
+        console.log("Nouvel événement : ", newEvent);
+        handleClosePopup();
+    };
+
+
+    const handleEditEvent = (event) => {
+        setEventToEdit(event);
+
+        // The event is in a serie
+        const isRepeated = dataEventSeries?.some(
+            serie => serie.id === event.EventSerieId
+        );
+
+        if (isRepeated) {
+            setPopupEditChoice(true);
+        
+        } else {
+            setEditMode("single");
+            openEditPopup(event, "single");
+        }
+    }
+
+    const openEditPopup = (event, mode) => {
+        const serie = dataEventSeries?.find(
+            (serie) => serie.id === event.EventSerieId
+        );
+
+        setEventToEdit(event);
+        setEditMode(mode);
+
+        // Type de cible : groupe ou utilisateur
+        if (event.userId) {
+            setPopupTypeUser(2);
+            setSelectedTarget(event.userId);
+        } else {
+            setPopupTypeUser(1);
+            setSelectedTarget(event.groupId);
+        }
+
+        setSelectedEventType(event.eventTypeId);
+
+        // Informations de l'événement
+        setSelectedEventType(String(event.eventTypeId));
+        setPopupEventDate(event.eventDate);
+        setPopupStartTime(event.startTime?.slice(0, 5) || "");
+        setPopupEndTime(event.endTime?.slice(0, 5) || "");
+
+        // Informations de répétition
+        setRepeatEvent(serie ? 1 : 2);
+        setRepeatDays(serie?.daysOfWeek || []);
+        setRepeatEndDate(serie?.endDate || "");
+
+        setPopupEditChoice(false);
+        setPopupDisplay("edit");
+    };
+
+    const isEditing = popupDisplay === "edit";
+
+    const isFullEdit = !isEditing || editMode === "all" || (editMode === "single" && !eventToEdit?.EventSerieId);
+
     ////////////////
     //  FRONTEND  //
     ////////////////
@@ -519,16 +729,22 @@ const Events = () => {
         />
 
 
-        <Button variant="primary" label="Nouvel événement" icon="plus" className="my-5"/>
+        <Button 
+            variant="primary" 
+            label="Nouvel événement" 
+            icon="plus" 
+            className="my-5"
+            onClick={() => setPopupDisplay("add")}
+        />
 
         <List
             actions ={{
                 delete: {
-                    onclick: function lY() {},
+                    onClick: function lY() {},
                     label: <Icon name="trash" size="small" />
                 },
                 edit: {
-                    onclick: function lY() {},
+                    onClick: (item) => handleEditEvent(item.event),
                     label: <Icon name="edit" size="small" />
                 }
             }} 
@@ -549,6 +765,231 @@ const Events = () => {
             }}
             items={listItems}
         />
+
+
+        {popupEditChoice && (
+            <PopUp
+                open={true}
+                title="Modifier un événement"
+                onClose={() => setPopupEditChoice(false)}
+            >
+                <div className="flex flex-col gap-4">
+                    <p>
+                        Cet événement fait partie d'une série.
+                        Sélectionner l'option souhaitée :
+                    </p>
+
+                    <Button
+                        label="Modifier uniquement cet événement"
+                        variant="primary"
+                        onClick={() => openEditPopup(eventToEdit, "single")}
+                    />
+
+                    <Button
+                        label="Modifier toute la série"
+                        variant="primary"
+                        onClick={() => openEditPopup(eventToEdit, "all")}
+                    />
+
+                    <Button
+                        label="Modifier cet événement et les suivants"
+                        variant="primary"
+                        onClick={() => openEditPopup(eventToEdit, "future")}
+                    />
+                </div>
+            </PopUp>
+        )}
+
+
+
+        {(popupDisplay === "add" || popupDisplay === "edit") && (
+            <PopUp 
+                open={true}
+                title={popupDisplay === "add" ? "Nouvel événement" : "Modifier l'événement"}
+                onClose={handleClosePopup}
+            >
+                <form onSubmit={handleSubmit}>
+                    
+                    <div className="mb-4">
+                        <InputRadio 
+                            key={`userType-${popupDisplay}-${popupTypeUser}`}
+                            label="Type d'utilisateur"
+                            name="Type"
+                            options={[
+                                { id: 1, label: "Groupe utilisateur", defaultChecked: popupTypeUser === 1 },
+                                { id: 2, label: "Utilisateur", defaultChecked: popupTypeUser === 2 }
+                            ]}  
+                            value={popupTypeUser}
+                            onChange={(value) => {
+                                console.log("Val : ", value);
+                                setPopupTypeUser(Number(value))
+                            }} 
+                            disabled={isEditing && !isFullEdit}
+                        />                   
+                        <div className="mb-4">
+                            <SingleSelect 
+                                key={`user-${popupDisplay}-${selectedTarget}`}
+                                name="user"
+                                placeholder={popupTypeUser === 1 ? "Sélectionner un groupe..." : "Sélectionner un utilisateur..."}
+                                options={selectOptions}
+                                defaultValue={selectedTarget}
+                                onChangeFunction={(value) => setSelectedTarget(value)}
+                                disabled={isEditing && !isFullEdit}
+                            />
+                            
+                            {formErrors.target && (
+                                <p className="text-red-500 text-sm mt-1">{formErrors.target}</p>
+                            )}
+                        </div>
+                    </div>    
+
+                    <div className="mb-4">
+                        <SingleSelect
+                            key={`event-${popupDisplay}-${selectedEventType}`}
+                            label="Type d'événement"
+                            name="eventType"
+                            placeholder="Sélectionner un type d'événement"
+                            options={dataEventTypes.map(type => ({
+                                label: type.name,
+                                value: type.id
+                            }))}
+                            defaultValue={selectedEventType}
+                            onChangeFunction={(value) => setSelectedEventType(value)}
+                            disabled={isEditing && !isFullEdit}
+                        />
+                        
+                        {formErrors.eventType && (
+                            <p className="text-red-500 text-sm mt-1">
+                                {formErrors.eventType}
+                            </p>
+                        )}
+                    </div>
+                    
+                    <div className="mb-4">
+                        <label htmlFor="popupEventDate" className="block mb-2">
+                            Date de début
+                        </label>
+                        <input
+                            type="date"
+                            id="popupEventDate"
+                            name="popupEventDate"
+                            value={popupEventDate}
+                            onChange={(e) => setPopupEventDate(e.target.value)}
+                            className="w-full border rounded p-1"
+                            required
+                            disabled={isEditing && editMode === "future"}
+                        />
+                    </div>           
+
+                    <div className="flex mb-4 gap-4">
+                        <div className="w-1/2">
+                            <label htmlFor="popupStartTime" className="block mb-2">
+                                Début
+                            </label>
+                            <input
+                                type="time"
+                                id="popupStartTime"
+                                name="popupStartTime"
+                                value={popupStartTime}
+                                onChange={(e) => setPopupStartTime(e.target.value)}
+                                className="w-full border rounded p-2"
+                                required
+                            />
+                        </div>
+                        <div className="w-1/2">
+                            <label htmlFor="popupEndTime" className="block mb-2">
+                                fin
+                            </label>
+                            <input
+                                type="time"
+                                id="popupEndTime"
+                                name="popupEndTime"
+                                value={popupEndTime}
+                                onChange={(e) => setPopupEndTime(e.target.value)}
+                                className="w-full border rounded p-2"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div className="mb-4">
+                        <InputRadio 
+                            key={`repeat-${popupDisplay}-${repeatEvent}`}
+                            label="Répéter cet événement ?"
+                            name="repeatEvent"
+                            options={[
+                                { id: 1, label: "Oui", defaultChecked: repeatEvent === 1 },
+                                { id: 2, label: "Non", defaultChecked: repeatEvent === 2  }
+                            ]}
+                            value={repeatEvent}
+                            onChange={(value) => setRepeatEvent(Number(value))}
+                            disabledAll={isEditing && !isFullEdit}
+                        />
+
+                        {repeatEvent === 1 && (
+                            <div className="mb-4">
+                                <label className="block mb-2">
+                                    Jours de répétition
+                                </label>
+
+                                <div className="flex flex-wrap gap-4 mb-4">
+                                    {[
+                                        { label: "Lu", value: "monday" },
+                                        { label: "Ma", value: "tuesday" },
+                                        { label: "Me", value: "wednesday" },
+                                        { label: "Je", value: "thursday" },
+                                        { label: "Ve", value: "friday" }
+                                    ].map(day => (
+                                        <label key={day.value} className="flex items-center gap-2">
+                                            <input
+                                                type="checkbox"
+                                                checked={repeatDays.includes(day.value)}
+                                                onChange={(e) => {
+                                                    if (e.target.checked) {
+                                                        setRepeatDays([...repeatDays, day.value]);
+                                                    } else {
+                                                        setRepeatDays(
+                                                            repeatDays.filter(d => d !== day.value)
+                                                        );
+                                                    }
+                                                }}
+                                                disabled={isEditing && !isFullEdit}
+                                            />
+                                            {day.label}
+                                        </label>
+                                    ))}
+                                </div>
+
+                                <label htmlFor="repeatEndDate" className="block mb-2">
+                                    Fin de répétition
+                                </label>
+
+                                <input
+                                    type="date"
+                                    id="repeatEndDate"
+                                    name="repeatEndDate"
+                                    value={repeatEndDate}
+                                    onChange={(e) => setRepeatEndDate(e.target.value)}
+                                    className="w-full border rounded p-2"
+                                    required
+                                    disabled={isEditing && !isFullEdit}
+                                />              
+                            </div>
+                        )}
+                    </div>
+                    
+                    <div className="flex justify-end gap-3">
+                        <button type="button" onClick={handleClosePopup}>
+                            Annuler
+                        </button>
+
+                        <button type="submit">
+                            Ajouter
+                        </button>
+                    </div>
+                </form>
+            </PopUp>
+        )}
     </>);
 }
 
