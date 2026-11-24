@@ -1,13 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { 
-    Title, 
-    SingleSelect, 
-    Button, 
-    List, 
-    Icon, 
-    PopUp,
-    InputRadio 
-} from "@orif-informatique/react-components-library";
+import { Title, SingleSelect, Button, List, Icon, PopUp, InputRadio } from "@orif-informatique/react-components-library";
 import SelectDate from "./components/selectDate";
 import AreaButton from "./components/areaButton";
 import { 
@@ -24,9 +16,9 @@ import {
 // FUNCTIONS OUSTIDE EVENT //
 /////////////////////////////
 
-////////
-//    //
-////////
+    ///////////
+    //  ???  //
+    ///////////
 function getGroupIds(groups, selectedId) {
     const ids = new Set();
 
@@ -58,9 +50,9 @@ function getGroupIds(groups, selectedId) {
     return ids;
 }
 
-////////
-//    //
-////////
+    ///////////
+    //  ???  //
+    ///////////
 function getDateRange(dateString, mode) {
     const [year, month, day] = dateString.split("-").map(Number);
     const date = new Date(year, month-1, day);
@@ -328,9 +320,9 @@ const Events = () => {
     }, []);
 
 
-    /////////////////////////////
-    //  FUNCTIONS - VARIABLES  //
-    /////////////////////////////
+    /////////////////
+    //  FUNCTIONS  //
+    /////////////////
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //  RETURN THE LIST OF ALL THE USER BASE LINK BY THE ID OF THE GROUP (IF THERE'S A GROUPE SELECTED)       //
@@ -340,9 +332,7 @@ const Events = () => {
         // If no group is selected, then display all user
         if (selectedGroup === null) {
             return [
-                { 
-                    label: "— Aucun utilisateur —", value: "" 
-                },
+                { label: "— Aucun utilisateur —", value: "" },
                 ...dataUsers.map(user => (
                     {
                         label: `${user.firstName} ${user.lastName}`,
@@ -359,9 +349,7 @@ const Events = () => {
         const filteredUsers = dataUsers.filter(user => (user.userGroupIds || []).length === 0 || user.userGroupIds.some(id => groupIds.has(id)));
 
         return [
-            { 
-                label: "— Aucun utilisateur —", value: "" 
-            },
+            { label: "— Aucun utilisateur —", value: "" },
             ...filteredUsers.map(user => (
                 {
                     label: `${user.firstName} ${user.lastName}`,
@@ -371,7 +359,7 @@ const Events = () => {
         ];        
     }, [dataUsers, dataGroups, selectedGroup])
 
-
+    // ???
     const filteredEvents = useMemo(() => {
         if (!dataEvent || !dataGroups.length) {
             return [];
@@ -430,6 +418,7 @@ const Events = () => {
     }, [dataEvent, dataGroups, selectedGroup, selectedUser]);
 
 
+    // ???
     const eventsByDate = useMemo(() => {
         const { start, end } = getDateRange(currentDate, triggerButtonFilter);
 
@@ -438,6 +427,7 @@ const Events = () => {
     }, [filteredEvents, currentDate, triggerButtonFilter]);
 
 
+    // Get the data in format list
     const listItems = eventsByDate.map(event => {
         const user = dataUsers.find(user => user.id === event.userId);
 
@@ -447,7 +437,7 @@ const Events = () => {
             date: event.eventDate.split("-").reverse().join("."),
             hour: `${event.startTime.slice(0, 5)} - ${event.endTime.slice(0, 5)}`,
             repeat: (() => {
-                const serie = dataEventSeries.find(
+                const serie = dataEventSeries?.find(
                     serie => serie.id === event.EventSerieId
                 );
 
@@ -463,6 +453,7 @@ const Events = () => {
         };
     })
 
+    // Depends what direction given (1 or -1) it will change the date display 
     function changeDate(direction) {
         const [year, month, day] = currentDate.split("-").map(Number);
         const date = new Date(year, month - 1, day);
@@ -497,6 +488,7 @@ const Events = () => {
         setCurrentDate(formatedDate);
     }
 
+    // Translate the format "monday" to a short format "lu"
     function translateDays(daysOfWeek) {
         const days = {
             monday: "Lu",
@@ -509,10 +501,13 @@ const Events = () => {
         return daysOfWeek.map(day => days[day]).join(", ");
     }
 
+    // Format date from "dd-mm-aaaa" to "dd.mm.aaaa"
     function formatDate(date) {
         return date.split("-").reverse().join(".");
     }
     
+
+    // Format two date from "dd-mm-aaaa" to "Du --- au ---"
     function formatDateRange(startDate, endDate) {
         return `Du ${formatDate(startDate)} au ${formatDate(endDate)}`;
     }
@@ -522,6 +517,7 @@ const Events = () => {
     //  HANDLER - POPUP  //
     ///////////////////////
 
+    // Handler for when the button cancel is pressed (from popup)
     const handleClosePopup = () => {
         setPopupTypeUser(1);
         setPopupDisplay(null);
@@ -529,6 +525,7 @@ const Events = () => {
 
     const selectOptions = popupTypeUser === 1 ? selectUserGroup : selectUser;
 
+    // Handler for when the button confirm is pressed (from popup add event)
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -623,7 +620,7 @@ const Events = () => {
         handleClosePopup();
     };
 
-
+    // Handler for when the button for add event is pressed
     const handleEditEvent = (event) => {
         setEventToEdit(event);
 
@@ -641,6 +638,7 @@ const Events = () => {
         }
     }
 
+    // Handler for when the button for edit is pressed
     const openEditPopup = (event, mode) => {
         const serie = dataEventSeries?.find(
             (serie) => serie.id === event.EventSerieId
@@ -675,10 +673,12 @@ const Events = () => {
         setPopupDisplay("edit");
     };
 
+    // Type of editions
     const isEditing = popupDisplay === "edit";
 
     const isFullEdit = !isEditing || editMode === "all" || (editMode === "single" && !eventToEdit?.EventSerieId);
 
+    // Handler for when the button for delete is pressed
     const handleDeleteEvent = (event) => {
         setEventToEdit(event);
 
@@ -696,351 +696,398 @@ const Events = () => {
         }
     };
 
+    // Reset the popup
+    const resetEventForm = () => {
+        setPopupTypeUser(1);
+        setPopupEventDate("");
+        setPopupStartTime("");
+        setPopupEndTime("");
+        setRepeatEvent(null);
+        setRepeatDays([]);
+        setRepeatEndDate("");
+        setSelectedTarget("");
+        setSelectedEventType("");
+        setFormErrors({});
+
+        setEventToEdit(null);
+        setEditMode(null);        
+    };
+
     ////////////////
     //  FRONTEND  //
     ////////////////
 
     return (<>
     
-        <Title>Planning d'événements</Title>
+        <div className="sm:w-full sm:w-1/2 mx-auto px-4">
+            <Title>
+                <div className="text-center sm:text-left">
+                    Planning d'événements
+                </div>
+            </Title>
 
-        <div className="flex flex-row gap-5 my-5">
-            <div className="basis-1/3">
-                <SingleSelect 
-                    name="userGroup" 
-                    placeholder="Groupe" 
-                    options={selectUserGroup} 
-                    value={selectedGroup ?? ""}
-                    onChangeFunction={value => {
-                        setSelectedGroup(value === "" ? null : Number(value));
-                        setSelectedUser(null);
-                    }}    
-                />
-            </div>
-            <div className="basis-1/3">
-                <SingleSelect 
-                    name="user" 
-                    placeholder="Utilisateur" 
-                    options={filteredUserSelect} 
-                    value={selectedUser ?? ""}
-                    onChangeFunction={value => 
-                        setSelectedUser(value === "" ? null : Number(value))
-                    }    
-                />
-            </div>
-        </div>
-        
-        <AreaButton 
-            funcFilterDay={() => setTriggerButtonFilter("day")} 
-            funcFilterWeek={() => setTriggerButtonFilter("week")} 
-            funcFilterMonth={() => setTriggerButtonFilter("month")} 
-            funcFilterYear={() => setTriggerButtonFilter("year")}
-        />
-
-        <SelectDate 
-            dateMode={triggerButtonFilter} 
-            dateString={currentDate} 
-            funcArrowLeft={() => changeDate(-1)} 
-            funcArrowRight={() => changeDate(1)} 
-        />
-
-
-        <Button 
-            variant="primary" 
-            label="Nouvel événement" 
-            icon="plus" 
-            className="my-5"
-            onClick={() => setPopupDisplay("add")}
-        />
-
-        <List
-            actions={{
-                delete: {
-                    onClick: (item) => handleDeleteEvent(item.event),
-                    label: <Icon name="trash" size="small" />
-                },
-                edit: {
-                    onClick: (item) => {
-                        setSeriesAction("edit");
-                        handleEditEvent(item.event);
-                    },
-                    label: <Icon name="edit" size="small" />
-                }
-            }} 
-            actionsLabel=""
-            columns={[
-                'date',
-                'hour',
-                'repeat',
-                'eventType',
-                'user'
-            ]}
-            columnsLabels={{
-                date: 'Date',
-                hour: 'Heure',
-                repeat: 'Répétition',
-                eventType: 'Type d\'événement',
-                user: 'Utilisateur'
-            }}
-            items={listItems}
-        />
-
-
-        {popupEditChoice && (
-            <PopUp
-                open={true}
-                title={seriesAction === "delete" ? "Supprimer un événement" : "Modifier un événement"}
-                onClose={() => setPopupEditChoice(false)}
-            >
-                <div className="flex flex-col gap-4">
-                    <p>
-                        Cet événement fait partie d'une série.
-                        Sélectionner l'option souhaitée :
-                    </p>
-
-                    <Button
-                        label={seriesAction === "delete" ? "Supprimer uniquement cet événement" : "Modifier uniquement cet événement"}
-                        variant="primary"
-                        onClick={() => {
-                            if (seriesAction === "delete") {
-                                console.log("Suppression :", {
-                                    scope: "single",
-                                    event: eventToEdit
-                                });
-                                setPopupEditChoice(false);
-                            } else {
-                                openEditPopup(eventToEdit, "single");
-                            }
-                        }}
-                    />
-
-                    <Button
-                        label={seriesAction === "delete" ? "Supprimer toute la série" : "Modifier toute la série"}
-                        variant="primary"
-                        onClick={() => {
-                            if (seriesAction === "delete") {
-                                console.log("Suppression :", {
-                                    scope: "all",
-                                    event: eventToEdit,
-                                    serieId: eventToEdit.EventSerieId
-                                });
-                                setPopupEditChoice(false);
-                            } else {
-                                openEditPopup(eventToEdit, "all");
-                            }
-                        }}
-                    />
-
-                    <Button
-                        label={seriesAction === "delete" ? "Supprimer cet événement et les suivants" : "Modifier cet événement et les suivants"}
-                        variant="primary"
-                        onClick={() => {
-                            if (seriesAction === "delete") {
-                                console.log("Suppression :", {
-                                    scope: "future",
-                                    event: eventToEdit,
-                                    serieId: eventToEdit.EventSerieId
-                                });
-                                setPopupEditChoice(false);
-                            } else {
-                                openEditPopup(eventToEdit, "future");
-                            }
-                        }}
+            <div className="flex flex-col sm:flex-row gap-5 my-5">
+                <div className="w-full sm:basis-1/3">
+                    <SingleSelect 
+                        name="userGroup" 
+                        placeholder="Groupe" 
+                        options={selectUserGroup} 
+                        value={selectedGroup ?? ""}
+                        onChangeFunction={value => {
+                            setSelectedGroup(value === "" ? null : Number(value));
+                            setSelectedUser(null);
+                        }}    
                     />
                 </div>
-            </PopUp>
-        )}
+                <div className="w-full sm:basis-1/3">
+                    <SingleSelect 
+                        name="user" 
+                        placeholder="Utilisateur" 
+                        options={filteredUserSelect} 
+                        value={selectedUser ?? ""}
+                        onChangeFunction={value => 
+                            setSelectedUser(value === "" ? null : Number(value))
+                        }    
+                    />
+                </div>
+            </div>
+            
+            <AreaButton 
+                funcFilterDay={() => setTriggerButtonFilter("day")} 
+                funcFilterWeek={() => setTriggerButtonFilter("week")} 
+                funcFilterMonth={() => setTriggerButtonFilter("month")} 
+                funcFilterYear={() => setTriggerButtonFilter("year")}
+            />
+
+            <SelectDate 
+                dateMode={triggerButtonFilter} 
+                dateString={currentDate} 
+                funcArrowLeft={() => changeDate(-1)} 
+                funcArrowRight={() => changeDate(1)} 
+            />
+
+
+            <Button 
+                variant="primary" 
+                label="Nouvel événement" 
+                icon="plus" 
+                className="my-5"
+                onClick={() => {
+                    resetEventForm();
+                    setPopupDisplay("add");
+                }}
+            />
+
+            <List
+                actions={{
+                    delete: {
+                        onClick: (item) => handleDeleteEvent(item.event),
+                        label: <Icon name="trash" size="small" />
+                    },
+                    edit: {
+                        onClick: (item) => {
+                            setSeriesAction("edit");
+                            handleEditEvent(item.event);
+                        },
+                        label: <Icon name="edit" size="small" />
+                    }
+                }} 
+                actionsLabel=""
+                columns={[
+                    'date',
+                    'hour',
+                    'repeat',
+                    'eventType',
+                    'user'
+                ]}
+                columnsLabels={{
+                    date: 'Date',
+                    hour: 'Heure',
+                    repeat: 'Répétition',
+                    eventType: 'Type d\'événement',
+                    user: 'Utilisateur'
+                }}
+                items={listItems}
+            />
+
+
+            {popupEditChoice && (
+                <PopUp
+                    open={true}
+                    title={seriesAction === "delete" ? "Supprimer un événement" : "Modifier un événement"}
+                    onClose={() => setPopupEditChoice(false)}
+                >
+                    <div className="flex flex-col gap-4">
+                        <p>
+                            Cet événement fait partie d'une série.
+                            Sélectionner l'option souhaitée :
+                        </p>
+
+                        <Button
+                            label={seriesAction === "delete" ? "Supprimer uniquement cet événement" : "Modifier uniquement cet événement"}
+                            variant="primary"
+                            onClick={() => {
+                                if (seriesAction === "delete") {
+                                    console.log("Suppression :", {
+                                        scope: "single",
+                                        event: eventToEdit
+                                    });
+                                    setPopupEditChoice(false);
+                                } else {
+                                    openEditPopup(eventToEdit, "single");
+                                }
+                            }}
+                        />
+
+                        <Button
+                            label={seriesAction === "delete" ? "Supprimer toute la série" : "Modifier toute la série"}
+                            variant="primary"
+                            onClick={() => {
+                                if (seriesAction === "delete") {
+                                    console.log("Suppression :", {
+                                        scope: "all",
+                                        event: eventToEdit,
+                                        serieId: eventToEdit.EventSerieId
+                                    });
+                                    setPopupEditChoice(false);
+                                } else {
+                                    openEditPopup(eventToEdit, "all");
+                                }
+                            }}
+                        />
+
+                        <Button
+                            label={seriesAction === "delete" ? "Supprimer cet événement et les suivants" : "Modifier cet événement et les suivants"}
+                            variant="primary"
+                            onClick={() => {
+                                if (seriesAction === "delete") {
+                                    console.log("Suppression :", {
+                                        scope: "future",
+                                        event: eventToEdit,
+                                        serieId: eventToEdit.EventSerieId
+                                    });
+                                    setPopupEditChoice(false);
+                                } else {
+                                    openEditPopup(eventToEdit, "future");
+                                }
+                            }}
+                        />
+                    </div>
+                </PopUp>
+            )}
 
 
 
-        {(popupDisplay === "add" || popupDisplay === "edit") && (
-            <PopUp 
-                open={true}
-                title={popupDisplay === "add" ? "Nouvel événement" : "Modifier l'événement"}
-                onClose={handleClosePopup}
-            >
-                <form onSubmit={handleSubmit}>
-                    
-                    <div className="mb-4">
-                        <InputRadio 
-                            key={`userType-${popupDisplay}-${popupTypeUser}`}
-                            label="Type d'utilisateur"
-                            name="Type"
-                            options={[
-                                { id: 1, label: "Groupe utilisateur", defaultChecked: popupTypeUser === 1 },
-                                { id: 2, label: "Utilisateur", defaultChecked: popupTypeUser === 2 }
-                            ]}  
-                            value={popupTypeUser}
-                            onChange={(value) => {
-                                console.log("Val : ", value);
-                                setPopupTypeUser(Number(value))
-                            }} 
-                            disabled={isEditing && !isFullEdit}
-                        />                   
+            {(popupDisplay === "add" || popupDisplay === "edit") && (
+                <PopUp 
+                    open={true}
+                    title={popupDisplay === "add" ? "Nouvel événement" : "Modifier l'événement"}
+                    onClose={handleClosePopup}
+                >
+                    <form onSubmit={handleSubmit}>
+                        
                         <div className="mb-4">
-                            <SingleSelect 
-                                key={`user-${popupDisplay}-${selectedTarget}`}
-                                name="user"
-                                placeholder={popupTypeUser === 1 ? "Sélectionner un groupe..." : "Sélectionner un utilisateur..."}
-                                options={selectOptions}
-                                defaultValue={selectedTarget}
-                                onChangeFunction={(value) => setSelectedTarget(value)}
+                            <InputRadio 
+                                key={`userType-${popupDisplay}-${popupTypeUser}`}
+                                label="Type d'utilisateur"
+                                name="Type"
+                                options={[
+                                    { id: 1, label: "Groupe utilisateur", defaultChecked: popupTypeUser === 1 },
+                                    { id: 2, label: "Utilisateur", defaultChecked: popupTypeUser === 2 }
+                                ]}  
+                                value={popupTypeUser}
+                                onChange={(value) => {
+                                    console.log("Val : ", value);
+                                    setPopupTypeUser(Number(value))
+                                }} 
+                                disabled={isEditing && !isFullEdit}
+                            />                   
+                            <div className="mb-4">
+                                <SingleSelect 
+                                    key={`user-${popupDisplay}-${selectedTarget}`}
+                                    name="user"
+                                    placeholder={popupTypeUser === 1 ? "Sélectionner un groupe..." : "Sélectionner un utilisateur..."}
+                                    options={selectOptions}
+                                    defaultValue={selectedTarget}
+                                    onChangeFunction={(value) => setSelectedTarget(value)}
+                                    disabled={isEditing && !isFullEdit}
+                                />
+                                
+                                {formErrors.target && (
+                                    <p className="text-red-500 text-sm mt-1">{formErrors.target}</p>
+                                )}
+                            </div>
+                        </div>    
+
+                        <div className="mb-4">
+                            <SingleSelect
+                                key={`event-${popupDisplay}-${selectedEventType}`}
+                                label="Type d'événement"
+                                name="eventType"
+                                placeholder="Sélectionner un type d'événement"
+                                options={dataEventTypes.map(type => ({
+                                    label: type.name,
+                                    value: type.id
+                                }))}
+                                defaultValue={selectedEventType}
+                                onChangeFunction={(value) => setSelectedEventType(value)}
                                 disabled={isEditing && !isFullEdit}
                             />
                             
-                            {formErrors.target && (
-                                <p className="text-red-500 text-sm mt-1">{formErrors.target}</p>
+                            {formErrors.eventType && (
+                                <p className="text-red-500 text-sm mt-1">
+                                    {formErrors.eventType}
+                                </p>
                             )}
                         </div>
-                    </div>    
-
-                    <div className="mb-4">
-                        <SingleSelect
-                            key={`event-${popupDisplay}-${selectedEventType}`}
-                            label="Type d'événement"
-                            name="eventType"
-                            placeholder="Sélectionner un type d'événement"
-                            options={dataEventTypes.map(type => ({
-                                label: type.name,
-                                value: type.id
-                            }))}
-                            defaultValue={selectedEventType}
-                            onChangeFunction={(value) => setSelectedEventType(value)}
-                            disabled={isEditing && !isFullEdit}
-                        />
                         
-                        {formErrors.eventType && (
-                            <p className="text-red-500 text-sm mt-1">
-                                {formErrors.eventType}
-                            </p>
-                        )}
-                    </div>
-                    
-                    <div className="mb-4">
-                        <label htmlFor="popupEventDate" className="block mb-2">
-                            Date de début
-                        </label>
-                        <input
-                            type="date"
-                            id="popupEventDate"
-                            name="popupEventDate"
-                            value={popupEventDate}
-                            onChange={(e) => setPopupEventDate(e.target.value)}
-                            className="w-full border rounded p-1"
-                            required
-                            disabled={isEditing && editMode === "future"}
-                        />
-                    </div>           
-
-                    <div className="flex mb-4 gap-4">
-                        <div className="w-1/2">
-                            <label htmlFor="popupStartTime" className="block mb-2">
-                                Début
+                        <div className="mb-4">
+                            <label htmlFor="popupEventDate" className="block mb-2">
+                                Date de début
                             </label>
                             <input
-                                type="time"
-                                id="popupStartTime"
-                                name="popupStartTime"
-                                value={popupStartTime}
-                                onChange={(e) => setPopupStartTime(e.target.value)}
-                                className="w-full border rounded p-2"
+                                type="date"
+                                id="popupEventDate"
+                                name="popupEventDate"
+                                value={popupEventDate}
+                                onChange={(e) => setPopupEventDate(e.target.value)}
+                                className="w-full border rounded p-1"
                                 required
+                                disabled={isEditing && editMode === "future"}
                             />
-                        </div>
-                        <div className="w-1/2">
-                            <label htmlFor="popupEndTime" className="block mb-2">
-                                fin
-                            </label>
-                            <input
-                                type="time"
-                                id="popupEndTime"
-                                name="popupEndTime"
-                                value={popupEndTime}
-                                onChange={(e) => setPopupEndTime(e.target.value)}
-                                className="w-full border rounded p-2"
-                                required
-                            />
-                        </div>
-                    </div>
+                            {formErrors.popupEventDate && (
+                                <p className="text-red-500 text-sm mt-1">
+                                    {formErrors.popupEventDate}
+                                </p>
+                            )}
+                        </div>           
 
-                    <div className="mb-4">
-                        <InputRadio 
-                            key={`repeat-${popupDisplay}-${repeatEvent}`}
-                            label="Répéter cet événement ?"
-                            name="repeatEvent"
-                            options={[
-                                { id: 1, label: "Oui", defaultChecked: repeatEvent === 1 },
-                                { id: 2, label: "Non", defaultChecked: repeatEvent === 2  }
-                            ]}
-                            value={repeatEvent}
-                            onChange={(value) => setRepeatEvent(Number(value))}
-                            disabledAll={isEditing && !isFullEdit}
-                        />
-
-                        {repeatEvent === 1 && (
-                            <div className="mb-4">
-                                <label className="block mb-2">
-                                    Jours de répétition
+                        <div className="flex mb-4 gap-4">
+                            <div className="w-1/2">
+                                <label htmlFor="popupStartTime" className="block mb-2">
+                                    Début
                                 </label>
-
-                                <div className="flex flex-wrap gap-4 mb-4">
-                                    {[
-                                        { label: "Lu", value: "monday" },
-                                        { label: "Ma", value: "tuesday" },
-                                        { label: "Me", value: "wednesday" },
-                                        { label: "Je", value: "thursday" },
-                                        { label: "Ve", value: "friday" }
-                                    ].map(day => (
-                                        <label key={day.value} className="flex items-center gap-2">
-                                            <input
-                                                type="checkbox"
-                                                checked={repeatDays.includes(day.value)}
-                                                onChange={(e) => {
-                                                    if (e.target.checked) {
-                                                        setRepeatDays([...repeatDays, day.value]);
-                                                    } else {
-                                                        setRepeatDays(
-                                                            repeatDays.filter(d => d !== day.value)
-                                                        );
-                                                    }
-                                                }}
-                                                disabled={isEditing && !isFullEdit}
-                                            />
-                                            {day.label}
-                                        </label>
-                                    ))}
-                                </div>
-
-                                <label htmlFor="repeatEndDate" className="block mb-2">
-                                    Fin de répétition
-                                </label>
-
                                 <input
-                                    type="date"
-                                    id="repeatEndDate"
-                                    name="repeatEndDate"
-                                    value={repeatEndDate}
-                                    onChange={(e) => setRepeatEndDate(e.target.value)}
+                                    type="time"
+                                    id="popupStartTime"
+                                    name="popupStartTime"
+                                    value={popupStartTime}
+                                    onChange={(e) => setPopupStartTime(e.target.value)}
                                     className="w-full border rounded p-2"
                                     required
-                                    disabled={isEditing && !isFullEdit}
-                                />              
+                                />
+                                {formErrors.popupStartTime && (
+                                    <p className="text-red-500 text-sm mt-1">
+                                        {formErrors.popupStartTime}
+                                    </p>
+                                )}                                
                             </div>
-                        )}
-                    </div>
-                    
-                    <div className="flex justify-end gap-3">
-                        <button type="button" onClick={handleClosePopup}>
-                            Annuler
-                        </button>
+                            <div className="w-1/2">
+                                <label htmlFor="popupEndTime" className="block mb-2">
+                                    fin
+                                </label>
+                                <input
+                                    type="time"
+                                    id="popupEndTime"
+                                    name="popupEndTime"
+                                    value={popupEndTime}
+                                    onChange={(e) => setPopupEndTime(e.target.value)}
+                                    className="w-full border rounded p-2"
+                                    required
+                                />
+                                {formErrors.popupEndTime && (
+                                    <p className="text-red-500 text-sm mt-1">
+                                        {formErrors.popupEndTime}
+                                    </p>
+                                )}
+                            </div>
+                        </div>
 
-                        <button type="submit">
-                            Ajouter
-                        </button>
-                    </div>
-                </form>
-            </PopUp>
-        )}
+                        <div className="mb-4">
+                            <InputRadio 
+                                key={`repeat-${popupDisplay}-${repeatEvent}`}
+                                label="Répéter cet événement ?"
+                                name="repeatEvent"
+                                options={[
+                                    { id: 1, label: "Oui", defaultChecked: repeatEvent === 1 },
+                                    { id: 2, label: "Non", defaultChecked: repeatEvent === 2  }
+                                ]}
+                                value={repeatEvent}
+                                onChange={(value) => setRepeatEvent(Number(value))}
+                                disabledAll={isEditing && !isFullEdit}
+                            />
+                            {formErrors.repeatEvent && (
+                                <p className="text-red-500 text-sm mt-1">
+                                    {formErrors.repeatEvent}
+                                </p>
+                            )}
+
+                            {repeatEvent === 1 && (
+                                <div className="mb-4">
+                                    <label className="block mb-2">
+                                        Jours de répétition
+                                    </label>
+
+                                    <div className="flex flex-wrap gap-4 mb-4">
+                                        {[
+                                            { label: "Lu", value: "monday" },
+                                            { label: "Ma", value: "tuesday" },
+                                            { label: "Me", value: "wednesday" },
+                                            { label: "Je", value: "thursday" },
+                                            { label: "Ve", value: "friday" }
+                                        ].map(day => (
+                                            <label key={day.value} className="flex items-center gap-2">
+                                                <input
+                                                    type="checkbox"
+                                                    checked={repeatDays.includes(day.value)}
+                                                    onChange={(e) => {
+                                                        if (e.target.checked) {
+                                                            setRepeatDays([...repeatDays, day.value]);
+                                                        } else {
+                                                            setRepeatDays(
+                                                                repeatDays.filter(d => d !== day.value)
+                                                            );
+                                                        }
+                                                    }}
+                                                    disabled={isEditing && !isFullEdit}
+                                                />
+                                                {day.label}
+                                            </label>
+                                        ))}
+                                    </div>
+
+                                    <label htmlFor="repeatEndDate" className="block mb-2">
+                                        Fin de répétition
+                                    </label>
+
+                                    <input
+                                        type="date"
+                                        id="repeatEndDate"
+                                        name="repeatEndDate"
+                                        value={repeatEndDate}
+                                        onChange={(e) => setRepeatEndDate(e.target.value)}
+                                        className="w-full border rounded p-2"
+                                        required
+                                        disabled={isEditing && !isFullEdit}
+                                    />              
+                                </div>
+                            )}
+                        </div>
+                        
+                        <div className="flex justify-end gap-3">
+                            <button type="button" onClick={handleClosePopup}>
+                                Annuler
+                            </button>
+
+                            <button type="submit">
+                                Ajouter
+                            </button>
+                        </div>
+                    </form>
+                </PopUp>
+            )}
+
+        </div>
     </>);
 }
 

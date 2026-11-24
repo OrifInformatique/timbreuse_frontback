@@ -53,7 +53,7 @@ const SelectDate = ({
 
     return (<>
 
-        <div className="flex flex-row p-2">
+        <div className="flex flex-row p-2 w-full sm:w-auto justify-center sm:justify-normal">
             <button 
                 type="button"
                 className="border-1 border-color-black h-lg p-4" 
@@ -63,7 +63,8 @@ const SelectDate = ({
                 <Icon name="chevron-double-left" size="10"/>
             </button>
             
-            <div className="border-1 border-color-black basis-1/4 p-4 h-lg text-center text-xl">
+            {/*<div className="border-1 border-color-black basis-1/4 p-4 h-lg text-center text-xl">*/}
+            <div className="border-1 border-color-black p-4 h-lg text-center text-xl flex items-center sm:justify-center">
                 {formatDate(dateString, dateMode)}
             </div>
                 

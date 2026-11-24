@@ -11,7 +11,7 @@ const AreaButton = ({
 
     return (<>
         
-        <div className="flex flex-row gap-5 my-5 bg-blue-300 p-4 my-5 rounded-lg max-w-md justify-center">
+        <div className="grid grid-cols-2 sm:flex sm:flex-row gap-5 my-5 bg-blue-300 p-4 my-5 rounded-lg max-w-md justify-center">
             <Button variant="tertiary" label="Jour" onClick={funcFilterDay}/>
             <Button variant="tertiary" label="Semaine" onClick={funcFilterWeek}/>
             <Button variant="tertiary" label="Mois" onClick={funcFilterMonth}/>
